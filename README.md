@@ -28,15 +28,13 @@ The experiments in this repository are arranged **session-wise** so that each la
 ```
 Advanced_Computing_Lab
 │
-├── Day1_EdmondsKarp
-│   ├── EdmondsKarp.java
-│   ├── Node.java
-│   ├── Edge.java
-│   └── DrawPanel.java
+├── Day1_Experiment
 │
 ├── Day2_Experiment
 │
 ├── Day3_Experiment
+│
+├── Day4_Experiment
 │
 └── README.md
 ```
