@@ -26,7 +26,7 @@ Each program reflects the understanding gained while performing the experiments.
 The experiments in this repository are arranged **session-wise** so that each lab activity can be easily identified and accessed.
 
 ```
-Advanced_Computing_Lab
+Advanced_computing_lab
 │
 ├── Day1_Experiment
 │
