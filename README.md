@@ -19,6 +19,29 @@ It mainly includes:
 
 Each program reflects the understanding gained while performing the experiments.
 
+---
+
+## 📂 Repository Organization
+
+The experiments in this repository are arranged **session-wise** so that each lab activity can be easily identified and accessed.
+
+```
+Advanced_Computing_Lab
+│
+├── Day1_EdmondsKarp
+│   ├── EdmondsKarp.java
+│   ├── Node.java
+│   ├── Edge.java
+│   └── DrawPanel.java
+│
+├── Day2_Experiment
+│
+├── Day3_Experiment
+│
+└── README.md
+```
+
+Each folder represents the work completed during a particular lab session and contains the corresponding **source code and implementations**.
 
 ---
 
