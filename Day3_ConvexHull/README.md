@@ -34,7 +34,7 @@ The implementation uses the **SFML graphics library** to render the points, edge
 ## 📂 Files
 
 ```text
-ConvexHull.cpp   → Implementation of Graham Scan with visualization
+GrahamScan.cpp   → Implementation of Graham Scan with visualization
 ```
 
 ---
@@ -46,7 +46,7 @@ This program requires the **SFML library**.
 Example compilation command:
 
 ```
-g++ ConvexHull.cpp -o convex_hull -lsfml-graphics -lsfml-window -lsfml-system
+g++ GrahamScan.cpp -o graham_scan -lsfml-graphics -lsfml-window -lsfml-system
 ```
 
 ---
@@ -54,7 +54,7 @@ g++ ConvexHull.cpp -o convex_hull -lsfml-graphics -lsfml-window -lsfml-system
 ## ▶️ Run
 
 ```
-./convex_hull
+./graham_scan
 ```
 
 ---
