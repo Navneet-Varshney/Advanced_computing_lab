@@ -1,18 +1,9 @@
 package Day5_NFA_Creation;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 
 public class NFAConsole {
 
@@ -52,7 +43,7 @@ public class NFAConsole {
             String symbol = String.valueOf(input.charAt(i));
             if (!model.alphabet.contains(symbol)) {
                 throw new IllegalArgumentException(
-                    "Input contains symbol '" + symbol + "' which is not in alphabet " + model.alphabet
+                    "Input contains symbol '" + symbol + "' which is not in alphabet " + model.alphabet.toDisplayString()
                 );
             }
         }
@@ -61,134 +52,264 @@ public class NFAConsole {
     private static void printSimulation(SimulationResult result, String input) {
         System.out.println("\n=== Simulation Start ===");
         System.out.println("Input string: '" + input + "'");
-        System.out.println("Initial states(start): " + result.initialStates);
+        System.out.println("Initial states(start): " + result.initialStates.toDisplayString());
 
-        for (SimulationStep step : result.steps) {
-            System.out.print(step.toLog());
+        for (int i = 0; i < result.stepCount; i++) {
+            System.out.print(result.steps[i].toLog());
         }
 
-        System.out.println("Final states after input: " + result.finalStatesAfterInput);
+        System.out.println("Final states after input: " + result.finalStatesAfterInput.toDisplayString());
         System.out.println("Result: " + (result.accepted ? "ACCEPTED" : "REJECTED"));
         System.out.println("========================");
     }
 
-    private static final class NFAModel {
-        private final Set<String> states = new LinkedHashSet<>();
-        private final Set<String> alphabet = new LinkedHashSet<>();
-        private String startState;
-        private final Set<String> finalStates = new LinkedHashSet<>();
-        private final Map<String, Map<String, Set<String>>> transitions = new LinkedHashMap<>();
+    private static final class StringArray {
+        private String[] data;
+        private int size;
 
-        void addTransition(String from, String symbol, String to) {
-            transitions
-                .computeIfAbsent(from, key -> new LinkedHashMap<>())
-                .computeIfAbsent(symbol, key -> new LinkedHashSet<>())
-                .add(to);
+        StringArray() {
+            this(4);
         }
 
-        Set<String> move(Set<String> inputStates, String symbol) {
-            Set<String> result = new LinkedHashSet<>();
-            for (String state : inputStates) {
-                result.addAll(getTargets(state, symbol));
+        StringArray(int capacity) {
+            data = new String[Math.max(1, capacity)];
+            size = 0;
+        }
+
+        void add(String value) {
+            ensureCapacity(size + 1);
+            data[size++] = value;
+        }
+
+        void addUnique(String value) {
+            if (!contains(value)) {
+                add(value);
+            }
+        }
+
+        boolean contains(String value) {
+            for (int i = 0; i < size; i++) {
+                if (data[i].equals(value)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        String get(int index) {
+            return data[index];
+        }
+
+        int size() {
+            return size;
+        }
+
+        boolean isEmpty() {
+            return size == 0;
+        }
+
+        StringArray copy() {
+            StringArray clone = new StringArray(size);
+            for (int i = 0; i < size; i++) {
+                clone.add(data[i]);
+            }
+            return clone;
+        }
+
+        String toDisplayString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append("[");
+            for (int i = 0; i < size; i++) {
+                if (i > 0) {
+                    sb.append(", ");
+                }
+                sb.append(data[i]);
+            }
+            sb.append("]");
+            return sb.toString();
+        }
+
+        private void ensureCapacity(int minCapacity) {
+            if (minCapacity <= data.length) {
+                return;
+            }
+            int newCapacity = data.length * 2;
+            if (newCapacity < minCapacity) {
+                newCapacity = minCapacity;
+            }
+            String[] newData = new String[newCapacity];
+            for (int i = 0; i < size; i++) {
+                newData[i] = data[i];
+            }
+            data = newData;
+        }
+    }
+
+    private static final class Transition {
+        private final String from;
+        private final String symbol;
+        private final String to;
+
+        Transition(String from, String symbol, String to) {
+            this.from = from;
+            this.symbol = symbol;
+            this.to = to;
+        }
+    }
+
+    private static final class NFAModel {
+        private final StringArray states = new StringArray();
+        private final StringArray alphabet = new StringArray();
+        private String startState;
+        private final StringArray finalStates = new StringArray();
+        private Transition[] transitions = new Transition[8];
+        private int transitionCount;
+
+        void addTransition(String from, String symbol, String to) {
+            ensureTransitionCapacity(transitionCount + 1);
+            transitions[transitionCount++] = new Transition(from, symbol, to);
+        }
+
+        StringArray move(StringArray inputStates, String symbol) {
+            StringArray result = new StringArray();
+            for (int i = 0; i < inputStates.size(); i++) {
+                String state = inputStates.get(i);
+                for (int j = 0; j < transitionCount; j++) {
+                    Transition t = transitions[j];
+                    if (t.from.equals(state) && t.symbol.equals(symbol)) {
+                        result.addUnique(t.to);
+                    }
+                }
             }
             return result;
         }
 
-        private Set<String> getTargets(String from, String symbol) {
-            Map<String, Set<String>> bySymbol = transitions.get(from);
-            if (bySymbol == null) {
-                return Collections.emptySet();
-            }
-            return bySymbol.getOrDefault(symbol, Collections.emptySet());
-        }
-
         String summary() {
-            return "States      : " + states + "\n"
-                + "Alphabet    : " + alphabet + "\n"
+            return "States      : " + states.toDisplayString() + "\n"
+                + "Alphabet    : " + alphabet.toDisplayString() + "\n"
                 + "Start State : " + startState + "\n"
-                + "Final States: " + finalStates + "\n"
+                + "Final States: " + finalStates.toDisplayString() + "\n"
                 + "Transitions :\n" + transitionLines();
         }
 
         String transitionLines() {
             StringBuilder sb = new StringBuilder();
-            for (Map.Entry<String, Map<String, Set<String>>> fromEntry : transitions.entrySet()) {
-                for (Map.Entry<String, Set<String>> symbolEntry : fromEntry.getValue().entrySet()) {
-                    sb.append("  ")
-                        .append(fromEntry.getKey())
-                        .append(" --")
-                        .append(symbolEntry.getKey())
-                        .append("--> ")
-                        .append(symbolEntry.getValue())
-                        .append("\n");
+            boolean[] grouped = new boolean[transitionCount];
+            for (int i = 0; i < transitionCount; i++) {
+                if (grouped[i]) {
+                    continue;
                 }
+
+                Transition t = transitions[i];
+                StringArray targets = new StringArray();
+                targets.addUnique(t.to);
+                grouped[i] = true;
+
+                for (int j = i + 1; j < transitionCount; j++) {
+                    if (grouped[j]) {
+                        continue;
+                    }
+                    Transition other = transitions[j];
+                    if (t.from.equals(other.from) && t.symbol.equals(other.symbol)) {
+                        targets.addUnique(other.to);
+                        grouped[j] = true;
+                    }
+                }
+
+                sb.append("  ")
+                    .append(t.from)
+                    .append(" --")
+                    .append(t.symbol)
+                    .append("--> ")
+                    .append(targets.toDisplayString())
+                    .append("\n");
             }
             return sb.length() == 0 ? "  (none)\n" : sb.toString();
+        }
+
+        private void ensureTransitionCapacity(int minCapacity) {
+            if (minCapacity <= transitions.length) {
+                return;
+            }
+            int newCapacity = transitions.length * 2;
+            if (newCapacity < minCapacity) {
+                newCapacity = minCapacity;
+            }
+            Transition[] newTransitions = new Transition[newCapacity];
+            for (int i = 0; i < transitionCount; i++) {
+                newTransitions[i] = transitions[i];
+            }
+            transitions = newTransitions;
         }
     }
 
     private static final class SimulationStep {
         private final int stepNo;
         private final String consumedSymbol;
-        private final Set<String> beforeStates;
-        private final Set<String> afterStates;
+        private final StringArray beforeStates;
+        private final StringArray afterStates;
 
-        SimulationStep(int stepNo, String consumedSymbol, Set<String> beforeStates, Set<String> afterStates) {
+        SimulationStep(int stepNo, String consumedSymbol, StringArray beforeStates, StringArray afterStates) {
             this.stepNo = stepNo;
             this.consumedSymbol = consumedSymbol;
-            this.beforeStates = new LinkedHashSet<>(beforeStates);
-            this.afterStates = new LinkedHashSet<>(afterStates);
+            this.beforeStates = beforeStates.copy();
+            this.afterStates = afterStates.copy();
         }
 
         String toLog() {
             return "Step " + stepNo + " | symbol='" + consumedSymbol + "'\n"
-                + "  Current states         : " + beforeStates + "\n"
-                + "  After transition(move) : " + afterStates + "\n";
+                + "  Current states         : " + beforeStates.toDisplayString() + "\n"
+                + "  After transition(move) : " + afterStates.toDisplayString() + "\n";
         }
     }
 
     private static final class SimulationResult {
-        private final List<SimulationStep> steps;
-        private final Set<String> initialStates;
-        private final Set<String> finalStatesAfterInput;
+        private final SimulationStep[] steps;
+        private final int stepCount;
+        private final StringArray initialStates;
+        private final StringArray finalStatesAfterInput;
         private final boolean accepted;
 
         SimulationResult(
-            List<SimulationStep> steps,
-            Set<String> initialStates,
-            Set<String> finalStatesAfterInput,
+            SimulationStep[] steps,
+            int stepCount,
+            StringArray initialStates,
+            StringArray finalStatesAfterInput,
             boolean accepted
         ) {
             this.steps = steps;
-            this.initialStates = new LinkedHashSet<>(initialStates);
-            this.finalStatesAfterInput = new LinkedHashSet<>(finalStatesAfterInput);
+            this.stepCount = stepCount;
+            this.initialStates = initialStates.copy();
+            this.finalStatesAfterInput = finalStatesAfterInput.copy();
             this.accepted = accepted;
         }
     }
 
     private static final class NFAParser {
         static NFAModel parse(Path path) throws IOException {
-            List<String> lines = Files.readAllLines(path);
             NFAModel model = new NFAModel();
 
             boolean readingTransitions = false;
             int lineNo = 0;
-            for (String rawLine : lines) {
-                lineNo++;
-                String line = cleanLine(rawLine);
-                if (line.isEmpty()) {
-                    continue;
-                }
+            try (Scanner fileScanner = new Scanner(path)) {
+                while (fileScanner.hasNextLine()) {
+                    String rawLine = fileScanner.nextLine();
+                    lineNo++;
+                    String line = cleanLine(rawLine);
+                    if (line.isEmpty()) {
+                        continue;
+                    }
 
-                if (line.equalsIgnoreCase("transitions:")) {
-                    readingTransitions = true;
-                    continue;
-                }
+                    if (line.equalsIgnoreCase("transitions:")) {
+                        readingTransitions = true;
+                        continue;
+                    }
 
-                if (readingTransitions) {
-                    parseTransitionLine(model, line, lineNo);
-                } else {
-                    parseHeaderLine(model, line, lineNo);
+                    if (readingTransitions) {
+                        parseTransitionLine(model, line, lineNo);
+                    } else {
+                        parseHeaderLine(model, line, lineNo);
+                    }
                 }
             }
 
@@ -206,15 +327,16 @@ public class NFAConsole {
                 throw new IllegalArgumentException("Line " + lineNo + ": expected key=value format.");
             }
 
-            String key = parts[0].trim().toLowerCase(Locale.ROOT);
+            String key = parts[0].trim().toLowerCase();
             String value = parts[1].trim();
+            StringArray tokens = splitCsv(value);
 
             switch (key) {
                 case "states":
-                    model.states.addAll(splitCsv(value));
+                    addUniqueAll(model.states, tokens);
                     break;
                 case "alphabet":
-                    model.alphabet.addAll(splitCsv(value));
+                    addUniqueAll(model.alphabet, tokens);
                     break;
                 case "start":
                 case "startstate":
@@ -222,7 +344,7 @@ public class NFAConsole {
                     break;
                 case "final":
                 case "finalstates":
-                    model.finalStates.addAll(splitCsv(value));
+                    addUniqueAll(model.finalStates, tokens);
                     break;
                 default:
                     throw new IllegalArgumentException("Line " + lineNo + ": unknown key '" + key + "'.");
@@ -245,7 +367,7 @@ public class NFAConsole {
 
             String from = leftParts[0].trim();
             String symbol = leftParts[1].trim();
-            List<String> targets = splitCsv(right);
+            StringArray targets = splitCsv(right);
             if (targets.isEmpty()) {
                 throw new IllegalArgumentException("Line " + lineNo + ": target states missing.");
             }
@@ -256,8 +378,8 @@ public class NFAConsole {
                 throw new IllegalArgumentException("Line " + lineNo + ": epsilon transitions are not allowed in this NFA.");
             }
 
-            for (String to : targets) {
-                model.addTransition(from, symbol, to);
+            for (int i = 0; i < targets.size(); i++) {
+                model.addTransition(from, symbol, targets.get(i));
             }
         }
 
@@ -267,11 +389,11 @@ public class NFAConsole {
                 || symbol.equalsIgnoreCase("epsilon");
         }
 
-        private static List<String> splitCsv(String csv) {
+        private static StringArray splitCsv(String csv) {
+            StringArray items = new StringArray();
             if (csv.isBlank()) {
-                return Collections.emptyList();
+                return items;
             }
-            List<String> items = new ArrayList<>();
             for (String token : csv.split(",")) {
                 String value = token.trim();
                 if (!value.isEmpty()) {
@@ -279,6 +401,12 @@ public class NFAConsole {
                 }
             }
             return items;
+        }
+
+        private static void addUniqueAll(StringArray target, StringArray source) {
+            for (int i = 0; i < source.size(); i++) {
+                target.addUnique(source.get(i));
+            }
         }
 
         private static void validateModel(NFAModel model) {
@@ -294,33 +422,30 @@ public class NFAConsole {
             if (model.finalStates.isEmpty()) {
                 throw new IllegalArgumentException("final states are missing.");
             }
-            for (String fs : model.finalStates) {
+            for (int i = 0; i < model.finalStates.size(); i++) {
+                String fs = model.finalStates.get(i);
                 if (!model.states.contains(fs)) {
                     throw new IllegalArgumentException("final state '" + fs + "' not in states list.");
                 }
             }
 
-            for (String ch : model.alphabet) {
+            for (int i = 0; i < model.alphabet.size(); i++) {
+                String ch = model.alphabet.get(i);
                 if (isEpsilonSymbol(ch)) {
                     throw new IllegalArgumentException("alphabet cannot include epsilon symbol: " + ch);
                 }
             }
 
-            for (Map.Entry<String, Map<String, Set<String>>> fromEntry : model.transitions.entrySet()) {
-                String from = fromEntry.getKey();
-                if (!model.states.contains(from)) {
-                    throw new IllegalArgumentException("transition has unknown source state: " + from);
+            for (int i = 0; i < model.transitionCount; i++) {
+                Transition t = model.transitions[i];
+                if (!model.states.contains(t.from)) {
+                    throw new IllegalArgumentException("transition has unknown source state: " + t.from);
                 }
-                for (Map.Entry<String, Set<String>> symbolEntry : fromEntry.getValue().entrySet()) {
-                    String symbol = symbolEntry.getKey();
-                    if (!model.alphabet.contains(symbol)) {
-                        throw new IllegalArgumentException("transition uses symbol not in alphabet: " + symbol);
-                    }
-                    for (String to : symbolEntry.getValue()) {
-                        if (!model.states.contains(to)) {
-                            throw new IllegalArgumentException("transition has unknown target state: " + to);
-                        }
-                    }
+                if (!model.alphabet.contains(t.symbol)) {
+                    throw new IllegalArgumentException("transition uses symbol not in alphabet: " + t.symbol);
+                }
+                if (!model.states.contains(t.to)) {
+                    throw new IllegalArgumentException("transition has unknown target state: " + t.to);
                 }
             }
         }
@@ -328,20 +453,31 @@ public class NFAConsole {
 
     private static final class NFASimulator {
         static SimulationResult run(NFAModel model, String input) {
-            Set<String> current = new LinkedHashSet<>(Collections.singleton(model.startState));
-            Set<String> initial = new LinkedHashSet<>(current);
-            List<SimulationStep> steps = new ArrayList<>();
+            StringArray current = new StringArray();
+            current.add(model.startState);
+            StringArray initial = current.copy();
+            SimulationStep[] steps = new SimulationStep[Math.max(1, input.length())];
+            int stepCount = 0;
 
             for (int i = 0; i < input.length(); i++) {
                 String symbol = String.valueOf(input.charAt(i));
-                Set<String> moved = model.move(current, symbol);
+                StringArray moved = model.move(current, symbol);
                 SimulationStep step = new SimulationStep(i + 1, symbol, current, moved);
-                steps.add(step);
+                steps[stepCount++] = step;
                 current = moved;
             }
 
-            boolean accepted = !Collections.disjoint(current, model.finalStates);
-            return new SimulationResult(steps, initial, current, accepted);
+            boolean accepted = hasCommonState(current, model.finalStates);
+            return new SimulationResult(steps, stepCount, initial, current, accepted);
+        }
+
+        private static boolean hasCommonState(StringArray a, StringArray b) {
+            for (int i = 0; i < a.size(); i++) {
+                if (b.contains(a.get(i))) {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
