@@ -235,8 +235,9 @@ public class SimpleNFA {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                if(currSize==0){
-                    System.out.println("\nNo need to check full String as Machine enters dead State.\n");
+                if (currSize == 0) {
+                    System.out.println("--------------------------------");
+                    System.out.println("Dead state reached! No further transitions possible.");
                     break;
                 }
             }
