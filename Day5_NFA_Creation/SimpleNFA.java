@@ -48,6 +48,7 @@ public class SimpleNFA {
         return s;
     }
 
+    // 🔹 Print transitions
     static void printTransitions() {
         System.out.println("Transitions :");
 
@@ -65,7 +66,6 @@ public class SimpleNFA {
                     for (int k = 0; k < transCount[index]; k++) {
                         String t = transitions[i][j][k];
 
-                        // avoid duplicate
                         if (indexOf(temp, size, t) == -1) {
                             temp[size++] = t;
                         }
@@ -102,10 +102,6 @@ public class SimpleNFA {
     }
 
     // 🔹 Validate symbol
-    static boolean isValidSymbol(String symbol) {
-        return indexOf(alphabet, alphaCount, symbol) != -1;
-    }
-
     static boolean validateInputString(String str) {
         for (int i = 0; i < str.length(); i++) {
             String symbol = String.valueOf(str.charAt(i));
@@ -178,16 +174,17 @@ public class SimpleNFA {
 
         System.out.print("Enter file path: ");
         String path = input.nextLine();
+
         System.out.println("\nReading NFA from given file..... \n");
         readFile(path);
+
         try {
-            Thread.sleep(2000); // 🔥 2 second pause
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         System.out.println("File read successfully!\n");
-        
-    
 
         // 🔹 Print NFA Summary
         System.out.println("\n========== NFA ==========");
@@ -198,56 +195,71 @@ public class SimpleNFA {
         printTransitions();
         System.out.println("=========================");
 
-        // 🔹 Input
-        System.out.print("\nEnter input string: ");
-        String str = input.nextLine();
-        // 🔥 INPUT VALIDATION (yahin add karna hai)
-        if (!validateInputString(str)) {
-            return;
-        }
+        // 🔥 INFINITE LOOP START
+        while (true) {
 
-        String[] current = new String[20];
-        int currSize = 1;
-        current[0] = startState;
+            System.out.print("\nEnter input string (type 'exit' to stop): ");
+            String str = input.nextLine();
 
-        System.out.println("\n===== Simulation =====");
-        System.out.println("Input: " + str);
-        System.out.println("Start: " + printArray(current, currSize));
-
-        // 🔹 Simulation
-        for (int i = 0; i < str.length(); i++) {
-            String symbol = String.valueOf(str.charAt(i));
-
-            int[] newSize = new int[1];
-            String[] next = move(current, currSize, symbol, newSize);
-
-            System.out.println("--------------------------------");
-            System.out.println("Step " + (i + 1) + " | Symbol: " + symbol);
-            System.out.println("Current States : " + printArray(current, currSize));
-            System.out.println("Next States    : " + printArray(next, newSize[0]));
-
-            current = next;
-            currSize = newSize[0];
-            try {
-                Thread.sleep(3000); // 🔥 3 second pause
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        // 🔹 Final check
-        boolean accepted = false;
-        for (int i = 0; i < currSize; i++) {
-            if (indexOf(finalStates, finalCount, current[i]) != -1) {
-                accepted = true;
+            // 🔹 Exit
+            if (str.equalsIgnoreCase("exit")) {
+                System.out.println("\nProgram terminated by user.");
                 break;
             }
+
+            // 🔹 Validate
+            if (!validateInputString(str)) {
+                continue;
+            }
+
+            String[] current = new String[20];
+            int currSize = 1;
+            current[0] = startState;
+
+            System.out.println("\n===== Simulation =====");
+            System.out.println("Input: " + str);
+            System.out.println("Start: " + printArray(current, currSize));
+
+            // 🔹 Simulation
+            for (int i = 0; i < str.length(); i++) {
+                String symbol = String.valueOf(str.charAt(i));
+
+                int[] newSize = new int[1];
+                String[] next = move(current, currSize, symbol, newSize);
+
+                System.out.println("--------------------------------");
+                System.out.println("Step " + (i + 1) + " | Symbol: " + symbol);
+                System.out.println("Current States : " + printArray(current, currSize));
+                System.out.println("Next States    : " + printArray(next, newSize[0]));
+
+                current = next;
+                currSize = newSize[0];
+                if(currSize==0){
+                    break;
+                }
+
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            // 🔹 Final check
+            boolean accepted = false;
+            for (int i = 0; i < currSize; i++) {
+                if (indexOf(finalStates, finalCount, current[i]) != -1) {
+                    accepted = true;
+                    break;
+                }
+            }
+
+            System.out.println("--------------------------------");
+            System.out.println("Final States : " + printArray(current, currSize));
+            System.out.println("Result       : " + (accepted ? "ACCEPTED" : "REJECTED"));
+            System.out.println("===============================");
         }
 
-        System.out.println("--------------------------------");
-        System.out.println("Final States : " + printArray(current, currSize));
-        System.out.println("Result       : " + (accepted ? "ACCEPTED" : "REJECTED"));
-        System.out.println("===============================");
+        input.close();
     }
-    
 }
