@@ -186,7 +186,6 @@ public class SimpleNFA {
 
         System.out.println("File read successfully!\n");
 
-        // 🔹 Print NFA Summary
         System.out.println("\n========== NFA ==========");
         System.out.println("States      : " + printArray(states, stateCount));
         System.out.println("Alphabet    : " + printArray(alphabet, alphaCount));
@@ -195,19 +194,16 @@ public class SimpleNFA {
         printTransitions();
         System.out.println("=========================");
 
-        // 🔥 INFINITE LOOP START
         while (true) {
 
             System.out.print("\nEnter input string (type 'exit' to stop): ");
             String str = input.nextLine();
 
-            // 🔹 Exit
             if (str.equalsIgnoreCase("exit")) {
                 System.out.println("\nProgram terminated by user.");
                 break;
             }
 
-            // 🔹 Validate
             if (!validateInputString(str)) {
                 continue;
             }
@@ -220,7 +216,6 @@ public class SimpleNFA {
             System.out.println("Input: " + str);
             System.out.println("Start: " + printArray(current, currSize));
 
-            // 🔹 Simulation
             for (int i = 0; i < str.length(); i++) {
                 String symbol = String.valueOf(str.charAt(i));
 
@@ -234,18 +229,18 @@ public class SimpleNFA {
 
                 current = next;
                 currSize = newSize[0];
-                if(currSize==0){
-                    break;
-                }
 
                 try {
                     Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                if(currSize==0){
+                    System.out.println("\nNo need to check full String as Machine enters dead State.\n");
+                    break;
+                }
             }
 
-            // 🔹 Final check
             boolean accepted = false;
             for (int i = 0; i < currSize; i++) {
                 if (indexOf(finalStates, finalCount, current[i]) != -1) {
