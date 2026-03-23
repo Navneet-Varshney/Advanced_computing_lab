@@ -1,13 +1,11 @@
-package Day5_NFA_Creation;
-
 import java.io.*;
 import java.util.Scanner;
 
 public class SimpleNFA {
 
-    static String[] states = new String[20];
+    static String[] S = new String[20];
     static String[] alphabet = new String[10];
-    static String startState;
+    static String initial;
     static String[] finalStates = new String[10];
 
     static String[][][] transitions = new String[20][10][20];
@@ -15,7 +13,6 @@ public class SimpleNFA {
 
     static int stateCount = 0, alphaCount = 0, finalCount = 0;
 
-    // 🔹 Find index
     static int indexOf(String[] arr, int size, String key) {
         for (int i = 0; i < size; i++) {
             if (arr[i].equals(key))
@@ -24,9 +21,8 @@ public class SimpleNFA {
         return -1;
     }
 
-    // 🔹 Add transition
     static void addTransition(String from, String symbol, String to) {
-        int i = indexOf(states, stateCount, from);
+        int i = indexOf(S, stateCount, from);
         int j = indexOf(alphabet, alphaCount, symbol);
 
         if (i == -1 || j == -1)
@@ -36,7 +32,6 @@ public class SimpleNFA {
         transitions[i][j][transCount[index]++] = to;
     }
 
-    // 🔹 Print array nicely
     static String printArray(String[] arr, int size) {
         String s = "[";
         for (int i = 0; i < size; i++) {
@@ -48,7 +43,6 @@ public class SimpleNFA {
         return s;
     }
 
-    // 🔹 Print transitions
     static void printTransitions() {
         System.out.println("Transitions :");
 
@@ -58,7 +52,7 @@ public class SimpleNFA {
                 int index = i * 10 + j;
 
                 if (transCount[index] > 0) {
-                    System.out.print("  " + states[i] + " --" + alphabet[j] + "--> ");
+                    System.out.print("  " + S[i] + " --" + alphabet[j] + "--> ");
 
                     String[] temp = new String[20];
                     int size = 0;
@@ -77,7 +71,6 @@ public class SimpleNFA {
         }
     }
 
-    // 🔹 Move function
     static String[] move(String[] current, int currSize, String symbol, int[] newSize) {
         String[] result = new String[20];
         newSize[0] = 0;
@@ -85,7 +78,7 @@ public class SimpleNFA {
         int symIndex = indexOf(alphabet, alphaCount, symbol);
 
         for (int i = 0; i < currSize; i++) {
-            int stateIndex = indexOf(states, stateCount, current[i]);
+            int stateIndex = indexOf(S, stateCount, current[i]);
 
             int index = stateIndex * 10 + symIndex;
 
@@ -101,7 +94,6 @@ public class SimpleNFA {
         return result;
     }
 
-    // 🔹 Validate symbol
     static boolean validateInputString(String str) {
         for (int i = 0; i < str.length(); i++) {
             String symbol = String.valueOf(str.charAt(i));
@@ -114,7 +106,6 @@ public class SimpleNFA {
         return true;
     }
 
-    // 🔹 File read
     static void readFile(String path) throws Exception {
         Scanner sc = new Scanner(new File(path));
 
@@ -140,12 +131,12 @@ public class SimpleNFA {
 
                 if (key.equalsIgnoreCase("states")) {
                     for (String t : tokens)
-                        states[stateCount++] = t.trim();
+                        S[stateCount++] = t.trim();
                 } else if (key.equalsIgnoreCase("alphabet")) {
                     for (String t : tokens)
                         alphabet[alphaCount++] = t.trim();
                 } else if (key.equalsIgnoreCase("start")) {
-                    startState = val;
+                 initial = val;
                 } else if (key.equalsIgnoreCase("final")) {
                     for (String t : tokens)
                         finalStates[finalCount++] = t.trim();
@@ -187,9 +178,9 @@ public class SimpleNFA {
         System.out.println("File read successfully!\n");
 
         System.out.println("\n========== NFA ==========");
-        System.out.println("States      : " + printArray(states, stateCount));
+        System.out.println("States      : " + printArray(S, stateCount));
         System.out.println("Alphabet    : " + printArray(alphabet, alphaCount));
-        System.out.println("Start State : " + startState);
+        System.out.println("Start State : " + initial);
         System.out.println("Final States: " + printArray(finalStates, finalCount));
         printTransitions();
         System.out.println("=========================");
@@ -210,7 +201,7 @@ public class SimpleNFA {
 
             String[] current = new String[20];
             int currSize = 1;
-            current[0] = startState;
+            current[0] = initial;
 
             System.out.println("\n===== Simulation =====");
             System.out.println("Input: " + str);
