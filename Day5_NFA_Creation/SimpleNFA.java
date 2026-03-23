@@ -10,7 +10,7 @@ public class SimpleNFA {
     static String[] finalStates = new String[10];
 
     static String[][][] transitions = new String[20][10][20];
-    static int[] transCount = new int[200];
+    static int[][] transCount = new int[20][10];
 
     static int indexOf(String[] arr, int size, String key) {
         for (int i = 0; i < size; i++) {
@@ -27,8 +27,7 @@ public class SimpleNFA {
         if (i == -1 || j == -1)
             return;
 
-        int index = i * 10 + j;
-        transitions[i][j][transCount[index]++] = to;
+        transitions[i][j][transCount[i][j]++] = to;
     }
 
     static String printArray(String[] arr, int size) {
@@ -48,15 +47,14 @@ public class SimpleNFA {
         for (int i = 0; i < stateCount; i++) {
             for (int j = 0; j < alphaCount; j++) {
 
-                int index = i * 10 + j;
 
-                if (transCount[index] > 0) {
+                if (transCount[i][j] > 0) {
                     System.out.print("  " + S[i] + " --" + alphabet[j] + "--> ");
 
                     String[] temp = new String[20];
                     int size = 0;
 
-                    for (int k = 0; k < transCount[index]; k++) {
+                    for (int k = 0; k < transCount[i][j]; k++) {
                         String t = transitions[i][j][k];
 
                         if (indexOf(temp, size, t) == -1) {
@@ -79,9 +77,7 @@ public class SimpleNFA {
         for (int i = 0; i < currSize; i++) {
             int stateIndex = indexOf(S, stateCount, current[i]);
 
-            int index = stateIndex * 10 + symIndex;
-
-            for (int k = 0; k < transCount[index]; k++) {
+            for (int k = 0; k < transCount[stateIndex][symIndex]; k++) {
                 String next = transitions[stateIndex][symIndex][k];
 
                 if (indexOf(result, newSize[0], next) == -1) {
@@ -135,7 +131,7 @@ public class SimpleNFA {
                     for (String t : tokens)
                         alphabet[alphaCount++] = t.trim();
                 } else if (key.equalsIgnoreCase("start")) {
-                 initial = val;
+                 initial = val.trim();
                 } else if (key.equalsIgnoreCase("final")) {
                     for (String t : tokens)
                         finalStates[finalCount++] = t.trim();
