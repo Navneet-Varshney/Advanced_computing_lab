@@ -2,16 +2,15 @@ import java.io.*;
 import java.util.Scanner;
 
 public class SimpleNFA {
+    static int stateCount = 0, alphaCount = 0, finalCount = 0;
 
-    static String[] S = new String[20];
     static String[] alphabet = new String[10];
+    static String[] S = new String[20];
     static String initial;
     static String[] finalStates = new String[10];
 
     static String[][][] transitions = new String[20][10][20];
     static int[] transCount = new int[200];
-
-    static int stateCount = 0, alphaCount = 0, finalCount = 0;
 
     static int indexOf(String[] arr, int size, String key) {
         for (int i = 0; i < size; i++) {
@@ -214,7 +213,7 @@ public class SimpleNFA {
                 String[] next = move(current, currSize, symbol, newSize);
 
                 System.out.println("--------------------------------");
-                System.out.println("Step " + (i + 1) + " | Symbol: " + symbol);
+                System.out.println("Step " + (i + 1) + " | Processing Symbol: " + symbol);
                 System.out.println("Current States : " + printArray(current, currSize));
                 System.out.println("Next States    : " + printArray(next, newSize[0]));
 
