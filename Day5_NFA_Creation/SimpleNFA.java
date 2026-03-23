@@ -229,16 +229,25 @@ public class SimpleNFA {
             }
 
             boolean accepted = false;
+            String end = null;
             for (int i = 0; i < currSize; i++) {
-                if (indexOf(finalStates, finalCount, current[i]) != -1) {
+                int index = indexOf(finalStates, finalCount, current[i]);
+                if (index != -1) {
                     accepted = true;
+                    end = current[i];
                     break;
                 }
             }
 
             System.out.println("--------------------------------");
             System.out.println("Final States : " + printArray(current, currSize));
-            System.out.println("Result       : " + (accepted ? "ACCEPTED" : "REJECTED"));
+            if (accepted) {
+                System.out.println("\nFinal state '" + end + "' is an accepting state!\n");
+                System.out.println("Result       : ACCEPTED");
+            } else {
+                System.out.println("No final state reached!\n");
+                System.out.println("Result       : REJECTED");
+            }
             System.out.println("===============================");
         }
 
