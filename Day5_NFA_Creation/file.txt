@@ -3,11 +3,10 @@ alphabet=a,b
 start=q0
 final=q2
 transitions:
-q0,a->q0
+q0,a->q0,q2
 q0,b->q1
 q1,b->q2
 q2,b->p0
-q0,a->q2
 p1,b->p0
 p1,a->p1
 p1,a->q0
