@@ -15,6 +15,10 @@ public class Client {
             return true;
         if (f.equalsIgnoreCase("branch"))
             return true;
+        if (f.equalsIgnoreCase("faculty"))
+            return true;
+        if (f.equalsIgnoreCase("course"))
+            return true;
         return false;
     }
 
@@ -31,10 +35,17 @@ public class Client {
 
                 String field;
                 while (true) {
-                    System.out.println("Search by: name / enrollment / gender / branch");
+                    System.out.println("Search by: name / enrollment / gender / branch / faculty / course");
+                    System.out.println("Type 'exit' to disconnect.");
                     System.out.print("Field: ");
                     field = sc.nextLine();
-
+                    if (field.equalsIgnoreCase("exit")) {
+                        System.out.println("\nDisconnecting from server...");
+                        s.close();
+                        sc.close();
+                        System.out.println("Client closed.");
+                        return; // program terminate
+                    }
                     if (validField(field))
                         break;
                     else
@@ -51,26 +62,23 @@ public class Client {
                 System.out.println("\nResult from Server:");
 
                 String line;
-                int recordCount = 0;
-                boolean firstRecordPrinted = false;
-                while (!(line = in.readLine()).equals("END")) {
 
-                    if (line.startsWith("--------------------")) {
-                        continue;
+                try {
+                    while (true) {
+                        line = in.readLine();
+
+                        if (line.equals("END"))
+                            break;
+
+                        System.out.println(line);
                     }
-
-                    if (line.startsWith("Name:")) {
-                        recordCount++;
-                        System.out.println("\nRecord " + recordCount + ":");
-                        firstRecordPrinted = true;
-                    }
-
-                    System.out.println(line);
+                } catch (SocketException e) {
+                    System.out.println("\nConnection lost! Server might be down.");
+                    System.out.println("Please start Server first, then run Client.");
+                    s.close();
+                    sc.close();
+                    return;
                 }
-                if (recordCount == 0)
-                    System.out.println("\nNo records found.");
-                else
-                    System.out.println("\n" + recordCount + " Record(s) Found.");
 
                 System.out.println();
             }
