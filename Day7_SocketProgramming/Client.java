@@ -44,7 +44,7 @@ public class Client {
                         s.close();
                         sc.close();
                         System.out.println("Client closed.");
-                        return; // program terminate
+                        return;
                     }
                     if (validField(field))
                         break;
@@ -52,7 +52,6 @@ public class Client {
                         System.out.println("Invalid Field! Please try again.\n");
                 }
 
-                // ab value puchenge
                 System.out.print("Value: ");
                 String value = sc.nextLine();
 

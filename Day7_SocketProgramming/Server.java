@@ -106,11 +106,7 @@ class ClientHandler extends Thread {
                     boolean match = (field.equalsIgnoreCase("name") && data[0].equalsIgnoreCase(value)) ||
                             (field.equalsIgnoreCase("enrollment") && data[1].equalsIgnoreCase(value)) ||
                             (field.equalsIgnoreCase("faculty") && data[2].equalsIgnoreCase(value)) ||
-                            (field.equalsIgnoreCase("residence") && data[3].equalsIgnoreCase(value)) ||
                             (field.equalsIgnoreCase("course") && data[4].equalsIgnoreCase(value)) ||
-                            (field.equalsIgnoreCase("year") && data[5].equalsIgnoreCase(value)) ||
-                            (field.equalsIgnoreCase("phone") && data[6].equalsIgnoreCase(value)) ||
-                            (field.equalsIgnoreCase("email") && data[7].equalsIgnoreCase(value)) ||
                             (field.equalsIgnoreCase("gender") && data[8].equalsIgnoreCase(value)) ||
                             (field.equalsIgnoreCase("branch") && data[9].equalsIgnoreCase(value));
 
