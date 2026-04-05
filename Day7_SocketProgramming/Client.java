@@ -1,0 +1,90 @@
+package Day7_SocketProgramming;
+
+import java.io.*;
+import java.net.*;
+import java.util.Scanner;
+
+public class Client {
+
+    static boolean validField(String f) {
+        if (f.equalsIgnoreCase("name"))
+            return true;
+        if (f.equalsIgnoreCase("enrollment"))
+            return true;
+        if (f.equalsIgnoreCase("gender"))
+            return true;
+        if (f.equalsIgnoreCase("branch"))
+            return true;
+        return false;
+    }
+
+    public static void main(String[] args) {
+        try {
+            Socket s = new Socket("localhost", 5000);
+            System.out.println("Connected to Server\n");
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            PrintWriter out = new PrintWriter(s.getOutputStream(), true);
+            Scanner sc = new Scanner(System.in);
+
+            while (true) {
+
+                String field;
+                while (true) {
+                    System.out.println("Search by: name / enrollment / gender / branch");
+                    System.out.print("Field: ");
+                    field = sc.nextLine();
+
+                    if (validField(field))
+                        break;
+                    else
+                        System.out.println("Invalid Field! Please try again.\n");
+                }
+
+                // ab value puchenge
+                System.out.print("Value: ");
+                String value = sc.nextLine();
+
+                out.println(field);
+                out.println(value);
+
+                System.out.println("\nResult from Server:");
+
+                String line;
+                int recordCount = 0;
+                boolean firstRecordPrinted = false;
+                while (!(line = in.readLine()).equals("END")) {
+
+                    if (line.startsWith("--------------------")) {
+                        continue;
+                    }
+
+                    if (line.startsWith("Name:")) {
+                        recordCount++;
+                        System.out.println("\nRecord " + recordCount + ":");
+                        firstRecordPrinted = true;
+                    }
+
+                    System.out.println(line);
+                }
+                if (recordCount == 0)
+                    System.out.println("\nNo records found.");
+                else
+                    System.out.println("\n" + recordCount + " Record(s) Found.");
+
+                System.out.println();
+            }
+
+        }
+
+        catch (ConnectException e) {
+            System.out.println("\n Unable to connect to Server!");
+            System.out.println(" Possible reasons:");
+            System.out.println("   1. Server program is NOT started");
+            System.out.println("   2. Wrong port number (5000)");
+            System.out.println("\n Please start Server first, then run Client.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
