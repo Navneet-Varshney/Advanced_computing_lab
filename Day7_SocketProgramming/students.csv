@@ -1,0 +1,6 @@
+Name,Enrollment,Faculty,Residence,Course,Year,Phone,Email,Gender,Branch,CGPA
+Rahul,GM0864,23COBEA213,Hosteller,BTech,3rd,9876543210,rahul@gmail.com,Male,CSE,8.5
+Rahul,GM0999,23COBEA500,DayScholar,BTech,2nd,9999999999,rahul2@gmail.com,Male,IT,7.9
+Priya,GM0777,23COBEA111,Hosteller,MTech,1st,8888888888,priya@gmail.com,Female,CSE,9.1
+Amit,GM0666,23COBEA333,DayScholar,PhD,1st,7777777777,amit@gmail.com,Male,ECE,8.8
+Sneha,GM0555,23COBEA777,Hosteller,BTech,4th,6666666666,sneha@gmail.com,Female,ME,8.2
