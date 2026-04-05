@@ -7,17 +7,17 @@ import java.util.Date;
 
 public class Server {
     static int clientCounter = 0;
+    static ServerSocket ss;
 
-    // time stamp
     static String time() {
         return new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
     }
 
-    // ⭐ CSV RECORD COUNT
     static int countRecords() {
         int count = 0;
         try {
             BufferedReader br = new BufferedReader(new FileReader("students.csv"));
+            br.readLine();
             while (br.readLine() != null)
                 count++;
             br.close();
@@ -28,15 +28,21 @@ public class Server {
 
     public static void main(String[] args) {
         try {
-            // ⭐ CSV LOAD LOG
             int total = countRecords();
             System.out.println("[" + time() + "] CSV Loaded. Records = " + total);
-
-            ServerSocket ss = new ServerSocket(5000);
+            ss = new ServerSocket(5000);
             System.out.println("[" + time() + "] SERVER STARTED on PORT 5000");
             System.out.println("[" + time() + "] Waiting for client...");
-
-            // ⭐ infinite server loop
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                try {
+                    System.out.println("\n[" + time() + "] Server shutting down...");
+                    if (ss != null && !ss.isClosed()) {
+                        ss.close();
+                    }
+                    System.out.println("[" + time() + "] Server stopped successfully.");
+                } catch (Exception e) {
+                }
+            }));
             while (true) {
                 Socket s = ss.accept();
 
@@ -48,13 +54,15 @@ public class Server {
                 new ClientHandler(s, clientId).start();
             }
 
-        } catch (Exception e) {
+        }
+        catch (SocketException e) {
+        }
+        catch (Exception e) {
             System.out.println("Server Error: " + e);
         }
     }
 }
 
-// ⭐ THREAD FOR EACH CLIENT
 class ClientHandler extends Thread {
 
     Socket s;
@@ -84,13 +92,18 @@ class ClientHandler extends Thread {
                 System.out.println("[" + Server.time() + "] Searching database...");
 
                 BufferedReader file = new BufferedReader(new FileReader("students.csv"));
+
+                file.readLine();
+
                 String line;
                 boolean found = false;
+                int recordNo = 0;
 
                 while ((line = file.readLine()) != null) {
+
                     String data[] = line.split(",");
 
-                    if ((field.equalsIgnoreCase("name") && data[0].equalsIgnoreCase(value)) ||
+                    boolean match = (field.equalsIgnoreCase("name") && data[0].equalsIgnoreCase(value)) ||
                             (field.equalsIgnoreCase("enrollment") && data[1].equalsIgnoreCase(value)) ||
                             (field.equalsIgnoreCase("faculty") && data[2].equalsIgnoreCase(value)) ||
                             (field.equalsIgnoreCase("residence") && data[3].equalsIgnoreCase(value)) ||
@@ -99,7 +112,13 @@ class ClientHandler extends Thread {
                             (field.equalsIgnoreCase("phone") && data[6].equalsIgnoreCase(value)) ||
                             (field.equalsIgnoreCase("email") && data[7].equalsIgnoreCase(value)) ||
                             (field.equalsIgnoreCase("gender") && data[8].equalsIgnoreCase(value)) ||
-                            (field.equalsIgnoreCase("branch") && data[9].equalsIgnoreCase(value))) {
+                            (field.equalsIgnoreCase("branch") && data[9].equalsIgnoreCase(value));
+
+                    if (match) {
+                        recordNo++;
+                        found = true;
+
+                        out.println("Record " + recordNo);
                         out.println("Name: " + data[0]);
                         out.println("Enrollment: " + data[1]);
                         out.println("Faculty No: " + data[2]);
@@ -112,17 +131,17 @@ class ClientHandler extends Thread {
                         out.println("Branch: " + data[9]);
                         out.println("CGPA: " + data[10]);
                         out.println("--------------------");
-                        found = true;
                     }
                 }
 
                 if (!found)
                     out.println("No Record Found");
+                else
+                    out.println(recordNo + " Record(s) Found");
 
                 out.println("END");
                 file.close();
 
-                // ⭐ LOG BLOCK END
                 System.out.println("[" + Server.time() + "] Response sent to CLIENT-" + clientId);
                 System.out.println("[" + Server.time() + "] ==============================");
             }
@@ -132,9 +151,7 @@ class ClientHandler extends Thread {
 
         } catch (SocketException e) {
             System.out.println("[" + Server.time() + "] CLIENT-" + clientId + " disconnected unexpectedly.");
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("[" + Server.time() + "] Error handling CLIENT-" + clientId);
         }
     }
