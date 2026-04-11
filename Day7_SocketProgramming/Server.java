@@ -13,25 +13,11 @@ public class Server {
         return new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
     }
 
-    static int countRecords() {
-        int count = 0;
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("students.csv"));
-            br.readLine();
-            while (br.readLine() != null)
-                count++;
-            br.close();
-        } catch (Exception e) {
-        }
-        return count;
-    }
-
     public static void main(String[] args) {
         try {
-            int total = countRecords();
-            System.out.println("[" + time() + "] CSV Loaded. Records = " + total);
-            ss = new ServerSocket(5000);
-            System.out.println("[" + time() + "] SERVER STARTED on PORT 5000");
+            System.out.println("[" + time() + "] CSV Loaded.");
+            ss = new ServerSocket(8000);
+            System.out.println("[" + time() + "] SERVER STARTED on PORT 8000");
             System.out.println("[" + time() + "] Waiting for client...");
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 try {
@@ -41,6 +27,7 @@ public class Server {
                     }
                     System.out.println("[" + time() + "] Server stopped successfully.");
                 } catch (Exception e) {
+                    System.out.println("Error occurred while shutting down server.");
                 }
             }));
             while (true) {

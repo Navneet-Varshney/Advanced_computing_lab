@@ -20,7 +20,7 @@ public class Client {
 
     public static void main(String[] args) {
         try {
-            Socket s = new Socket("localhost", 5000);
+            Socket s = new Socket("localhost", 8000);
             System.out.println("Connected to Server\n");
 
             BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
