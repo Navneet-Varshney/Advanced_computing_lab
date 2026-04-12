@@ -88,6 +88,13 @@
                     if (data.length === 0) {
                         tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">No faculty records found</td></tr>';
                     } else {
+                        // Sort by faculty_id numerically
+                        data.sort((a, b) => {
+                            const idA = parseInt(a.faculty_id) || 999999;
+                            const idB = parseInt(b.faculty_id) || 999999;
+                            return idA - idB;
+                        });
+                        
                         data.forEach(person => {
                             const row = tbody.insertRow();
                             row.innerHTML = `

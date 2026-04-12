@@ -228,6 +228,13 @@
                 tbody.innerHTML = '';
                 
                 if (Array.isArray(data)) {
+                    // Sort by faculty_id numerically
+                    data.sort((a, b) => {
+                        const idA = parseInt(a.faculty_id) || 999999;
+                        const idB = parseInt(b.faculty_id) || 999999;
+                        return idA - idB;
+                    });
+                    
                     data.forEach(person => {
                         const row = tbody.insertRow();
                         row.innerHTML = `
