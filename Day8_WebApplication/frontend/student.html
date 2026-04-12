@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Directory - Faculty Database</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>📚 Faculty Database - Student View (Read-Only)</h1>
+        <div class="nav-buttons">
+            <span id="username-display"></span>
+            <button onclick="logout()" class="btn btn-danger">Logout</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="dashboard">
+            <div class="info-box">
+                <h3>📖 College Faculty Directory</h3>
+                <p>Welcome! You are viewing the faculty directory in read-only mode. You can search and view faculty information.</p>
+            </div>
+            
+            <!-- Search Faculty Database -->
+            <div class="action-buttons">
+                <input type="text" id="searchInput" placeholder="Search by name, department, or specialization..." class="search-box">
+                <button onclick="searchFaculty()" class="btn btn-info">🔍 Search</button>
+                <button onclick="resetSearch()" class="btn btn-secondary">Show All</button>
+            </div>
+            
+            <!-- Faculty Table -->
+            <div class="table-container">
+                <table id="facultyTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Department</th>
+                            <th>Designation</th>
+                            <th>Mobile</th>
+                            <th>Email</th>
+                            <th>Specialization</th>
+                        </tr>
+                    </thead>
+                    <tbody id="facultyTableBody">
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="message" class="message"></div>
+        </div>
+    </div>
+    
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Load faculty data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthGuest();
+            loadAllFaculty();
+        });
+        
+        function checkAuthGuest() {
+            const role = sessionStorage.getItem('role');
+            if (role !== 'guest' && role !== 'student') {
+                // Redirect to appropriate page if not guest/student
+                if (role === 'admin') {
+                    window.location.href = 'admin.html';
+                } else if (role === 'faculty') {
+                    window.location.href = 'faculty.html';
+                } else {
+                    // Not logged in, redirect to login
+                    window.location.href = 'index.html';
+                }
+            }
+        }
+        
+        function loadAllFaculty() {
+            // No auth needed for student view - it's available to everyone
+            fetch('http://localhost:8080/api/faculty')
+            .then(res => res.json())
+            .then(data => {
+                const tbody = document.getElementById('facultyTableBody');
+                tbody.innerHTML = '';
+                
+                if (Array.isArray(data)) {
+                    if (data.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">No faculty records found</td></tr>';
+                    } else {
+                        data.forEach(person => {
+                            const row = tbody.insertRow();
+                            row.innerHTML = `
+                                <td>${person.faculty_id}</td>
+                                <td>${person.name}</td>
+                                <td>${person.department}</td>
+                                <td>${person.designation}</td>
+                                <td>${person.mobile}</td>
+                                <td><a href="mailto:${person.email}">${person.email}</a></td>
+                                <td>${person.specialization}</td>
+                            `;
+                        });
+                    }
+                } else {
+                    showMessage('Error loading faculty data', 'error');
+                }
+            })
+            .catch(err => {
+                showMessage('Error loading faculty: ' + err, 'error');
+                console.error(err);
+            });
+        }
+        
+        function searchFaculty() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (!query) {
+                showMessage('Please enter a search term', 'info');
+                return;
+            }
+            
+            fetch(`http://localhost:8080/api/search?q=${encodeURIComponent(query)}`)
+            .then(res => res.json())
+            .then(data => {
+                const tbody = document.getElementById('facultyTableBody');
+                tbody.innerHTML = '';
+                
+                if (data.success && data.results && data.results.length > 0) {
+                    data.results.forEach(person => {
+                        const row = tbody.insertRow();
+                        row.innerHTML = `
+                            <td>${person.faculty_id}</td>
+                            <td>${person.name}</td>
+                            <td>${person.department}</td>
+                            <td>${person.designation}</td>
+                            <td>${person.mobile}</td>
+                            <td><a href="mailto:${person.email}">${person.email}</a></td>
+                            <td>${person.specialization}</td>
+                        `;
+                    });
+                    showMessage(`Found ${data.count} result(s)`, 'success');
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">No results found</td></tr>';
+                    showMessage('No faculty members match your search', 'info');
+                }
+            })
+            .catch(err => {
+                showMessage('Search error: ' + err, 'error');
+                console.error(err);
+            });
+        }
+        
+        function resetSearch() {
+            document.getElementById('searchInput').value = '';
+            loadAllFaculty();
+        }
+        
+        function showMessage(msg, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = msg;
+            messageDiv.className = 'message ' + type;
+            setTimeout(() => {
+                messageDiv.textContent = '';
+                messageDiv.className = 'message';
+            }, 4000);
+        }
+        
+        function logout() {
+            sessionStorage.clear();
+            window.location.href = 'index.html';
+        }
+        
+        // Display username
+        const role = sessionStorage.getItem('role');
+        const username = sessionStorage.getItem('username');
+        document.getElementById('username-display').textContent = username || 'Guest User';
+    </script>
+</body>
+</html>
