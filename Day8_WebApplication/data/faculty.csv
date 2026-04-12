@@ -1,6 +1,6 @@
 faculty_id,name,department,designation,mobile,email,specialization,username
-101,Faisal Mirza Sayeed Baig,Mechanical Engineering,Professor,,drmfbaig@yahoo.co.uk,Mechanical Design,fasal_baig
-102,Mohammad Muzammil,Mechanical Engineering,Professor,9412596817,m.muzammil.me@amu.ac.in,Thermal Engineering,muzammil_prof
+101,Faisal Mirza Sayeed Baig,Mechanical Engineering,Professor,9876543216,drmfbaig@yahoo.co.uk,Mechanical Design,fasal_baig
+102,Mohammad Muzammil,Mechanical Engineering,Professor,9412596817,m.muzammil.me@amu.ac.in,Thermal Engineering,muzammil
 103,Raisuddin Ansari,Mechanical Engineering,Chairman and Professor,9456404433,raisansari@zhcet.ac.in,Heat Transfer,ansari_rai
 104,Ahmad Ali Khan,Mechanical Engineering,Professor,9690680712,khanaali@rediffmail.com,Fluid Mechanics,ahmad_khan
 105,Mohammed Ali,Mechanical Engineering,Professor,7599396152,mohd.ali.me@amu.ac.in,Mechanical Systems,mohd_ali_m
