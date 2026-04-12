@@ -4,37 +4,160 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faculty Database - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="login-container">
+        <!-- Decorative Background Elements -->
+        <div class="login-background">
+            <div class="background-shape shape-1"></div>
+            <div class="background-shape shape-2"></div>
+            <div class="background-shape shape-3"></div>
+        </div>
+
         <div class="login-box">
-            <h1>Faculty Database System</h1>
-            <p>College Management Portal</p>
-        
-        <form id="loginForm">
-            <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required>
+            <!-- Header -->
+            <div class="login-header">
+                <h1><i class="fas fa-university"></i> Faculty Database</h1>
+                <p>College Management Portal</p>
             </div>
-            
-            <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
+
+            <!-- Tab Navigation -->
+            <div class="login-tabs">
+                <button class="tab-button active" data-tab="admin">
+                    <i class="fas fa-shield-alt"></i> <span>Admin</span>
+                </button>
+                <button class="tab-button" data-tab="faculty">
+                    <i class="fas fa-chalkboard-user"></i> <span>Faculty</span>
+                </button>
+                <button class="tab-button" data-tab="student">
+                    <i class="fas fa-user-graduate"></i> <span>Student</span>
+                </button>
             </div>
-            
-                <button type="submit" class="btn btn-primary">Login</button>
-                
-                <button type="button" class="btn btn-secondary" onclick="guestLogin()">Continue as Guest</button>
-        </form>
-        
+
+            <!-- Admin Login -->
+            <div class="tab-content active" id="admin-tab">
+                <form id="adminLoginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="admin-username"><i class="fas fa-user-circle"></i> Username</label>
+                        <input type="text" id="admin-username" placeholder="Enter your username" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="admin-email"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="admin-email" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="admin-password"><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="admin-password" placeholder="Enter your password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                    
+                    <div class="forgot-password-link">
+                        <span class="forgot-text">Don't remember your password?</span>
+                        <button type="button" class="click-link-btn" onclick="showForgotPasswordModal('admin')">Click here</button>
+                    </div>
+                </form>
+                <div class="form-error" id="admin-error"></div>
+            </div>
+
+            <!-- Faculty Login -->
+            <div class="tab-content" id="faculty-tab">
+                <form id="facultyLoginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="faculty-id"><i class="fas fa-id-card"></i> Faculty ID</label>
+                        <input type="text" id="faculty-id" placeholder="e.g., 105" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="faculty-email"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="faculty-email" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="faculty-password"><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="faculty-password" placeholder="Enter your password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                    
+                    <div class="forgot-password-link">
+                        <span class="forgot-text">Don't remember your password?</span>
+                        <button type="button" class="click-link-btn" onclick="showForgotPasswordModal('faculty')">Click here</button>
+                    </div>
+                </form>
+                <div class="form-error" id="faculty-error"></div>
+            </div>
+
+            <!-- Student Login -->
+            <div class="tab-content" id="student-tab">
+                <div class="student-guest-section">
+                    <div class="guest-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>Browse Faculty Directory</h3>
+                    <p>Access the faculty directory as a student. No login required for viewing faculty information.</p>
+                    <button type="button" class="btn btn-primary" onclick="studentLogin()" style="width: 100%; justify-content: center; margin-top: 20px;">
+                        <i class="fas fa-arrow-right"></i> Continue as Student
+                    </button>
+                </div>
+            </div>
+
             <div id="error-message" class="error-message"></div>
-            
-            <div class="credentials-info">
-                <h4>Demo Credentials:</h4>
-                <p><strong>Admin:</strong> admin / admin123</p>
-                <p><strong>Faculty:</strong> prof1 / prof123</p>
-                <p><strong>Guest:</strong> Click "Continue as Guest" for read-only access</p>
+        </div>
+    </div>
+    
+    <!-- Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-key"></i> Recover Password</h2>
+            </div>
+            <div class="modal-body">
+                <!-- Admin Password Recovery -->
+                <form id="forgotPasswordFormAdmin" style="display: none;">
+                    <div class="form-group">
+                        <label for="recoveryAdminUsername"><i class="fas fa-user-circle"></i> Username</label>
+                        <input type="text" id="recoveryAdminUsername" placeholder="Enter your username" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="recoveryAdminEmail"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="recoveryAdminEmail" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div id="recovery-error-admin" class="error-message" style="display: none;"></div>
+                    <div id="recovery-success-admin" class="success-message" style="display: none;"></div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;"><i class="fas fa-check"></i> Retrieve Password</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeForgotPasswordModal()" style="width: 100%; justify-content: center; margin-top: 10px;"><i class="fas fa-times"></i> Cancel</button>
+                </form>
+
+                <!-- Faculty Password Recovery -->
+                <form id="forgotPasswordFormFaculty" style="display: none;">
+                    <div class="form-group">
+                        <label for="recoveryFacultyId"><i class="fas fa-id-card"></i> Faculty ID</label>
+                        <input type="text" id="recoveryFacultyId" placeholder="e.g., 105" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="recoveryFacultyEmail"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="recoveryFacultyEmail" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div id="recovery-error-faculty" class="error-message" style="display: none;"></div>
+                    <div id="recovery-success-faculty" class="success-message" style="display: none;"></div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;"><i class="fas fa-check"></i> Retrieve Password</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeForgotPasswordModal()" style="width: 100%; justify-content: center; margin-top: 10px;"><i class="fas fa-times"></i> Cancel</button>
+                </form>
             </div>
         </div>
     </div>
@@ -42,40 +165,96 @@
     <script src="js/api.js"></script>
     <script src="js/auth.js"></script>
     <script>
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        // Hide modal on page load
+        window.addEventListener('load', function() {
+            document.getElementById('forgotPasswordModal').style.display = 'none';
+            document.getElementById('recovery-error-admin').style.display = 'none';
+            document.getElementById('recovery-success-admin').style.display = 'none';
+            document.getElementById('recovery-error-faculty').style.display = 'none';
+            document.getElementById('recovery-success-faculty').style.display = 'none';
+        });
+
+        // Tab switching functionality
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const tabName = this.getAttribute('data-tab');
+                
+                // Remove active class from all buttons and contents
+                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                this.classList.add('active');
+                document.getElementById(tabName + '-tab').classList.add('active');
+                
+                // Close any open modals/error messages when switching tabs
+                closeForgotPasswordModal();
+            });
+        });
+
+        // Admin Login
+        document.getElementById('adminLoginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const errorDiv = document.getElementById('error-message');
+            const username = document.getElementById('admin-username').value;
+            const email = document.getElementById('admin-email').value;
+            const password = document.getElementById('admin-password').value;
+            const errorDiv = document.getElementById('admin-error');
+            
+            errorDiv.textContent = '';
             
             try {
-                const response = await fetch('http://localhost:8080/api/login', {
+                const response = await fetch('http://localhost:9001/api/login', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ username, password })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, password })
                 });
                 
                 const data = await response.json();
                 
                 if (data.success) {
-                    // Store auth token
                     const token = username + ':' + data.role;
                     sessionStorage.setItem('authToken', 'Bearer ' + token);
                     sessionStorage.setItem('username', data.username);
                     sessionStorage.setItem('role', data.role);
+                    window.location.href = 'admin.html';
+                } else {
+                    errorDiv.textContent = data.message || 'Login failed';
+                }
+            } catch (error) {
+                errorDiv.textContent = 'Error during login: ' + error;
+            }
+        });
+
+        // Faculty Login
+        document.getElementById('facultyLoginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const faculty_id = document.getElementById('faculty-id').value;
+            const email = document.getElementById('faculty-email').value;
+            const password = document.getElementById('faculty-password').value;
+            const errorDiv = document.getElementById('faculty-error');
+            
+            errorDiv.textContent = '';
+            
+            try {
+                const response = await fetch('http://localhost:9001/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ faculty_id, email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    const token = (data.username || faculty_id) + ':' + data.role;
+                    sessionStorage.setItem('authToken', 'Bearer ' + token);
+                    sessionStorage.setItem('username', data.username || faculty_id);
+                    sessionStorage.setItem('role', data.role);
                     if (data.faculty_id) {
                         sessionStorage.setItem('faculty_id', data.faculty_id);
                     }
-                    
-                    // Redirect based on role
-                    if (data.role === 'admin') {
-                        window.location.href = 'admin.html';
-                    } else if (data.role === 'faculty') {
-                        window.location.href = 'faculty.html';
-                    }
+                    window.location.href = 'faculty.html';
                 } else {
                     errorDiv.textContent = data.message || 'Login failed';
                 }
@@ -84,10 +263,143 @@
             }
         });
         
-        function guestLogin() {
+        function studentLogin() {
             sessionStorage.setItem('role', 'guest');
-            sessionStorage.setItem('username', 'Guest User');
+            sessionStorage.setItem('username', 'Student User');
             window.location.href = 'student.html';
+        }
+        
+        function showForgotPasswordModal(userType) {
+            document.getElementById('forgotPasswordModal').style.display = 'flex';
+            
+            // Hide all forms and show the correct one
+            document.getElementById('forgotPasswordFormAdmin').style.display = 'none';
+            document.getElementById('forgotPasswordFormFaculty').style.display = 'none';
+            
+            // Clear all error/success messages
+            document.getElementById('recovery-error-admin').style.display = 'none';
+            document.getElementById('recovery-success-admin').style.display = 'none';
+            document.getElementById('recovery-error-faculty').style.display = 'none';
+            document.getElementById('recovery-success-faculty').style.display = 'none';
+            document.getElementById('recovery-error-admin').textContent = '';
+            document.getElementById('recovery-success-admin').textContent = '';
+            document.getElementById('recovery-error-faculty').textContent = '';
+            document.getElementById('recovery-success-faculty').textContent = '';
+            
+            if (userType === 'admin') {
+                document.getElementById('forgotPasswordFormAdmin').style.display = 'block';
+                document.getElementById('forgotPasswordFormAdmin').reset();
+            } else if (userType === 'faculty') {
+                document.getElementById('forgotPasswordFormFaculty').style.display = 'block';
+                document.getElementById('forgotPasswordFormFaculty').reset();
+            }
+        }
+        
+        function closeForgotPasswordModal() {
+            document.getElementById('forgotPasswordModal').style.display = 'none';
+            document.getElementById('forgotPasswordFormAdmin').reset();
+            document.getElementById('forgotPasswordFormFaculty').reset();
+            document.getElementById('recovery-error-admin').style.display = 'none';
+            document.getElementById('recovery-success-admin').style.display = 'none';
+            document.getElementById('recovery-error-faculty').style.display = 'none';
+            document.getElementById('recovery-success-faculty').style.display = 'none';
+        }
+
+        // Admin Password Recovery Form
+        document.getElementById('forgotPasswordFormAdmin').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('recoveryAdminUsername').value;
+            const email = document.getElementById('recoveryAdminEmail').value;
+            const errorDiv = document.getElementById('recovery-error-admin');
+            const successDiv = document.getElementById('recovery-success-admin');
+            
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            
+            try {
+                const requestData = { userType: 'admin', username, email };
+                console.log('Admin recovery request:', requestData);
+                
+                const response = await fetch('http://localhost:9001/api/forgot-password', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestData)
+                });
+                
+                console.log('Response status:', response.status);
+                const data = await response.json();
+                console.log('Response data:', data);
+                
+                if (data.success) {
+                    successDiv.innerHTML = `
+                        <h4><i class="fas fa-check-circle"></i> Password Retrieved Successfully!</h4>
+                        <p><strong>Username:</strong> ${data.username}</p>
+                        <p><strong>Password:</strong> <code style="background: #f0f0f0; padding: 5px; border-radius: 3px; font-weight: bold;">${data.password}</code></p>
+                        <p style="color: #666; font-size: 0.9em; margin-top: 10px;">Please copy your password and save it in a secure place.</p>
+                    `;
+                    successDiv.style.display = 'block';
+                } else {
+                    errorDiv.textContent = data.message || 'Invalid username or email. Please try again.';
+                    errorDiv.style.display = 'block';
+                }
+            } catch (error) {
+                errorDiv.textContent = 'Error: ' + error.message;
+                errorDiv.style.display = 'block';
+            }
+        });
+
+        // Faculty Password Recovery Form
+        document.getElementById('forgotPasswordFormFaculty').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const facultyId = document.getElementById('recoveryFacultyId').value;
+            const email = document.getElementById('recoveryFacultyEmail').value;
+            const errorDiv = document.getElementById('recovery-error-faculty');
+            const successDiv = document.getElementById('recovery-success-faculty');
+            
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            
+            try {
+                const requestData = { userType: 'faculty', faculty_id: facultyId, email };
+                console.log('Faculty recovery request:', requestData);
+                
+                const response = await fetch('http://localhost:9001/api/forgot-password', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestData)
+                });
+                
+                console.log('Response status:', response.status);
+                const data = await response.json();
+                console.log('Response data:', data);
+                
+                if (data.success) {
+                    successDiv.innerHTML = `
+                        <h4><i class="fas fa-check-circle"></i> Password Retrieved Successfully!</h4>
+                        <p><strong>Faculty ID:</strong> ${data.faculty_id}</p>
+                        <p><strong>Name:</strong> ${data.name}</p>
+                        <p><strong>Username:</strong> ${data.username}</p>
+                        <p><strong>Password:</strong> <code style="background: #f0f0f0; padding: 5px; border-radius: 3px; font-weight: bold;">${data.password}</code></p>
+                        <p style="color: #666; font-size: 0.9em; margin-top: 10px;">Please copy your password and save it in a secure place.</p>
+                    `;
+                    successDiv.style.display = 'block';
+                } else {
+                    errorDiv.textContent = data.message || 'Invalid Faculty ID or email. Please try again.';
+                    errorDiv.style.display = 'block';
+                }
+            } catch (error) {
+                errorDiv.textContent = 'Error: ' + error.message;
+                errorDiv.style.display = 'block';
+            }
+        });
+        
+        window.onclick = function(event) {
+            const modal = document.getElementById('forgotPasswordModal');
+            if (event.target === modal) {
+                closeForgotPasswordModal();
+            }
         }
     </script>
 </body>
