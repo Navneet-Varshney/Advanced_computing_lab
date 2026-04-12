@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faculty Dashboard - Faculty Database</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="header">
-        <h1>👨‍🏫 Faculty Database - Faculty Dashboard</h1>
+        <h1><i class="fas fa-user-graduate"></i> Faculty Dashboard</h1>
         <div class="nav-buttons">
-            <span id="username-display"></span>
-            <button onclick="logout()" class="btn btn-danger">Logout</button>
+            <span><i class="fas fa-user-circle"></i> <span id="username-display"></span></span>
+            <button onclick="logout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
     </div>
     
@@ -19,34 +20,37 @@
         <div class="dashboard">
             <!-- Faculty Personal Information -->
             <div class="info-section">
-                <h2>📋 My Profile Information</h2>
+                <h2><i class="fas fa-user-card"></i> My Profile Information</h2>
                 <div class="profile-info" id="profileInfo">
-                    Loading...
+                    <div style="text-align: center; padding: 30px;">
+                        <div class="spinner"></div>
+                        <p style="margin-top: 15px; color: #999;">Loading profile...</p>
+                    </div>
                 </div>
             </div>
             
             <!-- Edit Contact Information Form -->
             <div class="edit-section">
-                <h2>✏️ Update Contact Information</h2>
-                <p><em>Note: You can only update your Mobile Number and Email Address</em></p>
+                <h2><i class="fas fa-edit"></i> Update Contact Information</h2>
+                <p><i class="fas fa-info-circle"></i> You can only update your Mobile Number and Email Address</p>
                 <form id="updateContactForm">
                     <div class="form-group">
-                        <label for="edit_mobile">Mobile Number:</label>
-                        <input type="tel" id="edit_mobile" name="mobile" pattern="[0-9]{10}" required>
+                        <label for="edit_mobile"><i class="fas fa-phone"></i> Mobile Number</label>
+                        <input type="tel" id="edit_mobile" name="mobile" placeholder="10-digit number" pattern="[0-9]{10}" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="edit_email">Email Address:</label>
-                        <input type="email" id="edit_email" name="email" required>
+                        <label for="edit_email"><i class="fas fa-envelope"></i> Email Address</label>
+                        <input type="email" id="edit_email" name="email" placeholder="your.email@example.com" required>
                     </div>
                     
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;"><i class="fas fa-save"></i> Save Changes</button>
                 </form>
             </div>
             
             <!-- Search Faculty Database -->
             <div class="search-section">
-                <h2>🔍 Search Faculty Directory</h2>
+                <h2><i class="fas fa-search"></i> Search Faculty Directory</h2>
                 <div class="action-buttons">
                     <input type="text" id="searchInput" placeholder="Search by name, department, or specialization..." class="search-box">
                     <button onclick="searchFaculty()" class="btn btn-info">Search</button>
@@ -93,7 +97,7 @@
             const facultyId = sessionStorage.getItem('faculty_id');
             
             if (facultyId) {
-                fetch(`http://localhost:8080/api/faculty/${facultyId}`, {
+                fetch(`http://localhost:9001/api/faculty/${facultyId}`, {
                     headers: {
                         'Authorization': sessionStorage.getItem('authToken')
                     }
@@ -137,7 +141,7 @@
         }
         
         function loadAllFaculty() {
-            fetch('http://localhost:8080/api/faculty', {
+            fetch('http://localhost:9001/api/faculty', {
                 headers: {
                     'Authorization': sessionStorage.getItem('authToken')
                 }
@@ -185,7 +189,7 @@
             const email = document.getElementById('edit_email').value;
             
             try {
-                const response = await fetch(`http://localhost:8080/api/faculty/${facultyId}`, {
+                const response = await fetch(`http://localhost:9001/api/faculty/${currentFacultyId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -214,7 +218,7 @@
                 return;
             }
             
-            fetch(`http://localhost:8080/api/search?q=${encodeURIComponent(query)}`)
+            fetch(`http://localhost:9001/api/search?q=${encodeURIComponent(query)}`)
             .then(res => res.json())
             .then(data => {
                 const tbody = document.getElementById('facultyTableBody');
