@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Dashboard - Faculty Database</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>👨‍🏫 Faculty Database - Faculty Dashboard</h1>
+        <div class="nav-buttons">
+            <span id="username-display"></span>
+            <button onclick="logout()" class="btn btn-danger">Logout</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="dashboard">
+            <!-- Faculty Personal Information -->
+            <div class="info-section">
+                <h2>📋 My Profile Information</h2>
+                <div class="profile-info" id="profileInfo">
+                    Loading...
+                </div>
+            </div>
+            
+            <!-- Edit Contact Information Form -->
+            <div class="edit-section">
+                <h2>✏️ Update Contact Information</h2>
+                <p><em>Note: You can only update your Mobile Number and Email Address</em></p>
+                <form id="updateContactForm">
+                    <div class="form-group">
+                        <label for="edit_mobile">Mobile Number:</label>
+                        <input type="tel" id="edit_mobile" name="mobile" pattern="[0-9]{10}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit_email">Email Address:</label>
+                        <input type="email" id="edit_email" name="email" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+            
+            <!-- Search Faculty Database -->
+            <div class="search-section">
+                <h2>🔍 Search Faculty Directory</h2>
+                <div class="action-buttons">
+                    <input type="text" id="searchInput" placeholder="Search by name, department, or specialization..." class="search-box">
+                    <button onclick="searchFaculty()" class="btn btn-info">Search</button>
+                </div>
+            </div>
+            
+            <!-- Faculty Table -->
+            <div class="table-container">
+                <table id="facultyTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Department</th>
+                            <th>Designation</th>
+                            <th>Mobile</th>
+                            <th>Email</th>
+                            <th>Specialization</th>
+                        </tr>
+                    </thead>
+                    <tbody id="facultyTableBody">
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="message" class="message"></div>
+        </div>
+    </div>
+    
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        let currentFacultyId = null;
+        
+        // Load faculty data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth('faculty');
+            loadMyProfile();
+            loadAllFaculty();
+        });
+        
+        function loadMyProfile() {
+            const username = sessionStorage.getItem('username');
+            const facultyId = sessionStorage.getItem('faculty_id');
+            
+            if (facultyId) {
+                fetch(`http://localhost:8080/api/faculty/${facultyId}`, {
+                    headers: {
+                        'Authorization': sessionStorage.getItem('authToken')
+                    }
+                })
+                .then(res => res.json())
+                .then(data => {
+                    currentFacultyId = data.faculty_id;
+                    
+                    document.getElementById('profileInfo').innerHTML = `
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <strong>Faculty ID:</strong> ${data.faculty_id}
+                            </div>
+                            <div class="info-item">
+                                <strong>Name:</strong> ${data.name}
+                            </div>
+                            <div class="info-item">
+                                <strong>Department:</strong> ${data.department}
+                            </div>
+                            <div class="info-item">
+                                <strong>Designation:</strong> ${data.designation}
+                            </div>
+                            <div class="info-item">
+                                <strong>Mobile:</strong> ${data.mobile}
+                            </div>
+                            <div class="info-item">
+                                <strong>Email:</strong> ${data.email}
+                            </div>
+                            <div class="info-item">
+                                <strong>Specialization:</strong> ${data.specialization}
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Pre-fill edit form
+                    document.getElementById('edit_mobile').value = data.mobile;
+                    document.getElementById('edit_email').value = data.email;
+                })
+                .catch(err => showMessage('Error loading profile: ' + err, 'error'));
+            }
+        }
+        
+        function loadAllFaculty() {
+            fetch('http://localhost:8080/api/faculty', {
+                headers: {
+                    'Authorization': sessionStorage.getItem('authToken')
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                const tbody = document.getElementById('facultyTableBody');
+                tbody.innerHTML = '';
+                
+                if (Array.isArray(data)) {
+                    data.forEach(person => {
+                        const row = tbody.insertRow();
+                        row.innerHTML = `
+                            <td>${person.faculty_id}</td>
+                            <td>${person.name}</td>
+                            <td>${person.department}</td>
+                            <td>${person.designation}</td>
+                            <td>${person.mobile}</td>
+                            <td>${person.email}</td>
+                            <td>${person.specialization}</td>
+                        `;
+                    });
+                }
+            })
+            .catch(err => showMessage('Error loading faculty: ' + err, 'error'));
+        }
+        
+        // Update contact information
+        document.getElementById('updateContactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!currentFacultyId) {
+                showMessage('Faculty ID not found', 'error');
+                return;
+            }
+            
+            const mobile = document.getElementById('edit_mobile').value;
+            const email = document.getElementById('edit_email').value;
+            
+            try {
+                const response = await fetch(`http://localhost:8080/api/faculty/${facultyId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': sessionStorage.getItem('authToken')
+                    },
+                    body: JSON.stringify({ mobile, email })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage('Contact information updated successfully!', 'success');
+                    loadMyProfile();
+                } else {
+                    showMessage(result.message || 'Error updating information', 'error');
+                }
+            } catch (error) {
+                showMessage('Error: ' + error, 'error');
+            }
+        });
+        
+        function searchFaculty() {
+            const query = document.getElementById('searchInput').value;
+            if (!query) {
+                loadAllFaculty();
+                return;
+            }
+            
+            fetch(`http://localhost:8080/api/search?q=${encodeURIComponent(query)}`)
+            .then(res => res.json())
+            .then(data => {
+                const tbody = document.getElementById('facultyTableBody');
+                tbody.innerHTML = '';
+                
+                if (data.results && data.results.length > 0) {
+                    data.results.forEach(person => {
+                        const row = tbody.insertRow();
+                        row.innerHTML = `
+                            <td>${person.faculty_id}</td>
+                            <td>${person.name}</td>
+                            <td>${person.department}</td>
+                            <td>${person.designation}</td>
+                            <td>${person.mobile}</td>
+                            <td>${person.email}</td>
+                            <td>${person.specialization}</td>
+                        `;
+                    });
+                    showMessage(`Found ${data.count} result(s)`, 'success');
+                } else {
+                    showMessage('No results found', 'info');
+                }
+            })
+            .catch(err => showMessage('Search error: ' + err, 'error'));
+        }
+        
+        function showMessage(msg, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = msg;
+            messageDiv.className = 'message ' + type;
+            setTimeout(() => {
+                messageDiv.textContent = '';
+                messageDiv.className = 'message';
+            }, 4000);
+        }
+        
+        function logout() {
+            sessionStorage.clear();
+            window.location.href = 'index.html';
+        }
+        
+        // Display username
+        document.getElementById('username-display').textContent = 'Welcome, ' + sessionStorage.getItem('username');
+    </script>
+</body>
+</html>
