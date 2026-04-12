@@ -3,7 +3,7 @@
  * Handles all API requests to the backend
  */
 
-const API_BASE = 'http://localhost:8080';
+const API_BASE = 'http://localhost:9001';
 
 /**
  * Login user with username and password
@@ -21,6 +21,26 @@ async function loginUser(username, password) {
         return await response.json();
     } catch (error) {
         console.error('Login error:', error);
+        return { success: false, message: 'Network error' };
+    }
+}
+
+/**
+ * Recover password using faculty_id and name verification
+ */
+async function forgotPassword(facultyId, name) {
+    try {
+        const response = await fetch(`${API_BASE}/api/forgot-password`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ faculty_id: facultyId, name: name })
+        });
+        
+        return await response.json();
+    } catch (error) {
+        console.error('Forgot password error:', error);
         return { success: false, message: 'Network error' };
     }
 }
