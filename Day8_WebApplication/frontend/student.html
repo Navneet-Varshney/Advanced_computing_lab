@@ -4,29 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faculty Directory - Faculty Database</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="header">
-        <h1>📚 Faculty Database - Student View (Read-Only)</h1>
+        <h1><i class="fas fa-book"></i> Faculty Directory - Read-Only View</h1>
         <div class="nav-buttons">
-            <span id="username-display"></span>
-            <button onclick="logout()" class="btn btn-danger">Logout</button>
+            <span><i class="fas fa-user-circle"></i> <span id="username-display"></span></span>
+            <button onclick="logout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
     </div>
     
     <div class="container">
         <div class="dashboard">
             <div class="info-box">
-                <h3>📖 College Faculty Directory</h3>
-                <p>Welcome! You are viewing the faculty directory in read-only mode. You can search and view faculty information.</p>
+                <h3><i class="fas fa-school"></i> College Faculty Directory</h3>
+                <p>Welcome! You are viewing the faculty directory in read-only mode. Browse and search faculty member information below.</p>
             </div>
             
             <!-- Search Faculty Database -->
             <div class="action-buttons">
-                <input type="text" id="searchInput" placeholder="Search by name, department, or specialization..." class="search-box">
-                <button onclick="searchFaculty()" class="btn btn-info">🔍 Search</button>
-                <button onclick="resetSearch()" class="btn btn-secondary">Show All</button>
+                <input type="text" id="searchInput" placeholder="🔍 Search by name, department, specialization..." class="search-box">
+                <button onclick="searchFaculty()" class="btn btn-info"><i class="fas fa-search"></i> Search</button>
+                <button onclick="resetSearch()" class="btn btn-secondary"><i class="fas fa-redo"></i> Show All</button>
             </div>
             
             <!-- Faculty Table -->
@@ -34,13 +35,13 @@
                 <table id="facultyTable">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Department</th>
-                            <th>Designation</th>
-                            <th>Mobile</th>
-                            <th>Email</th>
-                            <th>Specialization</th>
+                            <th><i class="fas fa-id-badge"></i> ID</th>
+                            <th><i class="fas fa-user"></i> Name</th>
+                            <th><i class="fas fa-building"></i> Department</th>
+                            <th><i class="fas fa-briefcase"></i> Designation</th>
+                            <th><i class="fas fa-phone"></i> Mobile</th>
+                            <th><i class="fas fa-envelope"></i> Email</th>
+                            <th><i class="fas fa-star"></i> Specialization</th>
                         </tr>
                     </thead>
                     <tbody id="facultyTableBody">
@@ -78,7 +79,7 @@
         
         function loadAllFaculty() {
             // No auth needed for student view - it's available to everyone
-            fetch('http://localhost:8080/api/faculty')
+            fetch('http://localhost:9001/api/faculty')
             .then(res => res.json())
             .then(data => {
                 const tbody = document.getElementById('facultyTableBody');
@@ -125,7 +126,7 @@
                 return;
             }
             
-            fetch(`http://localhost:8080/api/search?q=${encodeURIComponent(query)}`)
+            fetch(`http://localhost:9001/api/search?q=${encodeURIComponent(query)}`)
             .then(res => res.json())
             .then(data => {
                 const tbody = document.getElementById('facultyTableBody');
