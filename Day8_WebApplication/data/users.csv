@@ -1,0 +1,133 @@
+username,password,role,faculty_id,name,email
+admin,admin123,admin,,Administrator,admin@zhcet.ac.in
+fasal_baig,fasal@123,faculty,101,Faisal Mirza Sayeed Baig,drmfbaig@yahoo.co.uk
+muzammil_prof,muzammil@123,faculty,102,Mohammad Muzammil,m.muzammil.me@amu.ac.in
+ansari_rai,ansari@123,faculty,103,Raisuddin Ansari,raisansari@zhcet.ac.in
+ahmad_khan,ahmad@123,faculty,104,Ahmad Ali Khan,khanaali@rediffmail.com
+mohd_ali_m,mohd@123,faculty,105,Mohammed Ali,mohd.ali.me@amu.ac.in
+naiem_akhtar,naiem@123,faculty,106,Naiem Akhtar,nakhtar.me@amu.ac.in
+nadeem_h,nadeem@123,faculty,107,Nadeem Hasan,nadhasan@gmail.com
+abid_khan,abid@123,faculty,108,Abid Ali Khan,abid.khan.me@amu.ac.in
+naushad_alam,naushad@123,faculty,109,Md. Naushad Alam,mnaushadalam@zhcet.ac.in
+jamil_ahmad,jamil@123,faculty,110,M. Jamil Ahmad,jamil.amu@gmail.com
+faisal_talib,faisal@123,faculty,111,Faisal Talib,ftalib77@gmail.com
+shahood_alam,shahood@123,faculty,112,Shah Shahood Alam,sshahood2004@yahoo.co.in
+faizan_m,faizan@123,faculty,113,Mohammad Faizan,mofaizan@hotmail.com
+parveen_f,parveen@123,faculty,114,Parveen Farooquie,parveenfarooquie@yahoo.com
+arshad_khan,arshad@123,faculty,115,Arshad Hussain Khan,ah.khan.me@amu.ac.in
+faisal_h,faisal@123,faculty,116,Faisal Hasan,faisalhasan@zhcet.ac.in
+fahad_anwer,fahad@123,faculty,117,Syed Fahad Anwer,sfahadanwer@zhcet.ac.in
+saleem_khan,saleem@123,faculty,118,Saleem Anwar Khan,saleemanwar@zhcet.ac.in
+mubashshir_a,mubashshir@123,faculty,119,Mubashshir Ahmad Ansari,mubashshir@gmail.com
+rashid_ali,rashid@123,faculty,120,Rashid Ali,rashidali1@zhcet.ac.in
+imran_shafiq,imran@123,faculty,121,Syed Imran Shafiq,sishafiq.bp@amu.ac.in
+asif_sami,asif@123,faculty,122,Asif Sami,asif_sami@rediffmail.com
+nafees_a,nafees@123,faculty,123,Nafees Ahmad,nafees2amu@rediffmail.com
+adnan_hafiz,adnan@123,faculty,124,Adnan Hafiz,hafizadnan10@gmail.com
+najeeb_r,najeeb@123,faculty,125,Najeeb ur Rahman,najeebalig@rediffmail.com
+arees_q,arees@123,faculty,126,Arees Qamareen,aqamareen.me@amu.ac.in
+yahya_m,yahya@123,faculty,127,Syed Mohd Yahya,smyahya@zhcet.ac.in
+saman_a,saman@123,faculty,128,Saman Ahmad,saman.ahmad@yahoo.co.in
+azhar_j,azhar@123,faculty,129,Azhar Jamil,azharjamil@zhcet.ac.in
+taliv_h,taliv@123,faculty,130,Taliv Hussain,hussaintaliv@gmail.com
+sanaur_r,sanaur@123,faculty,131,Sanaur Rehman,sanaur.rehman@zhcet.ac.in
+khusro_q,khusro@123,faculty,132,Khusro Qasim,khusroqasim786@gmail.com
+yasser_r,yasser@123,faculty,133,Yasser Rafat,yasser.rafat@zhcet.ac.in
+yaqoob_y,yaqoob@123,faculty,134,Mohd. Yaqoob Yasin,yaqoob.yasin@gmail.com
+zafar_m,zafar@123,faculty,135,Mohammad Rashid Zafar,rashidzafar@zhcet.ac.in
+nasir_khan,nasir@123,faculty,136,Mohammad Nasir Khan,mnasirkhan@zhcet.ac.in
+sidra_k,sidra@123,faculty,137,Sidra Khanam,sidrakhanam@zhcet.ac.in
+ateeb_khan,ateeb@123,faculty,138,Ateeb Ahmad Khan,ateebkhan.me@amu.ac.in
+abdullah_u,abdullah@123,faculty,139,Abdullah Yousuf Usmani,usmani.fts@gmail.com
+shahid_h,shahid@123,faculty,140,Shahid Husain,shahidhusain@zhcet.ac.in
+yusuf_u,yusuf@123,faculty,201,Yusuf Uzzaman Khan,yusufzkhan@zhcet.ac.in
+azeem_m,azeem@123,faculty,202,Mohammad Fazle Azeem,mf.azeem@zhcet.ac.in
+imtiaz_a,imtiaz@123,faculty,203,Imtiaz Ashraf,iashraf@rediffmail.com
+salman_h,salman@123,faculty,204,Salman Hameed,hameeddee@gmail.com
+abu_tariq,abu@123,faculty,205,Abu Tariq,abutariq@zhcet.ac.in
+asfar_khan,asfar@123,faculty,206,Asfar Ali Khan,asfaralikhan@gmail.com
+aejaz_m,aejaz@123,faculty,207,Aejaz Masood,aejaz_masood@yahoo.co.in
+rizwan_khan,rizwan@123,faculty,208,Mohd. Rizwan Khan,rizwan.eed@gmail.com
+rihan_e,rihan@123,faculty,209,Mohd Rihan,m.rihan.ee@amu.ac.in
+zuberi_m,zuberi@123,faculty,210,Mujib Ullah Zuberi,mu.zuberi.ee@amu.ac.in
+safia_k,safia@123,faculty,211,Safia Akhtar Kazmi,safiakazmiamu@gmail.com
+sheeraz_k,sheeraz@123,faculty,212,Sheeraz Kirmani,skirmani.ee@amu.ac.in
+adil_s,adil@123,faculty,213,Adil Sarwar,adil.sarwar@zhcet.ac.in
+anas_a,anas@123,faculty,214,Mohd. Anas Anees,anasanees.amu@gmail.com
+zaid_m,zaid@123,faculty,215,Mohammad Zaid,mohammad.zaid@zhcet.ac.in
+sarfraz_m,sarfraz@123,faculty,216,Mohammad Sarfraz,msarfraz@zhcet.ac.in
+saad_a,saad@123,faculty,217,M Saad Bin Arif,saadbinarif@gmail.com
+tariq_e,tariq@123,faculty,218,Mohd Tariq,tariq.ee@zhcet.ac.in
+izharuddin_ce,izhar@123,faculty,301,Izharuddin,izharuddin.ce@amu.ac.in
+nesar_a,nesar@123,faculty,302,Nesar Ahmad,n.ahmad.ce@amu.ac.in
+abbas_m,abbas@123,faculty,303,Ash Mohammad Abbas,am.abbas.ce@amu.ac.in
+sufyan_b,sufyan@123,faculty,304,M. M. Sufyan Beg,mmsbeg.ce@amu.ac.in
+sarosh_u,sarosh@123,faculty,305,Mohammad Sarosh Umar,saroshumar@zhcet.ac.in
+rashid_ce,rashid@123,faculty,306,Rashid Ali,rashidali.cse@zhcet.ac.in
+saiful_i,saiful@123,faculty,307,Saiful Islam,saifulislam@zhcet.ac.in
+warsi_m,warsi@123,faculty,308,Misbahur Rahman Warsi,warsimr@yahoo.com
+qadeer_m,qadeer@123,faculty,309,Mohammed Abdul Qadeer,maqadeer@amu.ac.in
+nadeem_ce,nadeem@123,faculty,310,Nadeem Akhtar,nadeemakhtar@zhcet.ac.in
+samad_a,samad@123,faculty,311,Abdus Samad,abdussamadamu@gmail.com
+inam_m,inam@123,faculty,312,Muhammad Inamullah,inam@zhcet.ac.in
+tameem_a,tameem@123,faculty,313,Tameem Ahmad,tameemahmad@zhcet.ac.in
+muneeb_k,muneeb@123,faculty,314,Muneeb Hasan Khan,muneebhkhan@zhcet.ac.in
+faisal_ce,faisal@123,faculty,315,Faisal Alam,faisalalam@zhcet.ac.in
+masood_a,masood@123,faculty,401,Amjad Masood,a.masood.cv@amu.ac.in
+arif_m,arif@123,faculty,402,Mohammed Arif,m.arif.cv@amu.ac.in
+farooqi_i,farooqi@123,faculty,403,Izharul Haq Farooqi,farooqi_izhar@yahoo.com
+javed_a,javed@123,faculty,404,Javed Alam,jalam.cv@amu.ac.in
+masroor_a,masroor@123,faculty,405,Mohd. Masroor Alam,mmalam.cv@amu.ac.in
+hassan_i,hassan@123,faculty,406,Hassan Irtaza,hirtaza.amu@gmail.com
+sabih_a,sabih@123,faculty,407,Sabih Akhtar,sabihced@yahoo.co.in
+sohail_a,sohail@123,faculty,408,Sohail Ayub,sohailayub@rediffmail.com
+mehboob_k,mehboob@123,faculty,409,Mehboob Anwer Khan,mehboobcivil@yahoo.co.in
+mujib_a,mujib@123,faculty,410,Mujib Ahmad Ansari,mujibansari68@gmail.com
+khaleel_k,khaleel@123,faculty,411,Iqbal Khaleel Khan,ikk01in@yahoo.co.in
+talib_m,talib@123,faculty,412,Talib Mansoor,talibced@gmail.com
+shoeb_a,shoeb@123,faculty,413,Malik Shoeb Ahmad,shoeb33@gmail.com
+rehan_k,rehan@123,faculty,414,Rehan Ahmad Khan,rehan_iitd@rediffmail.com
+kausar_a,kausar@123,faculty,415,Kausar Ali,kausarali786@rediffmail.com
+asif_s,asif@123,faculty,416,Asif Ali Siddiqui,aasiddiqui.cv@amu.ac.in
+fareed_m,fareed@123,faculty,417,Major Fareed Mahdi,fareedmahdi@zhcet.ac.in
+nadeem_k,nadeem@123,faculty,418,Nadeem Khalil,nkhalil.cv@amu.ac.in
+jafri_m,jafri@123,faculty,419,Mohd Shamsuddin Jafri,jafrims@live.com
+rizwan_k,rizwan@123,faculty,420,Rizwan Ahmad Khan,krizwan.cv@amu.ac.in
+saif_s,saif@123,faculty,421,Saif Said,ssaid.cv@amu.ac.in
+danish_h,danish@123,faculty,422,Syed Danish Hasan,sdhasan.amu@gmail.com
+zaheer_m,zaheer@123,faculty,423,Mohd. Moonis Zaheer,mohdmooniszaheer@gmail.com
+shariq_m,shariq@123,faculty,424,Mohd Shariq,mshariq.cv@amu.ac.in
+basheer_f,basheer@123,faculty,425,Farrukh Basheer,farrukhbasheer.cv@amu.ac.in
+ajmal_h,ajmal@123,faculty,426,Ajmal Hussain,ajmal.hussain@zhcet.ac.in
+arsalan_k,arsalan@123,faculty,427,Mohammad Arsalan Khan,mohd.arsalan.khan@hotmail.co.uk
+rehan_s,rehan@123,faculty,428,Md. Rehan Sadique,rehan.sadique@zhcet.ac.in
+tahira_p,tahira@123,faculty,501,Tahira Parveen,tahiraparveen@zhcet.ac.in
+hasan_m,hasan@123,faculty,502,Mohd. Hasan,mohd.hasan@amu.ac.in
+omar_f,omar@123,faculty,503,Omar Farooq,omar.farooq@amu.ac.in
+ekram_k,ekram@123,faculty,504,Ekram Khan,ekhan.el@amu.ac.in
+maheshwari_s,maheshwari@123,faculty,505,Sudhanshu Maheshwari,maheshwarispm@gmail.com
+javed_a,javed@123,faculty,506,Syed Javed Arif,sjavedarif@gmail.com
+siddiqui_m,siddiqui@123,faculty,507,Mohammad Jawaid Siddiqui,mjsiddiqui@zhcet.ac.in
+rahman_a,rahman@123,faculty,508,Syed Atiqur Rahman,sarahman@zhcet.ac.in
+moinuddin_a,moinuddin@123,faculty,509,Athar Ali Moinuddin,atharamoin@gmail.com
+sadat_a,sadat@123,faculty,510,Anwar Sadat,anwart7039@gmail.com
+naushad_a,naushad@123,faculty,511,Naushad Alam,naushad.el@zhcet.ac.in
+wajid_m,wajid@123,faculty,512,Mohd Wajid,mohdwajid@zhcet.ac.in
+abidi_m,abidi@123,faculty,513,Musiur Raza Abidi,mrabidi.el@amu.ac.in
+sharique_m,sharique@123,faculty,514,Mohd Sharique,mohdsharique@zhcet.ac.in
+arora_t,arora@123,faculty,515,Tajinder Singh Arora,tsarora.el@amu.ac.in
+ayyub_k,ayyub@123,faculty,516,Mohd Ayyub Khan,mayyubkhan@zhcet.ac.in
+tausif_m,tausif@123,faculty,517,Mohd Tausif,mohdtausif@zhcet.ac.in
+asif_m,asif@123,faculty,518,Mohd Asifuddola,masifuddola.el@amu.ac.in
+danish_m,danish@123,faculty,601,Mohd Danish,mdanish77@rediffmail.com
+jameel_a,jameel@123,faculty,602,Ahmad Tariq Jameel,atjameel@yahoo.com
+naseem_k,naseem@123,faculty,603,Naseem Ahmad Khan,nakhan63@rediffmail.com
+hakeem_m,hakeem@123,faculty,604,Mohammed Abdul Hakeem,mahakim@rediffmail.com
+jilani_s,jilani@123,faculty,605,Sheeba Jilani,sheeba_jilani@yahoo.co.in
+bushra_a,bushra@123,faculty,606,Aishatul Bushra,a.bushra@rediffmail.com
+siddiqui_f,siddiqui@123,faculty,607,Faisal Zia Siddiqui,fzsiddiqui.ke@amu.ac.in
+zaidi_h,zaidi@123,faculty,608,Hasan Akhtar Zaidi,hasan.azaidi@gmail.com
+hasib_r,hasib@123,faculty,609,Raunaq Hasib,raunaqhasib@zhcet.ac.in
+arman_i,arman@123,faculty,610,Iram Arman,iramarman@gmail.com
+khan_p,khan@123,faculty,611,Parvez Khan,parvezchem001@gmail.com
+rahman_w,rahman@123,faculty,612,Wasi ur Rahman,wurahman_co@myamu.ac.in
