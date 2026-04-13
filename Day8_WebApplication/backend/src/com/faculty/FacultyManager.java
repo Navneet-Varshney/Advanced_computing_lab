@@ -4,9 +4,6 @@ import java.util.*;
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
 
-/**
- * Faculty CRUD operations manager
- */
 public class FacultyManager {
     private static final String FACULTY_CSV = "data/faculty.csv";
     private static final String[] FACULTY_HEADERS = {"faculty_id", "name", "department", "designation", "mobile", "email", "specialization", "username"};

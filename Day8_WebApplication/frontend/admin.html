@@ -23,12 +23,13 @@
                 <button onclick="showAddForm()" class="btn btn-success"><i class="fas fa-plus"></i> Add Faculty</button>
                 <input type="text" id="searchInput" placeholder="🔍 Search by name, department..." class="search-box">
                 <button onclick="searchFaculty()" class="btn btn-info"><i class="fas fa-search"></i> Search</button>
+                <button onclick="resetAdminSearch()" class="btn btn-secondary"><i class="fas fa-redo"></i> Show All</button>
         </div>
         
             <!-- Add Faculty Form (Modal) -->
             <div id="addFormModal" class="modal" style="display:none;">
                 <div class="modal-content">
-                    <button onclick="closeAddForm()" class="close-btn">&times;</button>
+                    <span onclick="closeAddForm()" class="close">&times;</span>
                     <h2><i class="fas fa-user-plus"></i> Add New Faculty</h2>
                     <div id="addFormError" class="error-message"></div>
                     <div id="addFormSuccess" class="success-message"></div>
@@ -53,6 +54,7 @@
                             <label for="designation"><i class="fas fa-briefcase"></i> Designation</label>
                             <select id="designation" name="designation" required>
                                 <option>Select Designation</option>
+                                <option>Chairman & Professor</option>
                                 <option>Professor</option>
                                 <option>Associate Professor</option>
                                 <option>Assistant Professor</option>
@@ -96,6 +98,7 @@
                             <label for="edit_designation">Designation:</label>
                             <select id="edit_designation" name="designation" required>
                                 <option>Select Designation</option>
+                                <option>Chairman & Professor</option>
                                 <option>Professor</option>
                                 <option>Associate Professor</option>
                                 <option>Assistant Professor</option>
@@ -167,14 +170,14 @@
             const data = Object.fromEntries(formData);
             
             try {
-                const response = await fetch('http://localhost:9001/api/faculty', {
+                const response = await fetch(API_BASE + '/api/faculty', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': sessionStorage.getItem('authToken')
                     },
                     body: JSON.stringify(data)
-                });
+                })
                 
                 const result = await response.json();
             
@@ -220,14 +223,14 @@
             const data = Object.fromEntries(formData);
             
             try {
-                const response = await fetch(`http://localhost:9001/api/faculty/${facultyId}`, {
+                const response = await fetch(API_BASE + `/api/faculty/${facultyId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': sessionStorage.getItem('authToken')
                     },
                     body: JSON.stringify(data)
-                });
+                })
                 
                 const result = await response.json();
                 
@@ -244,7 +247,7 @@
         });
         
         function loadFaculty() {
-            fetch('http://localhost:9001/api/faculty', {
+            fetch(API_BASE + '/api/faculty', {
                 headers: {
                     'Authorization': sessionStorage.getItem('authToken')
                 }
@@ -292,7 +295,7 @@
         }
         
         function editFaculty(facultyId) {
-            fetch(`http://localhost:9001/api/faculty/${facultyId}`, {
+            fetch(API_BASE + `/api/faculty/${facultyId}`, {
                 headers: {
                     'Authorization': sessionStorage.getItem('authToken')
                 }
@@ -318,7 +321,7 @@
         
         function deleteFaculty(facultyId) {
             if (confirm('Are you sure you want to delete this faculty member?')) {
-                fetch(`http://localhost:9001/api/faculty/${facultyId}`, {
+                fetch(API_BASE + `/api/faculty/${facultyId}`, {
                     method: 'DELETE',
                     headers: {
                         'Authorization': sessionStorage.getItem('authToken')
@@ -344,7 +347,7 @@
                 return;
             }
             
-            fetch(`http://localhost:9001/api/search?q=${encodeURIComponent(query)}`)
+            fetch(API_BASE + `/api/search?q=${encodeURIComponent(query)}`)
             .then(res => res.json())
             .then(data => {
                 const tbody = document.getElementById('facultyTableBody');
@@ -373,6 +376,11 @@
                 }
             })
             .catch(err => showMessage('Search error: ' + err, 'error'));
+        }
+        
+        function resetAdminSearch() {
+            document.getElementById('searchInput').value = '';
+            loadFaculty();
         }
         
         function showMessage(msg, type) {

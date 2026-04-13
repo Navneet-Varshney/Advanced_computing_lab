@@ -16,64 +16,86 @@
         </div>
     </div>
     
+    <!-- Faculty Navigation Tabs -->
+    <div class="container">
+        <div class="faculty-tabs">
+            <button class="faculty-tab-button active" onclick="switchTab('profile')">
+                <i class="fas fa-id-card"></i> Profile
+            </button>
+            <button class="faculty-tab-button" onclick="switchTab('update')">
+                <i class="fas fa-edit"></i> Update
+            </button>
+            <button class="faculty-tab-button" onclick="switchTab('members')">
+                <i class="fas fa-users"></i> Members
+            </button>
+        </div>
+    </div>
+    
     <div class="container">
         <div class="dashboard">
-            <!-- Faculty Personal Information -->
-            <div class="info-section">
-                <h2><i class="fas fa-user-card"></i> My Profile Information</h2>
-                <div class="profile-info" id="profileInfo">
-                    <div style="text-align: center; padding: 30px;">
-                        <div class="spinner"></div>
-                        <p style="margin-top: 15px; color: #999;">Loading profile...</p>
+            <!-- PROFILE TAB -->
+            <div id="profile-tab" class="faculty-tab-content active">
+                <div class="info-section">
+                    <h2><i class="fas fa-user-card"></i> My Profile Information</h2>
+                    <div class="profile-info" id="profileInfo">
+                        <div style="text-align: center; padding: 30px;">
+                            <div class="spinner"></div>
+                            <p style="margin-top: 15px; color: #999;">Loading profile...</p>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Edit Contact Information Form -->
-            <div class="edit-section">
-                <h2><i class="fas fa-edit"></i> Update Contact Information</h2>
-                <p><i class="fas fa-info-circle"></i> You can only update your Mobile Number and Email Address</p>
-                <form id="updateContactForm">
-                    <div class="form-group">
-                        <label for="edit_mobile"><i class="fas fa-phone"></i> Mobile Number</label>
-                        <input type="tel" id="edit_mobile" name="mobile" placeholder="10-digit number" pattern="[0-9]{10}" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="edit_email"><i class="fas fa-envelope"></i> Email Address</label>
-                        <input type="email" id="edit_email" name="email" placeholder="your.email@example.com" required>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;"><i class="fas fa-save"></i> Save Changes</button>
-                </form>
-            </div>
-            
-            <!-- Search Faculty Database -->
-            <div class="search-section">
-                <h2><i class="fas fa-search"></i> Search Faculty Directory</h2>
-                <div class="action-buttons">
-                    <input type="text" id="searchInput" placeholder="Search by name, department, or specialization..." class="search-box">
-                    <button onclick="searchFaculty()" class="btn btn-info">Search</button>
+            <!-- UPDATE TAB -->
+            <div id="update-tab" class="faculty-tab-content" style="display: none;">
+                <div class="edit-section">
+                    <h2><i class="fas fa-edit"></i> Update Contact Information</h2>
+                    <p><i class="fas fa-info-circle"></i> You can only update your Mobile Number and Email Address</p>
+                    <form id="updateContactForm">
+                        <div class="form-group">
+                            <label for="edit_mobile"><i class="fas fa-phone"></i> Mobile Number</label>
+                            <input type="tel" id="edit_mobile" name="mobile" placeholder="10-digit number" pattern="[0-9]{10}" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="edit_email"><i class="fas fa-envelope"></i> Email Address</label>
+                            <input type="email" id="edit_email" name="email" placeholder="your.email@example.com" required>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;"><i class="fas fa-save"></i> Save Changes</button>
+                    </form>
                 </div>
             </div>
             
-            <!-- Faculty Table -->
-            <div class="table-container">
-                <table id="facultyTable">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Department</th>
-                            <th>Designation</th>
-                            <th>Mobile</th>
-                            <th>Email</th>
-                            <th>Specialization</th>
-                        </tr>
-                    </thead>
-                    <tbody id="facultyTableBody">
-                    </tbody>
-                </table>
+            <!-- MEMBERS TAB -->
+            <div id="members-tab" class="faculty-tab-content" style="display: none;">
+                <div class="search-section">
+                    <h2><i class="fas fa-search"></i> Search Faculty Directory</h2>
+                    <div class="action-buttons">
+                        <input type="text" id="searchInput" placeholder="Search by name, department, or specialization..." class="search-box">
+                        <button onclick="searchFaculty()" class="btn btn-info"><i class="fas fa-search"></i> Search</button>
+                        <button onclick="resetFacultySearch()" class="btn btn-secondary"><i class="fas fa-redo"></i> Show All</button>
+                    </div>
+                </div>
+                
+                <!-- Faculty Table -->
+                <div class="table-container">
+                    <table id="facultyTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Department</th>
+                                <th>Designation</th>
+                                <th>Mobile</th>
+                                <th>Email</th>
+                                <th>Specialization</th>
+                            </tr>
+                        </thead>
+                        <tbody id="facultyTableBody">
+                        </tbody>
+                    </table>
+                </div>
             </div>
             
             <div id="message" class="message"></div>
@@ -92,12 +114,33 @@
             loadAllFaculty();
         });
         
+        // Tab switching function
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.faculty-tab-content').forEach(tab => {
+                tab.style.display = 'none';
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.faculty-tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').style.display = 'block';
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.closest('.faculty-tab-button').classList.add('active');
+        }
+        
         function loadMyProfile() {
             const username = sessionStorage.getItem('username');
             const facultyId = sessionStorage.getItem('faculty_id');
             
             if (facultyId) {
-                fetch(`http://localhost:9001/api/faculty/${facultyId}`, {
+                fetch(API_BASE + `/api/faculty/${facultyId}`, {
                     headers: {
                         'Authorization': sessionStorage.getItem('authToken')
                     }
@@ -141,7 +184,7 @@
         }
         
         function loadAllFaculty() {
-            fetch('http://localhost:9001/api/faculty', {
+            fetch(API_BASE + '/api/faculty', {
                 headers: {
                     'Authorization': sessionStorage.getItem('authToken')
                 }
@@ -189,14 +232,14 @@
             const email = document.getElementById('edit_email').value;
             
             try {
-                const response = await fetch(`http://localhost:9001/api/faculty/${currentFacultyId}`, {
+                const response = await fetch(API_BASE + `/api/faculty/${currentFacultyId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': sessionStorage.getItem('authToken')
                     },
                     body: JSON.stringify({ mobile, email })
-                });
+                })
                 
                 const result = await response.json();
                 
@@ -218,7 +261,7 @@
                 return;
             }
             
-            fetch(`http://localhost:9001/api/search?q=${encodeURIComponent(query)}`)
+            fetch(API_BASE + `/api/search?q=${encodeURIComponent(query)}`)
             .then(res => res.json())
             .then(data => {
                 const tbody = document.getElementById('facultyTableBody');
@@ -243,6 +286,11 @@
                 }
             })
             .catch(err => showMessage('Search error: ' + err, 'error'));
+        }
+        
+        function resetFacultySearch() {
+            document.getElementById('searchInput').value = '';
+            loadAllFaculty();
         }
         
         function showMessage(msg, type) {
