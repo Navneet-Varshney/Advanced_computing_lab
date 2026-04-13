@@ -3,7 +3,34 @@
  * Handles all API requests to the backend
  */
 
-const API_BASE = 'http://localhost:9001';
+// Dynamic API Base URL - loaded from server config
+let API_BASE = 'http://localhost:9001';
+
+/**
+ * Fetch server configuration to get dynamic API base URL
+ */
+async function loadServerConfig() {
+    try {
+        // Fetch from port 9001 where the Java server is running
+        const response = await fetch('http://localhost:9001/config');
+        if (response.ok) {
+            const config = await response.json();
+            API_BASE = config.api_base;
+            console.log('✅ Server config loaded:', config);
+            return config;
+        }
+    } catch (error) {
+        console.warn('⚠️ Could not load server config, using default:', error);
+    }
+    return null;
+}
+
+// Load config when page loads
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadServerConfig);
+} else {
+    loadServerConfig();
+}
 
 /**
  * Login user with username and password
@@ -128,6 +155,12 @@ async function addFaculty(facultyData, authToken) {
  */
 async function updateFaculty(facultyId, updates, authToken) {
     try {
+        // Verify authToken exists
+        if (!authToken) {
+            console.error('❌ No auth token provided');
+            return { success: false, message: 'Authentication required. Please log in again.' };
+        }
+        
         const response = await fetch(`${API_BASE}/api/faculty/${facultyId}`, {
             method: 'PUT',
             headers: {
@@ -137,10 +170,14 @@ async function updateFaculty(facultyId, updates, authToken) {
             body: JSON.stringify(updates)
         });
         
+        if (response.status === 403) {
+            return { success: false, message: 'Permission denied. Please log in again.' };
+        }
+        
         return await response.json();
     } catch (error) {
-        console.error('Update faculty error:', error);
-        return { success: false, message: 'Network error' };
+        console.error('❌ Update faculty error:', error);
+        return { success: false, message: 'Network error: ' + error.message };
     }
 }
 
