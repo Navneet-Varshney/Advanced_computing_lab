@@ -1,33 +1,6 @@
 
 
-// Dynamic API Base URL - loaded from server config
-let API_BASE = 'http://localhost:9001';
-
-/**
- * Fetch server configuration to get dynamic API base URL
- */
-async function loadServerConfig() {
-    try {
-        // Fetch from port 9001 where the Java server is running
-        const response = await fetch('http://localhost:9001/config');
-        if (response.ok) {
-            const config = await response.json();
-            API_BASE = config.api_base;
-            console.log('✅ Server config loaded:', config);
-            return config;
-        }
-    } catch (error) {
-        console.warn('⚠️ Could not load server config, using default:', error);
-    }
-    return null;
-}
-
-// Load config when page loads
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadServerConfig);
-} else {
-    loadServerConfig();
-}
+const API_BASE = 'http://localhost:9001';
 
 async function loginUser(username, password) {
     try {

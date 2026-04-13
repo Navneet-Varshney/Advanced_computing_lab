@@ -9,17 +9,11 @@ public class FacultyManager {
     private static final String[] FACULTY_HEADERS = {"faculty_id", "name", "department", "designation", "mobile", "email", "specialization", "username"};
     private static final Gson gson = new Gson();
 
-    /**
-     * Get all faculty
-     */
     public static List<Map<String, String>> getAllFaculty() {
         CSVReader reader = new CSVReader(FACULTY_CSV);
         return reader.readAll();
     }
 
-    /**
-     * Get faculty by ID
-     */
     public static Map<String, String> getFacultyById(String id) {
         CSVReader reader = new CSVReader(FACULTY_CSV);
         List<Map<String, String>> data = reader.readAll();
@@ -29,9 +23,6 @@ public class FacultyManager {
                 .orElse(null);
     }
 
-    /**
-     * Get faculty by username
-     */
     public static Map<String, String> getFacultyByUsername(String username) {
         CSVReader reader = new CSVReader(FACULTY_CSV);
         List<Map<String, String>> data = reader.readAll();
@@ -41,9 +32,6 @@ public class FacultyManager {
                 .orElse(null);
     }
 
-    /**
-     * Search faculty by name
-     */
     public static List<Map<String, String>> searchFaculty(String query) {
         CSVReader reader = new CSVReader(FACULTY_CSV);
         List<Map<String, String>> data = reader.readAll();
