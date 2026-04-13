@@ -106,7 +106,7 @@ async function updateFaculty(facultyId, updates, authToken) {
     try {
         // Verify authToken exists
         if (!authToken) {
-            console.error('❌ No auth token provided');
+            console.error('No auth token provided');
             return { success: false, message: 'Authentication required. Please log in again.' };
         }
         
@@ -125,7 +125,7 @@ async function updateFaculty(facultyId, updates, authToken) {
         
         return await response.json();
     } catch (error) {
-        console.error('❌ Update faculty error:', error);
+        console.error('Update faculty error:', error);
         return { success: false, message: 'Network error: ' + error.message };
     }
 }

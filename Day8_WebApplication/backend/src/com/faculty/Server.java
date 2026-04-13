@@ -16,7 +16,7 @@ public class Server {
     
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("🌐 Enter server IP address (press Enter for localhost): ");
+        System.out.print("Enter server IP address (press Enter for localhost): ");
         String userInput = scanner.nextLine().trim();
         if (!userInput.isEmpty()) {
             serverIP = userInput;
@@ -39,11 +39,11 @@ public class Server {
         server.setExecutor(Executors.newCachedThreadPool());
         
         server.start();
-        System.out.println("✅ Server started successfully!");
-        System.out.println("🌐 Server IP: " + serverIP + ":" + PORT);
-        System.out.println("🔗 Access URL: http://" + serverIP + ":" + PORT);
-        System.out.println("📂 Frontend files served from: " + new File(FRONTEND_DIR).getAbsolutePath());
-        System.out.println("\n🔐 API endpoints available:");
+        System.out.println("Server started successfully!");
+        System.out.println("Server IP: " + serverIP + ":" + PORT);
+        System.out.println("Access URL: http://" + serverIP + ":" + PORT);
+        System.out.println("Frontend files served from: " + new File(FRONTEND_DIR).getAbsolutePath());
+        System.out.println("\nAPI endpoints available:");
         System.out.println("   GET    /config                - Get server configuration");
         System.out.println("   POST   /api/login             - Login (username, password)");
         System.out.println("   POST   /api/forgot-password   - Forgot password recovery");
