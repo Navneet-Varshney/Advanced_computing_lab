@@ -204,7 +204,7 @@
             errorDiv.textContent = '';
             
             try {
-                const response = await fetch('http://localhost:9001/api/login', {
+                const response = await fetch(API_BASE + '/api/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, email, password })
@@ -238,7 +238,7 @@
             errorDiv.textContent = '';
             
             try {
-                const response = await fetch('http://localhost:9001/api/login', {
+                const response = await fetch(API_BASE + '/api/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ faculty_id, email, password })
@@ -321,7 +321,7 @@
                 const requestData = { userType: 'admin', username, email };
                 console.log('Admin recovery request:', requestData);
                 
-                const response = await fetch('http://localhost:9001/api/forgot-password', {
+                const response = await fetch(API_BASE + '/api/forgot-password', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(requestData)
@@ -365,7 +365,7 @@
                 const requestData = { userType: 'faculty', faculty_id: facultyId, email };
                 console.log('Faculty recovery request:', requestData);
                 
-                const response = await fetch('http://localhost:9001/api/forgot-password', {
+                const response = await fetch(API_BASE + '/api/forgot-password', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(requestData)
