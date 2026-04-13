@@ -41,7 +41,9 @@ public class FacultyManager {
         for (Map<String, String> faculty : data) {
             if (faculty.get("name").toLowerCase().contains(lowerQuery) ||
                 faculty.get("department").toLowerCase().contains(lowerQuery) ||
-                faculty.get("email").toLowerCase().contains(lowerQuery)) {
+                faculty.get("email").toLowerCase().contains(lowerQuery) ||
+                faculty.get("specialization").toLowerCase().contains(lowerQuery) ||
+                faculty.get("designation").toLowerCase().contains(lowerQuery)) {
                 results.add(faculty);
             }
         }
