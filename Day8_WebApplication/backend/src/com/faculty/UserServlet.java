@@ -13,7 +13,6 @@ public class UserServlet implements HttpHandler {
         String method = exchange.getRequestMethod();
         String path = exchange.getRequestURI().getPath();
         
-        // Enable CORS
         exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
         exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "POST, OPTIONS");
         exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
@@ -35,7 +34,6 @@ public class UserServlet implements HttpHandler {
     }
     
     private void handleLogin(HttpExchange exchange) throws IOException {
-        // Read request body
         String body = readRequestBody(exchange);
         
         try {

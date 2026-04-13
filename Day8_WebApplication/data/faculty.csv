@@ -1,132 +1,132 @@
 faculty_id,name,department,designation,mobile,email,specialization,username
-101,Faisal Mirza Sayeed Baig,Mechanical Engineering,Professor,9876543216,drmfbaig@yahoo.co.uk,Mechanical Design,fasal_baig
-102,Mohammad Muzammil,Mechanical Engineering,Professor,9412596817,m.muzammil.me@amu.ac.in,Thermal Engineering,muzammil
-103,Raisuddin Ansari,Mechanical Engineering,Chairman and Professor,9456404433,raisansari@zhcet.ac.in,Heat Transfer,ansari_rai
-104,Ahmad Ali Khan,Mechanical Engineering,Professor,9690680712,khanaali@rediffmail.com,Fluid Mechanics,ahmad_khan
-105,Mohammed Ali,Mechanical Engineering,Professor,7599396152,mohd.ali.me@amu.ac.in,Mechanical Systems,mohd_ali_m
-106,Naiem Akhtar,Mechanical Engineering,Professor,9457694976,nakhtar.me@amu.ac.in,Manufacturing,naiem_akhtar
-107,Nadeem Hasan,Mechanical Engineering,Professor,9719517185,nadhasan@gmail.com,Machine Design,nadeem_h
-108,Abid Ali Khan,Mechanical Engineering,Professor,9837111865,abid.khan.me@amu.ac.in,Tribology,abid_khan
-109,Md. Naushad Alam,Mechanical Engineering,Professor,9411488164,mnaushadalam@zhcet.ac.in,CAD/CAM,naushad_alam
-110,M. Jamil Ahmad,Mechanical Engineering,Professor,9411208421,jamil.amu@gmail.com,Production Engineering,jamil_ahmad
-111,Faisal Talib,Mechanical Engineering,Professor,9412459748,ftalib77@gmail.com,Robotics,faisal_talib
-112,Shah Shahood Alam,Mechanical Engineering,Professor,09319572233,sshahood2004@yahoo.co.in,Automation,shahood_alam
-113,Mohammad Faizan,Mechanical Engineering,Professor,8791463886,mofaizan@hotmail.com,Materials Science,faizan_m
-114,Parveen Farooquie,Mechanical Engineering,Professor,09897856443,parveenfarooquie@yahoo.com,Composites,parveen_f
-115,Arshad Hussain Khan,Mechanical Engineering,Professor,9711556950,ah.khan.me@amu.ac.in,Structural Analysis,arshad_khan
-116,Faisal Hasan,Mechanical Engineering,Professor,,faisalhasan@zhcet.ac.in,Design Engineering,faisal_h
-117,Syed Fahad Anwer,Mechanical Engineering,Professor,8126634354,sfahadanwer@zhcet.ac.in,Thermal Systems,fahad_anwer
-118,Saleem Anwar Khan,Mechanical Engineering,Professor,,saleemanwar@zhcet.ac.in,Mechanical Engineering,saleem_khan
-119,Mubashshir Ahmad Ansari,Mechanical Engineering,Professor,8171777568,mubashshir@gmail.com,Manufacturing Engineering,mubashshir_a
-120,Rashid Ali,Mechanical Engineering,Professor,8439020438,rashidali1@zhcet.ac.in,Material Handling,rashid_ali
-121,Syed Imran Shafiq,Mechanical Engineering,Professor,8755286666,sishafiq.bp@amu.ac.in,Fluid Mechanics,imran_shafiq
-122,Asif Sami,Mechanical Engineering,Associate Professor,9837356720,asif_sami@rediffmail.com,Machine Components,asif_sami
-123,Nafees Ahmad,Mechanical Engineering,Associate Professor,9412478206,nafees2amu@rediffmail.com,Mechanical Vibrations,nafees_a
-124,Adnan Hafiz,Mechanical Engineering,Associate Professor,9897533125,hafizadnan10@gmail.com,Control Systems,adnan_hafiz
-125,Najeeb ur Rahman,Mechanical Engineering,Associate Professor,9997365945,najeebalig@rediffmail.com,CFD Analysis,najeeb_r
-126,Arees Qamareen,Mechanical Engineering,Associate Professor,,aqamareen.me@amu.ac.in,Computational Methods,arees_q
-127,Syed Mohd Yahya,Mechanical Engineering,Associate Professor,9718508831,smyahya@zhcet.ac.in,Process Design,yahya_m
-128,Saman Ahmad,Mechanical Engineering,Associate Professor,,saman.ahmad@yahoo.co.in,Quality Management,saman_a
-129,Azhar Jamil,Mechanical Engineering,Associate Professor,,azharjamil@zhcet.ac.in,Energy Systems,azhar_j
-130,Taliv Hussain,Mechanical Engineering,Associate Professor,9720229876,hussaintaliv@gmail.com,Heat Exchangers,taliv_h
-131,Sanaur Rehman,Mechanical Engineering,Associate Professor,8791430327,sanaur.rehman@zhcet.ac.in,Industrial Engineering,sanaur_r
-132,Khusro Qasim,Mechanical Engineering,Assistant Professor,8755878084,khusroqasim786@gmail.com,Machine Dynamics,khusro_q
-133,Yasser Rafat,Mechanical Engineering,Assistant Professor,8755964212,yasser.rafat@zhcet.ac.in,Advanced Manufacturing,yasser_r
-134,Mohd. Yaqoob Yasin,Mechanical Engineering,Assistant Professor,9412641665,yaqoob.yasin@gmail.com,Instrumentation,yaqoob_y
-135,Mohammad Rashid Zafar,Mechanical Engineering,Assistant Professor,,rashidzafar@zhcet.ac.in,Experimental Mechanics,zafar_m
-136,Mohammad Nasir Khan,Mechanical Engineering,Assistant Professor,9045282971,mnasirkhan@zhcet.ac.in,Design Applications,nasir_khan
-137,Sidra Khanam,Mechanical Engineering,Assistant Professor,8800439222,sidrakhanam@zhcet.ac.in,Renewable Energy,sidra_k
-138,Ateeb Ahmad Khan,Mechanical Engineering,Assistant Professor,7417001656,ateebkhan.me@amu.ac.in,Industrial Design,ateeb_khan
-139,Abdullah Yousuf Usmani,Mechanical Engineering,Assistant Professor,8475052456,usmani.fts@gmail.com,Production Systems,abdullah_u
-140,Shahid Husain,Mechanical Engineering,Assistant Professor,,shahidhusain@zhcet.ac.in,Mechanical Applications,shahid_h
-201,Yusuf Uzzaman Khan,Electrical Engineering,Chairman and Professor,,yusufzkhan@zhcet.ac.in,Power Systems,yusuf_u
-202,Mohammad Fazle Azeem,Electrical Engineering,Professor,9945432984,mf.azeem@zhcet.ac.in,Electrical Machines,azeem_m
-203,Imtiaz Ashraf,Electrical Engineering,Professor,9412878824,iashraf@rediffmail.com,Control Engineering,imtiaz_a
-204,Salman Hameed,Electrical Engineering,Professor,9412483867,hameeddee@gmail.com,Power Electronics,salman_h
-205,Abu Tariq,Electrical Engineering,Professor,9897617078,abutariq@zhcet.ac.in,High Voltage Engineering,abu_tariq
-206,Asfar Ali Khan,Electrical Engineering,Professor,0571-2704186,asfaralikhan@gmail.com,Electrical Distribution,asfar_khan
-207,Aejaz Masood,Electrical Engineering,Professor,,aejaz_masood@yahoo.co.in,Power Generation,aejaz_m
-208,Mohd. Rizwan Khan,Electrical Engineering,Professor,9412545798,rizwan.eed@gmail.com,Electrical Drives,rizwan_khan
-209,Mohd Rihan,Electrical Engineering,Professor,,m.rihan.ee@amu.ac.in,Renewable Energy,rihan_e
-210,Mujib Ullah Zuberi,Electrical Engineering,Associate Professor,,mu.zuberi.ee@amu.ac.in,Industrial Electronics,zuberi_m
-211,Safia Akhtar Kazmi,Electrical Engineering,Associate Professor,9258893888,safiakazmiamu@gmail.com,Control Systems,safia_k
-212,Sheeraz Kirmani,Electrical Engineering,Associate Professor,9953707456,skirmani.ee@amu.ac.in,Signal Processing,sheeraz_k
-213,Adil Sarwar,Electrical Engineering,Assistant Professor,9997277428,adil.sarwar@zhcet.ac.in,Electrical Safety,adil_s
-214,Mohd. Anas Anees,Electrical Engineering,Assistant Professor,9536322686,anasanees.amu@gmail.com,Power Quality,anas_a
-215,Mohammad Zaid,Electrical Engineering,Assistant Professor,7895932115,mohammad.zaid@zhcet.ac.in,Grid Systems,zaid_m
-216,Mohammad Sarfraz,Electrical Engineering,Assistant Professor,9971683540,msarfraz@zhcet.ac.in,Electrical Networks,sarfraz_m
-217,M Saad Bin Arif,Electrical Engineering,Assistant Professor,9368105903,saadbinarif@gmail.com,Power Dynamics,saad_a
-218,Mohd Tariq,Electrical Engineering,Assistant Professor,,tariq.ee@zhcet.ac.in,Electrical Engineering,tariq_e
-301,Izharuddin,Computer Engineering,Chairman and Professor,9412545793,izharuddin.ce@amu.ac.in,Software Engineering,izharuddin_ce
-302,Nesar Ahmad,Computer Engineering,Professor,,n.ahmad.ce@amu.ac.in,Database Systems,nesar_a
-303,Ash Mohammad Abbas,Computer Engineering,Professor,8791685906,am.abbas.ce@amu.ac.in,AI and ML,abbas_m
-304,M. M. Sufyan Beg,Computer Engineering,Professor,9999071406,mmsbeg.ce@amu.ac.in,Web Technologies,sufyan_b
-305,Mohammad Sarosh Umar,Computer Engineering,Professor,9457558766,saroshumar@zhcet.ac.in,Networking,sarosh_u
-306,Rashid Ali,Computer Engineering,Professor,9411419429,rashidali.cse@zhcet.ac.in,Software Development,rashid_ce
-307,Saiful Islam,Computer Engineering,Professor,9358257122,saifulislam@zhcet.ac.in,Information Systems,saiful_i
-308,Misbahur Rahman Warsi,Computer Engineering,Associate Professor,9411488531,warsimr@yahoo.com,Programming Languages,warsi_m
-309,Mohammed Abdul Qadeer,Computer Engineering,Associate Professor,9897705269,maqadeer@amu.ac.in,Computer Systems,qadeer_m
-310,Nadeem Akhtar,Computer Engineering,Associate Professor,9450658150,nadeemakhtar@zhcet.ac.in,System Architecture,nadeem_ce
-311,Abdus Samad,Computer Engineering,Associate Professor,9634982285,abdussamadamu@gmail.com,Software Analysis,samad_a
-312,Muhammad Inamullah,Computer Engineering,Assistant Professor,,inam@zhcet.ac.in,Data Structures,inam_m
-313,Tameem Ahmad,Computer Engineering,Assistant Professor,9208308093,tameemahmad@zhcet.ac.in,Algorithm Design,tameem_a
-314,Muneeb Hasan Khan,Computer Engineering,Assistant Professor,7017760456,muneebhkhan@zhcet.ac.in,Web Development,muneeb_k
-315,Faisal Alam,Computer Engineering,Assistant Professor,8095334058,faisalalam@zhcet.ac.in,Mobile Applications,faisal_ce
-401,Amjad Masood,Civil Engineering,Chairman and Professor,9410426876,a.masood.cv@amu.ac.in,Structural Engineering,masood_a
-402,Mohammed Arif,Civil Engineering,Professor,9411804371,m.arif.cv@amu.ac.in,Geotechnical Engineering,arif_m
-403,Izharul Haq Farooqi,Civil Engineering,Professor,9412176757,farooqi_izhar@yahoo.com,Soil Mechanics,farooqi_i
-404,Javed Alam,Civil Engineering,Professor,9837169427,jalam.cv@amu.ac.in,Foundation Design,javed_a
-405,Mohd. Masroor Alam,Civil Engineering,Professor,9412459471,mmalam.cv@amu.ac.in,Structural Design,masroor_a
-406,Hassan Irtaza,Civil Engineering,Professor,8126710884,hirtaza.amu@gmail.com,Environmental Engineering,hassan_i
-407,Sabih Akhtar,Civil Engineering,Professor,9412596531,sabihced@yahoo.co.in,Hydraulics,sabih_a
-408,Sohail Ayub,Civil Engineering,Professor,9411802300,sohailayub@rediffmail.com,Water Resources,sohail_a
-409,Mehboob Anwer Khan,Civil Engineering,Professor,9412273770,mehboobcivil@yahoo.co.in,Concrete Design,mehboob_k
-410,Mujib Ahmad Ansari,Civil Engineering,Professor,9412596530,mujibansari68@gmail.com,Structural Behavior,mujib_a
-411,Iqbal Khaleel Khan,Civil Engineering,Professor,9457050900,ikk01in@yahoo.co.in,Transportation Engineering,khaleel_k
-412,Talib Mansoor,Civil Engineering,Professor,7599112094,talibced@gmail.com,Highway Engineering,talib_m
-413,Malik Shoeb Ahmad,Civil Engineering,Professor,9412065804,shoeb33@gmail.com,Construction Engineering,shoeb_a
-414,Rehan Ahmad Khan,Civil Engineering,Professor,9634618899,rehan_iitd@rediffmail.com,Earthquake Engineering,rehan_k
-415,Kausar Ali,Civil Engineering,Professor,9411804045,kausarali786@rediffmail.com,Soil Engineering,kausar_a
-416,Asif Ali Siddiqui,Civil Engineering,Professor,9760249915,aasiddiqui.cv@amu.ac.in,Building Design,asif_s
-417,Major Fareed Mahdi,Civil Engineering,Professor,9837066423,fareedmahdi@zhcet.ac.in,Infrastructure Development,fareed_m
-418,Nadeem Khalil,Civil Engineering,Professor,9358258350,nkhalil.cv@amu.ac.in,Resource Planning,nadeem_k
-419,Mohd Shamsuddin Jafri,Civil Engineering,Professor,9359757637,jafrims@live.com,Project Management,jafri_m
-420,Rizwan Ahmad Khan,Civil Engineering,Professor,9876497242,krizwan.cv@amu.ac.in,Urban Development,rizwan_k
-421,Saif Said,Civil Engineering,Professor,,ssaid.cv@amu.ac.in,Civil Design,saif_s
-422,Syed Danish Hasan,Civil Engineering,Professor,9557914410,sdhasan.amu@gmail.com,Structural Systems,danish_h
-423,Mohd. Moonis Zaheer,Civil Engineering,Associate Professor,8126994199,mohdmooniszaheer@gmail.com,Foundation Engineering,zaheer_m
-424,Mohd Shariq,Civil Engineering,Associate Professor,9897903968,mshariq.cv@amu.ac.in,Geotechnical Design,shariq_m
-425,Farrukh Basheer,Civil Engineering,Assistant Professor,9897813572,farrukhbasheer.cv@amu.ac.in,Environmental Systems,basheer_f
-426,Ajmal Hussain,Civil Engineering,Assistant Professor,,ajmal.hussain@zhcet.ac.in,Site Engineering,ajmal_h
-427,Mohammad Arsalan Khan,Civil Engineering,Assistant Professor,9045401002,mohd.arsalan.khan@hotmail.co.uk,Pavement Design,arsalan_k
-428,Md. Rehan Sadique,Civil Engineering,Assistant Professor,8057897879,rehan.sadique@zhcet.ac.in,Design Analysis,rehan_s
-501,Tahira Parveen,Electronics Engineering,Chairperson and Professor,9897001202,tahiraparveen@zhcet.ac.in,Signal Processing,tahira_p
-502,Mohd. Hasan,Electronics Engineering,Professor,9897790043,mohd.hasan@amu.ac.in,Communication Systems,hasan_m
-503,Omar Farooq,Electronics Engineering,Professor,9456667567,omar.farooq@amu.ac.in,VLSI Design,omar_f
-504,Ekram Khan,Electronics Engineering,Professor,9457110112,ekhan.el@amu.ac.in,Microelectronics,ekram_k
-505,Sudhanshu Maheshwari,Electronics Engineering,Professor,,maheshwarispm@gmail.com,Power Electronics,maheshwari_s
-506,Syed Javed Arif,Electronics Engineering,Professor,9456033796,sjavedarif@gmail.com,Circuit Design,javed_a
-507,Mohammad Jawaid Siddiqui,Electronics Engineering,Professor,9634736626,mjsiddiqui@zhcet.ac.in,Electronic Systems,siddiqui_m
-508,Syed Atiqur Rahman,Electronics Engineering,Professor,9759893738,sarahman@zhcet.ac.in,Control Systems,rahman_a
-509,Athar Ali Moinuddin,Electronics Engineering,Professor,8171624344,atharamoin@gmail.com,Digital Systems,moinuddin_a
-510,Anwar Sadat,Electronics Engineering,Professor,9897257577,anwart7039@gmail.com,Electronics Applications,sadat_a
-511,Naushad Alam,Electronics Engineering,Professor,9897165051,naushad.el@zhcet.ac.in,Communications,naushad_a
-512,Mohd Wajid,Electronics Engineering,Professor,9218529591,mohdwajid@zhcet.ac.in,Electronic Instrumentation,wajid_m
-513,Musiur Raza Abidi,Electronics Engineering,Associate Professor,9358202111,mrabidi.el@amu.ac.in,Analog Electronics,abidi_m
-514,Mohd Sharique,Electronics Engineering,Associate Professor,9621202377,mohdsharique@zhcet.ac.in,Signal Conditioning,sharique_m
-515,Tajinder Singh Arora,Electronics Engineering,Associate Professor,9818671663,tsarora.el@amu.ac.in,Network Circuits,arora_t
-516,Mohd Ayyub Khan,Electronics Engineering,Associate Professor,,mayyubkhan@zhcet.ac.in,System Integration,ayyub_k
-517,Mohd Tausif,Electronics Engineering,Assistant Professor,,mohdtausif@zhcet.ac.in,Embedded Systems,tausif_m
-518,Mohd Asifuddola,Electronics Engineering,Assistant Professor,9971458972,masifuddola.el@amu.ac.in,Digital Design,asif_m
-601,Mohd Danish,Chemical Engineering,Chairman and Professor,9997579474,mdanish77@rediffmail.com,Process Design,danish_m
-602,Ahmad Tariq Jameel,Chemical Engineering,Professor,9068319003,atjameel@yahoo.com,Chemical Processes,jameel_a
-603,Naseem Ahmad Khan,Chemical Engineering,Associate Professor,9411212431,nakhan63@rediffmail.com,Plant Operations,naseem_k
-604,Mohammed Abdul Hakeem,Chemical Engineering,Associate Professor,9411040023,mahakim@rediffmail.com,Industrial Processes,hakeem_m
-605,Sheeba Jilani,Chemical Engineering,Associate Professor,,sheeba_jilani@yahoo.co.in,Chemical Reaction Engineering,jilani_s
-606,Aishatul Bushra,Chemical Engineering,Associate Professor,9997399185,a.bushra@rediffmail.com,Mass Transfer,bushra_a
-607,Faisal Zia Siddiqui,Chemical Engineering,Associate Professor,7599124940,fzsiddiqui.ke@amu.ac.in,Unit Operations,siddiqui_f
-608,Hasan Akhtar Zaidi,Chemical Engineering,Associate Professor,9410872369,hasan.azaidi@gmail.com,Chemical Engineering,zaidi_h
-609,Raunaq Hasib,Chemical Engineering,Assistant Professor,,raunaqhasib@zhcet.ac.in,Process Engineering,hasib_r
-610,Iram Arman,Chemical Engineering,Assistant Professor,,iramarman@gmail.com,Separation Processes,arman_i
-611,Parvez Khan,Chemical Engineering,Assistant Professor,9999716352,parvezchem001@gmail.com,Chemical Kinetics,khan_p
-612,Wasi ur Rahman,Chemical Engineering,Assistant Professor,7252952986,wurahman_co@myamu.ac.in,Reactor Design,rahman_w
+101,Faisal Mirza Sayeed Baig,Mechanical Engineering,Professor,9876543217,drmfbaig@yahoo.co.uk,Mechanical Design and Analysis,fasal_baig
+102,Mohammad Muzammil,Mechanical Engineering,Professor,9412596818,m.muzammil.me@amu.ac.in,"Ergonomics/Human Factors Engineering,Active Control of Noise",muzammil
+103,Raisuddin Ansari,Mechanical Engineering,Chairman and Professor,9456404433,raisansari@zhcet.ac.in,"Impact Mechanics,Crashworthiness",ansari_rai
+104,Ahmad Ali Khan,Mechanical Engineering,Professor,9690680712,khanaali@rediffmail.com,"Machine Design (Nonlinear Dynamics,System Identification",ahmad_khan
+105,Mohammed Ali,Mechanical Engineering,Professor,7599396152,mohd.ali.me@amu.ac.in,Computational Fluid Dynamics and Heat Transfer,mohd_ali_m
+106,Naiem Akhtar,Mechanical Engineering,Professor,9457694976,nakhtar.me@amu.ac.in,"Thermal Engineering,Solar Thermal"
+107,Nadeem Hasan,Mechanical Engineering,Professor,9719517185,nadhasan@gmail.com,Computational Fluid Dynamics and Heat Transfer,nadeem_h
+108,Abid Ali Khan,Mechanical Engineering,Professor,9837111865,abid.khan.me@amu.ac.in,Composite Materials and Structural Analysis,abid_khan
+109,Md. Naushad Alam,Mechanical Engineering,Professor,9411488164,mnaushadalam@zhcet.ac.in,"Smart Composite and Sandwich Structure,Active Vibration Control
+110,M. Jamil Ahmad,Mechanical Engineering,Professor,9411208421,jamil.amu@gmail.com,Thermal Engineering,jamil_ahmad
+111,Faisal Talib,Mechanical Engineering,Professor,9412459748,ftalib77@gmail.com,"Total Quality Management,Multi-Criteria Decision Making Techniques
+112,Shah Shahood Alam,Mechanical Engineering,Professor,09319572233,sshahood2004@yahoo.co.in,Solar Thermal Energy Systems,shahood_alam
+113,Mohammad Faizan,Mechanical Engineering,Professor,8791463886,mofaizan@hotmail.com,Fluid Structure Interactions and CFD,faizan_m
+114,Parveen Farooquie,Mechanical Engineering,Professor,09897856443,parveenfarooquie@yahoo.com,Manufacturing Engineering and Materials,parveen_f
+115,Arshad Hussain Khan,Mechanical Engineering,Professor,9711556950,ah.khan.me@amu.ac.in,"DNS of Canonical Turbulent Flows,Fluid Mechanics"
+116,Faisal Hasan,Mechanical Engineering,Professor,,faisalhasan@zhcet.ac.in,Desiccant-Based Dehumidification and Thermal Systems,faisal_h
+117,Syed Fahad Anwer,Mechanical Engineering,Professor,8126634354,sfahadanwer@zhcet.ac.in,Nonlinear Dynamics and Control Systems,fahad_anwer
+118,Saleem Anwar Khan,Mechanical Engineering,Professor,,saleemanwar@zhcet.ac.in,Machine Design and Operations,saleem_khan
+119,Mubashshir Ahmad Ansari,Mechanical Engineering,Professor,8171777568,mubashshir@gmail.com,Computational Mechanics and Solid Mechanics,mubashshir_a
+120,Rashid Ali,Mechanical Engineering,Professor,8439020438,rashidali1@zhcet.ac.in,Condition Monitoring,rashid_ali
+121,Syed Imran Shafiq,Mechanical Engineering,Professor,8755286666,sishafiq.bp@amu.ac.in,Ergonomics and Human Factors,imran_shafiq
+122,Asif Sami,Mechanical Engineering,Associate Professor,9837356720,asif_sami@rediffmail.com,Material Science and Engineering,asif_sami
+123,Nafees Ahmad,Mechanical Engineering,Associate Professor,9412478206,nafees2amu@rediffmail.com,Advanced Vapor Absorption Refrigeration,nafees_a
+124,Adnan Hafiz,Mechanical Engineering,Associate Professor,9897533125,hafizadnan10@gmail.com,Condition Monitoring,adnan_hafiz
+125,Najeeb ur Rahman,Mechanical Engineering,Associate Professor,9997365945,najeebalig@rediffmail.com,Engineering Acoustics,najeeb_r
+126,Arees Qamareen,Mechanical Engineering,Associate Professor,,aqamareen.me@amu.ac.in,Solar Thermal Energy Systems,arees_q
+127,Syed Mohd Yahya,Mechanical Engineering,Associate Professor,9718508831,smyahya@zhcet.ac.in,Engine Combustion and Emission Control,yahya_m
+128,Saman Ahmad,Mechanical Engineering,Associate Professor,,saman.ahmad@yahoo.co.in,Advanced Vapor Absorption Refrigeration,saman_a
+129,Azhar Jamil,Mechanical Engineering,Associate Professor,,azharjamil@zhcet.ac.in,Operations Management,azhar_j
+130,Taliv Hussain,Mechanical Engineering,Associate Professor,9720229876,hussaintaliv@gmail.com,Nonlinear Dynamics and Control,taliv_h
+131,Sanaur Rehman,Mechanical Engineering,Associate Professor,8791430327,sanaur.rehman@zhcet.ac.in,Impact Mechanics,sanaur_r
+132,Khusro Qasim,Mechanical Engineering,Assistant Professor,8755878084,khusroqasim786@gmail.com,Operations Management,khusro_q
+133,Yasser Rafat,Mechanical Engineering,Assistant Professor,8755964212,yasser.rafat@zhcet.ac.in,Fluid Structure Interactions,yasser_r
+134,Mohd. Yaqoob Yasin,Mechanical Engineering,Assistant Professor,9412641665,yaqoob.yasin@gmail.com,Composites and Smart Materials,yaqoob_y
+135,Mohammad Rashid Zafar,Mechanical Engineering,Assistant Professor,,rashidzafar@zhcet.ac.in,Composites and Smart Materials,zafar_m
+136,Mohammad Nasir Khan,Mechanical Engineering,Assistant Professor,9045282971,mnasirkhan@zhcet.ac.in,Computational Fluid Flow and Heat Transfer,nasir_khan
+137,Sidra Khanam,Mechanical Engineering,Assistant Professor,8800439222,sidrakhanam@zhcet.ac.in,Characterization of Nano-fluids,sidra_k
+138,Ateeb Ahmad Khan,Mechanical Engineering,Assistant Professor,7417001656,ateebkhan.me@amu.ac.in,DNS of Canonical Turbulent Flows,ateeb_khan
+139,Abdullah Yousuf Usmani,Mechanical Engineering,Assistant Professor,8475052456,usmani.fts@gmail.com,Droplet and Spray Combustion Modelling,abdullah_u
+140,Shahid Husain,Mechanical Engineering,Assistant Professor,,shahidhusain@zhcet.ac.in,Ergonomics and Human Factors,shahid_h
+201,Yusuf Uzzaman Khan,Electrical Engineering,Chairman and Professor,,yusufzkhan@zhcet.ac.in,"Signals and Systems,Digital Signal Processing
+202,Mohammad Fazle Azeem,Electrical Engineering,Professor,9945432984,mf.azeem@zhcet.ac.in,Electrical Machines and High Voltage,azeem_m
+203,Imtiaz Ashraf,Electrical Engineering,Professor,9412878824,iashraf@rediffmail.com,Control Engineering and Power Electronics,imtiaz_a
+204,Salman Hameed,Electrical Engineering,Professor,9412483867,hameeddee@gmail.com,Instrumentation and Control Systems,salman_h
+205,Abu Tariq,Electrical Engineering,Professor,9897617078,abutariq@zhcet.ac.in,Power Electronics and Drives,abu_tariq
+206,Asfar Ali Khan,Electrical Engineering,Professor,0571-2704186,asfaralikhan@gmail.com,High Voltage Engineering,asfar_khan
+207,Aejaz Masood,Electrical Engineering,Professor,,aejaz_masood@yahoo.co.in,High Voltage Engineering,aejaz_m
+208,Mohd. Rizwan Khan,Electrical Engineering,Professor,9412545798,rizwan.eed@gmail.com,Power Electronics and Drives,rizwan_khan
+209,Mohd Rihan,Electrical Engineering,Professor,,m.rihan.ee@amu.ac.in,Power Electronics and Drives,rihan_e
+210,Mujib Ullah Zuberi,Electrical Engineering,Associate Professor,,mu.zuberi.ee@amu.ac.in,Instrumentation and Control Systems,zuberi_m
+211,Safia Akhtar Kazmi,Electrical Engineering,Associate Professor,9258893888,safiakazmiamu@gmail.com,Power Electronics and Drives,safia_k
+212,Sheeraz Kirmani,Electrical Engineering,Associate Professor,9953707456,skirmani.ee@amu.ac.in,Power System Analysis and Control,sheeraz_k
+213,Adil Sarwar,Electrical Engineering,Assistant Professor,9997277428,adil.sarwar@zhcet.ac.in,Power Electronics and Drives,adil_s
+214,Mohd. Anas Anees,Electrical Engineering,Assistant Professor,9536322686,anasanees.amu@gmail.com,Bio-medical Engineering Applications,anas_a
+215,Mohammad Zaid,Electrical Engineering,Assistant Professor,7895932115,mohammad.zaid@zhcet.ac.in,Instrumentation and Control Systems,zaid_m
+216,Mohammad Sarfraz,Electrical Engineering,Assistant Professor,9971683540,msarfraz@zhcet.ac.in,Power System Analysis and Control,sarfraz_m
+217,M Saad Bin Arif,Electrical Engineering,Assistant Professor,9368105903,saadbinarif@gmail.com,Power System Analysis and Control,saad_a
+218,Mohd Tariq,Electrical Engineering,Assistant Professor,,tariq.ee@zhcet.ac.in,Power Electronics and Drives,tariq_e
+301,Izharuddin,Computer Engineering,Chairman and Professor,9412545793,izharuddin.ce@amu.ac.in,"VLSI Design,Signal Processing and Signal Security",izharuddin_ce
+302,Nesar Ahmad,Computer Engineering,Professor,,n.ahmad.ce@amu.ac.in,"Artificial Intelligence,Applied Soft Computing",nesar_a
+303,Ash Mohammad Abbas,Computer Engineering,Professor,8791685906,am.abbas.ce@amu.ac.in,Computer Networks,abbas_m
+304,M. M. Sufyan Beg,Computer Engineering,Professor,9999071406,mmsbeg.ce@amu.ac.in,"Computer Architecture,Parallel and Distributed Computing",sufyan_b
+305,Mohammad Sarosh Umar,Computer Engineering,Professor,9457558766,saroshumar@zhcet.ac.in,"Computer Graphics,User Authentication",sarosh_u
+306,Rashid Ali,Computer Engineering,Professor,9411419429,rashidali.cse@zhcet.ac.in,"Web Mining,Soft Computing",rashid_a
+307,Saiful Islam,Computer Engineering,Professor,9358257122,saifulislam@zhcet.ac.in,"Digital Forensics,Data Hiding Techniques and Computer Security",saiful_i
+308,Misbahur Rahman Warsi,Computer Engineering,Associate Professor,9411488531,warsimr@yahoo.com,"Software Engineering,Compiler Design",misbah_w
+309,Mohammed Abdul Qadeer,Computer Engineering,Associate Professor,9897705269,maqadeer@amu.ac.in,"Computer Networks,Mobile & Wireless Networks",mohammed_q
+310,Nadeem Akhtar,Computer Engineering,Associate Professor,9450658150,nadeemakhtar@zhcet.ac.in,"Machine Learning,Data Science",nadeem_a
+311,Abdus Samad,Computer Engineering,Associate Professor,9634982285,abdussamadamu@gmail.com,"Parallel and Distributed Systems,Microprocessor Systems",abdus_s
+312,Muhammad Inamullah,Computer Engineering,Assistant Professor,,inam@zhcet.ac.in,Wireless Computer Networks,inam_m
+313,Tameem Ahmad,Computer Engineering,Assistant Professor,9208308093,tameemahmad@zhcet.ac.in,"Soft Computing,Natural Language Processing",tameem_a
+314,Muneeb Hasan Khan,Computer Engineering,Assistant Professor,7017760456,muneebhkhan@zhcet.ac.in,,muneeb_k
+315,Faisal Alam,Computer Engineering,Assistant Professor,8095334058,faisalalam@zhcet.ac.in,"Cloud Computing,Electric Vehicle Optimization",faisal_a
+401,Amjad Masood,Civil Engineering,Chairman and Professor,9410426876,a.masood.cv@amu.ac.in,"Earthquake Resistance Design of Masonry Structure,High Strength Concrete at Elevated Temperatures",amjad_m
+402,Mohammed Arif,Civil Engineering,Professor,9411804371,m.arif.cv@amu.ac.in,"Ferrocement Composites and Reinforced Concrete,Linear and non Linear Analysis of Structures",mohammed_a
+403,Izharul Haq Farooqi,Civil Engineering,Professor,9412176757,farooqi_izhar@yahoo.com,"Environmental Engineering,Corrosion Control",izhar_f
+404,Javed Alam,Civil Engineering,Professor,9837169427,jalam.cv@amu.ac.in,Structural Masonry Engineering,javed_a
+405,Mohd. Masroor Alam,Civil Engineering,Professor,9412459471,mmalam.cv@amu.ac.in,Rock-Mass Characterization,masroor_a
+406,Hassan Irtaza,Civil Engineering,Professor,8126710884,hirtaza.amu@gmail.com,Reliability Analysis and Risk Assessment,hassan_i
+407,Sabih Akhtar,Civil Engineering,Professor,9412596531,sabihced@yahoo.co.in,Fluid Structure Interaction,sabih_a
+408,Sohail Ayub,Civil Engineering,Professor,9411802300,sohailayub@rediffmail.com,Rock-Mass Characterization,sohail_a
+409,Mehboob Anwer Khan,Civil Engineering,Professor,9412273770,mehboobcivil@yahoo.co.in,Physico Chemical Treatment Processes,mehboob_k
+410,Mujib Ahmad Ansari,Civil Engineering,Professor,9412596530,mujibansari68@gmail.com,Physico Chemical Treatment Processes,mujib_a
+411,Iqbal Khaleel Khan,Civil Engineering,Professor,9457050900,ikk01in@yahoo.co.in,Earthquake Resistant Low Cost Housing,khaleel_k
+412,Talib Mansoor,Civil Engineering,Professor,7599112094,talibced@gmail.com,Flyash Utilization and Disposal,talib_m
+413,Malik Shoeb Ahmad,Civil Engineering,Professor,9412065804,shoeb33@gmail.com,Wind Engineering and Design,shoeb_a
+414,Rehan Ahmad Khan,Civil Engineering,Professor,9634618899,rehan_iitd@rediffmail.com,Open Channel Flow Analysis,rehan_k
+415,Kausar Ali,Civil Engineering,Professor,9411804045,kausarali786@rediffmail.com,Flow Through Porous Media,kausar_a
+416,Asif Ali Siddiqui,Civil Engineering,Professor,9760249915,aasiddiqui.cv@amu.ac.in,Fibre Composites and New Construction Materials,asif_s
+417,Major Fareed Mahdi,Civil Engineering,Professor,9837066423,fareedmahdi@zhcet.ac.in,Fluid Structure Interaction,fareed_m
+418,Nadeem Khalil,Civil Engineering,Professor,9358258350,nkhalil.cv@amu.ac.in,Structural Masonry Engineering,nadeem_k
+419,Mohd Shamsuddin Jafri,Civil Engineering,Professor,9359757637,jafrims@live.com,Corrosion Control and Prevention,jafri_m
+420,Rizwan Ahmad Khan,Civil Engineering,Professor,9876497242,krizwan.cv@amu.ac.in,Offshore Structures,rizwan_k
+421,Saif Said,Civil Engineering,Professor,,ssaid.cv@amu.ac.in,Landslide and Slope Stability,saif_s
+422,Syed Danish Hasan,Civil Engineering,Professor,9557914410,sdhasan.amu@gmail.com,Reliability Analysis and Risk Assessment,danish_h
+423,Mohd. Moonis Zaheer,Civil Engineering,Associate Professor,8126994199,mohdmooniszaheer@gmail.com,Application of Geo-synthetics,zaheer_m
+424,Mohd Shariq,Civil Engineering,Associate Professor,9897903968,mshariq.cv@amu.ac.in,Stabilization of Hazardous Waste,shariq_m
+425,Farrukh Basheer,Civil Engineering,Assistant Professor,9897813572,farrukhbasheer.cv@amu.ac.in,Corrosion Control and Prevention,basheer_f
+426,Ajmal Hussain,Civil Engineering,Assistant Professor,,ajmal.hussain@zhcet.ac.in,Underground Space Utilization and Tunnelling,ajmal_h
+427,Mohammad Arsalan Khan,Civil Engineering,Assistant Professor,9045401002,mohd.arsalan.khan@hotmail.co.uk,Hazardous and Solid Waste Management,arsalan_k
+428,Md. Rehan Sadique,Civil Engineering,Assistant Professor,8057897879,rehan.sadique@zhcet.ac.in,Reliability Analysis and Risk Assessment,rehan_s
+501,Tahira Parveen,Electronics Engineering,Chairperson and Professor,9897001202,tahiraparveen@zhcet.ac.in,Analog Signal Processing,tahira_p
+502,Mohd. Hasan,Electronics Engineering,Professor,9897790043,mohd.hasan@amu.ac.in,VLSI Design and Microelectronics,hasan_m
+503,Omar Farooq,Electronics Engineering,Professor,9456667567,omar.farooq@amu.ac.in,Digital Signal Processing,omar_f
+504,Ekram Khan,Electronics Engineering,Professor,9457110112,ekhan.el@amu.ac.in,Wireless Communication,ekram_k
+505,Sudhanshu Maheshwari,Electronics Engineering,Professor,,maheshwarispm@gmail.com,Signal Processing and Applications,maheshwari_s
+506,Syed Javed Arif,Electronics Engineering,Professor,9456033796,sjavedarif@gmail.com,Signal Processing and Applications,javed_a
+507,Mohammad Jawaid Siddiqui,Electronics Engineering,Professor,9634736626,mjsiddiqui@zhcet.ac.in,Digital Signal Processing,siddiqui_m
+508,Syed Atiqur Rahman,Electronics Engineering,Professor,9759893738,sarahman@zhcet.ac.in,Microelectronics Design,rahman_a
+509,Athar Ali Moinuddin,Electronics Engineering,Professor,8171624344,atharamoin@gmail.com,VLSI Design and Fabrication,moinuddin_a
+510,Anwar Sadat,Electronics Engineering,Professor,9897257577,anwart7039@gmail.com,Microelectronics Design,sadat_a
+511,Naushad Alam,Electronics Engineering,Professor,9897165051,naushad.el@zhcet.ac.in,Communication Systems,naushad_a
+512,Mohd Wajid,Electronics Engineering,Professor,9218529591,mohdwajid@zhcet.ac.in,Microelectronics Design,wajid_m
+513,Musiur Raza Abidi,Electronics Engineering,Associate Professor,9358202111,mrabidi.el@amu.ac.in,Wireless Communication,abidi_m
+514,Mohd Sharique,Electronics Engineering,Associate Professor,9621202377,mohdsharique@zhcet.ac.in,Digital Signal Processing,sharique_m
+515,Tajinder Singh Arora,Electronics Engineering,Associate Professor,9818671663,tsarora.el@amu.ac.in,Digital Signal Processing,arora_t
+516,Mohd Ayyub Khan,Electronics Engineering,Associate Professor,,mayyubkhan@zhcet.ac.in,VLSI Design and Fabrication,ayyub_k
+517,Mohd Tausif,Electronics Engineering,Assistant Professor,,mohdtausif@zhcet.ac.in,Signal Processing and Applications,tausif_m
+518,Mohd Asifuddola,Electronics Engineering,Assistant Professor,9971458972,masifuddola.el@amu.ac.in,Signal Processing and Applications,asif_m
+601,Mohd Danish,Chemical Engineering,Chairman and Professor,9997579474,mdanish77@rediffmail.com,"Mathematical Analytical Methods,Process Modelling & Simulation
+602,Ahmad Tariq Jameel,Chemical Engineering,Professor,9068319003,atjameel@yahoo.com,Waste Management and Pollution Control,jameel_a
+603,Naseem Ahmad Khan,Chemical Engineering,Associate Professor,9411212431,nakhan63@rediffmail.com,Computer Aided Design and Engineering,naseem_k
+604,Mohammed Abdul Hakeem,Chemical Engineering,Associate Professor,9411040023,mahakim@rediffmail.com,Catalytic Reaction Engineering,hakeem_m
+605,Sheeba Jilani,Chemical Engineering,Associate Professor,,sheeba_jilani@yahoo.co.in,Energy Integration and Mass Exchange Networks,jilani_s
+606,Aishatul Bushra,Chemical Engineering,Associate Professor,9997399185,a.bushra@rediffmail.com,Computer Aided Design and Engineering,bushra_a
+607,Faisal Zia Siddiqui,Chemical Engineering,Associate Professor,7599124940,fzsiddiqui.ke@amu.ac.in,Catalytic Reaction Engineering,siddiqui_f
+608,Hasan Akhtar Zaidi,Chemical Engineering,Associate Professor,9410872369,hasan.azaidi@gmail.com,Computer Aided Design and Engineering,zaidi_h
+609,Raunaq Hasib,Chemical Engineering,Assistant Professor,,raunaqhasib@zhcet.ac.in,Process Modeling and Simulation,hasib_r
+610,Iram Arman,Chemical Engineering,Assistant Professor,,iramarman@gmail.com,Solid and Hazardous Waste Management,arman_i
+611,Parvez Khan,Chemical Engineering,Assistant Professor,9999716352,parvezchem001@gmail.com,Process Modeling and Simulation,khan_p
+612,Wasi ur Rahman,Chemical Engineering,Assistant Professor,7252952986,wurahman_co@myamu.ac.in,Computational Fluid Dynamics,rahman_w

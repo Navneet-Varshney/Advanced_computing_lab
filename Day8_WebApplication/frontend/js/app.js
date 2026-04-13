@@ -1,10 +1,4 @@
-/**
- * Main Application Logic and Helper Functions
- */
 
-/**
- * Show message notification
- */
 function showMessage(message, type = 'info') {
     const messageDiv = document.getElementById('message');
     if (!messageDiv) return;
@@ -12,32 +6,23 @@ function showMessage(message, type = 'info') {
     messageDiv.textContent = message;
     messageDiv.className = 'message ' + type;
     
-    // Auto-hide after 4 seconds
     setTimeout(() => {
         messageDiv.textContent = '';
         messageDiv.className = 'message';
     }, 4000);
 }
 
-/**
- * Validate email
- */
+
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
 
-/**
- * Validate mobile number (10 digits)
- */
 function isValidMobile(mobile) {
     const mobileRegex = /^\d{10}$/;
     return mobileRegex.test(mobile);
 }
 
-/**
- * Validate form data
- */
 function validateFormData(formData) {
     if (!formData.name || formData.name.trim() === '') {
         showMessage('Name is required', 'error');
@@ -57,9 +42,6 @@ function validateFormData(formData) {
     return true;
 }
 
-/**
- * Format date
- */
 function formatDate(date) {
     if (!date) return '';
     const d = new Date(date);
@@ -69,9 +51,6 @@ function formatDate(date) {
     return `${day}/${month}/${year}`;
 }
 
-/**
- * Escape HTML special characters
- */
 function escapeHtml(text) {
     const map = {
         '&': '&amp;',
@@ -83,9 +62,6 @@ function escapeHtml(text) {
     return text.replace(/[&<>"']/g, m => map[m]);
 }
 
-/**
- * Debounce function for search
- */
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -98,16 +74,10 @@ function debounce(func, wait) {
     };
 }
 
-/**
- * Confirm action dialog
- */
 function confirmAction(message) {
     return confirm(message);
 }
 
-/**
- * Export data to CSV
- */
 function exportToCSV(data, filename = 'data.csv') {
     if (!data || data.length === 0) {
         showMessage('No data to export', 'error');
@@ -120,7 +90,6 @@ function exportToCSV(data, filename = 'data.csv') {
         ...data.map(row => 
             headers.map(header => {
                 const value = row[header];
-                // Escape quotes and wrap in quotes if contains comma
                 return typeof value === 'string' && value.includes(',') 
                     ? `"${value.replace(/"/g, '""')}"` 
                     : value;
@@ -141,9 +110,6 @@ function exportToCSV(data, filename = 'data.csv') {
     showMessage('Data exported successfully', 'success');
 }
 
-/**
- * Get role display name
- */
 function getRoleDisplayName(role) {
     const roleMap = {
         'admin': 'Administrator',
@@ -154,9 +120,6 @@ function getRoleDisplayName(role) {
     return roleMap[role] || role;
 }
 
-/**
- * Sort array of objects by property
- */
 function sortByProperty(array, property, ascending = true) {
     return [...array].sort((a, b) => {
         const aVal = a[property];
@@ -168,9 +131,6 @@ function sortByProperty(array, property, ascending = true) {
     });
 }
 
-/**
- * Filter array of objects by multiple criteria
- */
 function filterByCriteria(array, criteria) {
     return array.filter(item => {
         for (let key in criteria) {
@@ -182,9 +142,6 @@ function filterByCriteria(array, criteria) {
     });
 }
 
-/**
- * Paginate array
- */
 function paginate(array, page, pageSize) {
     const startIndex = (page - 1) * pageSize;
     const endIndex = startIndex + pageSize;
@@ -197,9 +154,6 @@ function paginate(array, page, pageSize) {
     };
 }
 
-/**
- * Get initials from name
- */
 function getInitials(name) {
     return name
         .split(' ')
@@ -208,17 +162,11 @@ function getInitials(name) {
         .toUpperCase();
 }
 
-/**
- * Format phone number
- */
 function formatPhoneNumber(phone) {
     if (!phone || phone.length !== 10) return phone;
     return `${phone.slice(0, 3)}-${phone.slice(3, 6)}-${phone.slice(6)}`;
 }
 
-/**
- * Remove duplicate objects from array
- */
 function removeDuplicates(array, key) {
     const seen = new Set();
     return array.filter(obj => {

@@ -14,7 +14,6 @@ public class SearchServlet implements HttpHandler {
         String path = exchange.getRequestURI().getPath();
         String query = exchange.getRequestURI().getQuery();
         
-        // Enable CORS
         exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
         exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, OPTIONS");
         exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
@@ -35,14 +34,12 @@ public class SearchServlet implements HttpHandler {
     
     private void handleSearch(HttpExchange exchange, String query) throws IOException {
         try {
-            // Parse query string to extract search term
             String searchTerm = "";
             if (query != null) {
                 String[] params = query.split("&");
                 for (String param : params) {
                     if (param.startsWith("q=")) {
                         searchTerm = param.substring(2);
-                        // URL decode if needed
                         searchTerm = java.net.URLDecoder.decode(searchTerm, "UTF-8");
                         break;
                     }
@@ -54,7 +51,6 @@ public class SearchServlet implements HttpHandler {
                 return;
             }
             
-            // Perform search
             List<Map<String, String>> results = FacultyManager.searchFaculty(searchTerm);
             
             JsonObject response = new JsonObject();

@@ -15,7 +15,6 @@ public class Server {
     private static String serverIP = "localhost";  // Default IP
     
     public static void main(String[] args) throws Exception {
-        // Ask user for server IP
         Scanner scanner = new Scanner(System.in);
         System.out.print("🌐 Enter server IP address (press Enter for localhost): ");
         String userInput = scanner.nextLine().trim();
@@ -26,7 +25,6 @@ public class Server {
         
         HttpServer server = HttpServer.create(new InetSocketAddress("0.0.0.0", PORT), 0);
         
-        // Config endpoint - returns API base URL
         server.createContext("/config", new ConfigHandler());
         
         // API endpoints
@@ -38,7 +36,6 @@ public class Server {
         // Serve static files (HTML, CSS, JS)
         server.createContext("/", new StaticFileHandler(FRONTEND_DIR));
         
-        // Use executor services for handling multiple concurrent requests
         server.setExecutor(Executors.newCachedThreadPool());
         
         server.start();
@@ -86,7 +83,6 @@ public class Server {
             File file = new File(baseDir + path);
             
             if (file.exists() && file.isFile()) {
-                // Determine content type
                 String contentType = getContentType(path);
                 
                 try {

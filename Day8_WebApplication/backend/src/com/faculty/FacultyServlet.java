@@ -16,7 +16,6 @@ public class FacultyServlet implements HttpHandler {
         String path = exchange.getRequestURI().getPath();
         String query = exchange.getRequestURI().getQuery();
         
-        // Enable CORS
         exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
         exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
         exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type, Authorization");
@@ -51,16 +50,12 @@ public class FacultyServlet implements HttpHandler {
     }
     
     private void handleGetAll(HttpExchange exchange) throws IOException {
-        // GET is allowed for all (including guests)
-        // No authorization required for read-only access
         List<Map<String, String>> faculty = FacultyManager.getAllFacultySorted();
         String response = FacultyManager.toJSON(faculty);
         sendResponse(exchange, 200, response);
     }
     
     private void handleGetById(HttpExchange exchange, String facultyId) throws IOException {
-        // GET is allowed for all (including guests)
-        // No authorization required for read-only access
         Map<String, String> faculty = FacultyManager.getFacultyById(facultyId);
         if (faculty != null) {
             String response = FacultyManager.toJSON(faculty);
@@ -71,7 +66,6 @@ public class FacultyServlet implements HttpHandler {
     }
     
     private void handleAdd(HttpExchange exchange) throws IOException {
-        // Check authorization and role
         String auth = exchange.getRequestHeaders().getFirst("Authorization");
         if (auth == null || !isAuthorized(auth)) {
             sendError(exchange, 401, "Unauthorized");
@@ -95,13 +89,11 @@ public class FacultyServlet implements HttpHandler {
                 facultyData.put(key, requestJson.get(key).getAsString());
             }
             
-            // Use addFacultyWithUser to create user entry automatically
             Map<String, String> result = FacultyManager.addFacultyWithUser(facultyData);
             
             if (result != null) {
                 // Check if this is an error response (duplicate ID)
                 if (result.containsKey("error") && result.get("error").equals("true")) {
-                    // Duplicate faculty ID error
                     JsonObject response = new JsonObject();
                     response.addProperty("success", false);
                     response.addProperty("message", result.get("message"));
@@ -109,7 +101,6 @@ public class FacultyServlet implements HttpHandler {
                     response.addProperty("suggested_ids", result.get("suggested_ids"));
                     sendResponse(exchange, 409, response.toString());
                 } else {
-                    // Success response
                     JsonObject response = new JsonObject();
                     response.addProperty("success", true);
                     response.addProperty("message", "Faculty added successfully");
@@ -128,7 +119,6 @@ public class FacultyServlet implements HttpHandler {
     }
     
     private void handleUpdate(HttpExchange exchange, String facultyId) throws IOException {
-        // Check authorization
         String auth = exchange.getRequestHeaders().getFirst("Authorization");
         if (auth == null || !isAuthorized(auth)) {
             sendError(exchange, 401, "Unauthorized");

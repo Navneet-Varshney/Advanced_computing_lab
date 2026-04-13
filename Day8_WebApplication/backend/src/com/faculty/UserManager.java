@@ -8,53 +8,27 @@ public class UserManager {
     private static final String[] USER_HEADERS = {"username", "password", "role", "faculty_id", "name", "email"};
     private static Gson gson = new Gson();
     
-    /**
-     * Add new user (automatically called when faculty is added)
-     */
     public static boolean addUser(Map<String, String> userData) {
         try {
-            System.out.println("[DEBUG-USER] Starting addUser for: " + userData.get("username"));
-            
-            // Read existing users from CSV file
-            System.out.println("[DEBUG-USER] Reading existing users from: " + USERS_CSV);
             CSVReader reader = new CSVReader(USERS_CSV);
             List<Map<String, String>> existingUsers = reader.readCSV();
-            System.out.println("[DEBUG-USER] Existing user count: " + existingUsers.size());
             
-            // Add new user to list
             existingUsers.add(userData);
-            System.out.println("[DEBUG-USER] New user count after adding: " + existingUsers.size());
-            
-            // Write all users back to file (without sorting)
-            System.out.println("[DEBUG-USER] Writing users to CSV file with headers: " + USER_HEADERS.length + " columns");
             CSVWriter writer = new CSVWriter(USERS_CSV);
             boolean result = writer.writeCSV(existingUsers, Arrays.asList(USER_HEADERS));
             
-            System.out.println("[DEBUG-USER] writeCSV() returned: " + result);
-            
-            if (result) {
-                System.out.println("[SUCCESS-USER] User added successfully: " + userData.get("username"));
-            } else {
-                System.err.println("[ERROR-USER] writeCSV() returned false for user: " + userData.get("username"));
-            }
-            
             return result;
         } catch (Exception e) {
-            System.err.println("[EXCEPTION-USER] Error in addUser(): " + e.getClass().getName() + " - " + e.getMessage());
             e.printStackTrace();
             return false;
         }
     }
     
-    /**
-     * Authenticate user (check username and password)
-     */
     public static Map<String, String> authenticate(String username, String password) {
         CSVReader reader = new CSVReader(USERS_CSV);
         Map<String, String> user = reader.findRow("username", username);
         
         if (user != null && user.getOrDefault("password", "").equals(password)) {
-            // Don't send password back, create a response map
             Map<String, String> response = new HashMap<>();
             response.put("username", user.get("username"));
             response.put("role", user.get("role"));
@@ -64,15 +38,11 @@ public class UserManager {
         return null; // Authentication failed
     }
     
-    /**
-     * Get user by username
-     */
     public static Map<String, String> getUserByUsername(String username) {
         CSVReader reader = new CSVReader(USERS_CSV);
         Map<String, String> user = reader.findRow("username", username);
         
         if (user != null) {
-            // Don't send password
             Map<String, String> response = new HashMap<>();
             response.put("username", user.get("username"));
             response.put("role", user.get("role"));
@@ -82,14 +52,10 @@ public class UserManager {
         return null;
     }
     
-    /**
-     * Get all users (admin only)
-     */
     public static List<Map<String, String>> getAllUsers() {
         CSVReader reader = new CSVReader(USERS_CSV);
         List<Map<String, String>> users = reader.readCSV();
         
-        // Remove passwords from response
         for (Map<String, String> user : users) {
             user.remove("password");
         }
@@ -97,18 +63,11 @@ public class UserManager {
         return users;
     }
     
-    /**
-     * Verify if user exists
-     */
     public static boolean userExists(String username) {
         CSVReader reader = new CSVReader(USERS_CSV);
         return reader.findRow("username", username) != null;
     }
     
-    /**
-     * Recover password for admin by username and email verification
-     * Returns user object with password if verified, null otherwise
-     */
     public static Map<String, String> recoverAdminPassword(String username, String email) {
         try {
             CSVReader reader = new CSVReader(USERS_CSV);
@@ -150,10 +109,6 @@ public class UserManager {
         }
     }
     
-    /**
-     * Recover password by faculty_id and email verification
-     * Returns user object with password if verified, null otherwise
-     */
     public static Map<String, String> recoverPassword(String facultyId, String email) {
         try {
             CSVReader reader = new CSVReader(USERS_CSV);
@@ -200,30 +155,18 @@ public class UserManager {
         }
     }
     
-    /**
-     * Convert user map to JSON string
-     */
     public static String toJSON(Map<String, String> user) {
         return gson.toJson(user);
     }
     
-    /**
-     * Convert user list to JSON string
-     */
     public static String toJSON(List<Map<String, String>> userList) {
         return gson.toJson(userList);
     }
     
-    /**
-     * Delete user by username
-     */
     public static boolean deleteUser(String username) {
         try {
-            System.out.println("[DEBUG-USER] Starting deleteUser for: " + username);
-            
             CSVReader reader = new CSVReader(USERS_CSV);
             List<Map<String, String>> data = reader.readCSV();
-            System.out.println("[DEBUG-USER] Total users before deletion: " + data.size());
             
             boolean removed = false;
             int removeIndex = -1;
@@ -237,7 +180,6 @@ public class UserManager {
             }
             
             if (!removed) {
-                System.err.println("[ERROR-USER] User not found for deletion: " + username);
                 return false;
             }
             

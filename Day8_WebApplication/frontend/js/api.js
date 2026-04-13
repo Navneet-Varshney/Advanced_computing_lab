@@ -1,13 +1,7 @@
-/**
- * API Communication Layer
- * Handles all API requests to the backend
- */
+
 
 const API_BASE = 'http://localhost:9001';
 
-/**
- * Login user with username and password
- */
 async function loginUser(username, password) {
     try {
         const response = await fetch(`${API_BASE}/api/login`, {
@@ -25,9 +19,6 @@ async function loginUser(username, password) {
     }
 }
 
-/**
- * Recover password using faculty_id and name verification
- */
 async function forgotPassword(facultyId, name) {
     try {
         const response = await fetch(`${API_BASE}/api/forgot-password`, {
@@ -45,9 +36,6 @@ async function forgotPassword(facultyId, name) {
     }
 }
 
-/**
- * Get all faculty members
- */
 async function getAllFaculty(authToken) {
     try {
         const response = await fetch(`${API_BASE}/api/faculty`, {
@@ -67,9 +55,6 @@ async function getAllFaculty(authToken) {
     }
 }
 
-/**
- * Get faculty by ID
- */
 async function getFacultyById(facultyId, authToken) {
     try {
         const response = await fetch(`${API_BASE}/api/faculty/${facultyId}`, {
@@ -89,9 +74,6 @@ async function getFacultyById(facultyId, authToken) {
     }
 }
 
-/**
- * Search faculty
- */
 async function searchFaculty(query) {
     try {
         const response = await fetch(`${API_BASE}/api/search?q=${encodeURIComponent(query)}`);
@@ -102,9 +84,6 @@ async function searchFaculty(query) {
     }
 }
 
-/**
- * Add new faculty (admin only)
- */
 async function addFaculty(facultyData, authToken) {
     try {
         const response = await fetch(`${API_BASE}/api/faculty`, {
@@ -123,9 +102,6 @@ async function addFaculty(facultyData, authToken) {
     }
 }
 
-/**
- * Update faculty record
- */
 async function updateFaculty(facultyId, updates, authToken) {
     try {
         const response = await fetch(`${API_BASE}/api/faculty/${facultyId}`, {
@@ -144,9 +120,6 @@ async function updateFaculty(facultyId, updates, authToken) {
     }
 }
 
-/**
- * Delete faculty record (admin only)
- */
 async function deleteFaculty(facultyId, authToken) {
     try {
         const response = await fetch(`${API_BASE}/api/faculty/${facultyId}`, {
