@@ -1,6 +1,8 @@
 package com.faculty;
 
 import java.util.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
 
@@ -39,9 +41,12 @@ public class FacultyManager {
         List<Map<String, String>> results = new ArrayList<>();
         
         for (Map<String, String> faculty : data) {
-            if (faculty.get("name").toLowerCase().contains(lowerQuery) ||
+            if (faculty.get("faculty_id").toLowerCase().contains(lowerQuery) ||
+                faculty.get("name").toLowerCase().contains(lowerQuery) ||
                 faculty.get("department").toLowerCase().contains(lowerQuery) ||
-                faculty.get("email").toLowerCase().contains(lowerQuery)) {
+                faculty.get("email").toLowerCase().contains(lowerQuery)
+                || faculty.get("designation").toLowerCase().contains(lowerQuery)
+                || faculty.get("specialization").toLowerCase().contains(lowerQuery)) {
                 results.add(faculty);
             }
         }
@@ -89,7 +94,7 @@ public class FacultyManager {
                 facultyData.put("username", username);
             }
             
-            System.out.println("[DEBUG] Adding faculty: " + facultyData.get("name"));
+            System.out.println("[" + getTimestamp() + "] Adding faculty: " + facultyData.get("name"));
             
             // Add to faculty.csv
             CSVWriter writer = new CSVWriter(FACULTY_CSV);
@@ -98,7 +103,7 @@ public class FacultyManager {
                 return null;
             }
             
-            System.out.println("[DEBUG] Faculty added to CSV successfully");
+            System.out.println("[" + getTimestamp() + "] Faculty added to CSV successfully");
             
             // Generate simple password (username_before_underscore + 123)
             String username = facultyData.get("username");
@@ -113,11 +118,11 @@ public class FacultyManager {
             userData.put("name", facultyData.get("name"));
             userData.put("email", facultyData.getOrDefault("email", ""));
             
-            System.out.println("[DEBUG] UserData prepared: username=" + username + ", password=" + simplePassword);
+            System.out.println("[" + getTimestamp() + "] UserData prepared: username=" + username + ", password=" + simplePassword);
             
             // Add user to users.csv
             boolean userAdded = UserManager.addUser(userData);
-            System.out.println("[DEBUG] UserManager.addUser() returned: " + userAdded);
+            System.out.println("[" + getTimestamp() + "] UserManager.addUser() returned: " + userAdded);
             
             if (userAdded) {
                 // Return result with generated credentials
@@ -180,7 +185,7 @@ public class FacultyManager {
         }
         
         String username = facultyToDelete.get("username");
-        System.out.println("[DEBUG] Deleting faculty: " + facultyToDelete.get("name") + " (ID: " + id + ", Username: " + username + ")");
+        System.out.println("[" + getTimestamp() + "] Deleting faculty: " + facultyToDelete.get("name") + " (ID: " + id + ", Username: " + username + ")");
         
         // Remove from faculty.csv
         data.remove(deleteIndex);
@@ -195,7 +200,7 @@ public class FacultyManager {
         
         // Now remove user from users.csv
         if (username != null && !username.isEmpty()) {
-            System.out.println("[DEBUG] Attempting to delete user: " + username);
+            System.out.println("[" + getTimestamp() + "] Attempting to delete user: " + username);
             boolean userDeleted = UserManager.deleteUser(username);
             if (userDeleted) {
                 System.out.println("[SUCCESS] User deleted from users.csv: " + username);
@@ -243,7 +248,7 @@ public class FacultyManager {
         // Get part before underscore, or whole username if no underscore
         String prefix = username.contains("_") ? username.split("_")[0] : username;
         
-        System.out.println("[DEBUG] Generated password: " + prefix + "@123 (from username: " + username + ")");
+        System.out.println("[" + getTimestamp() + "] Generated password: " + prefix + "@123 (from username: " + username + ")");
         return prefix + "@123";
     }
 
@@ -402,5 +407,10 @@ public class FacultyManager {
             }
         });
         return data;
+    }
+
+    private static String getTimestamp() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
+        return sdf.format(new Date());
     }
 }
