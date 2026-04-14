@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
 import java.util.Scanner;
 
 public class Server {
-    private static final int PORT = 9001;
+    private static final int PORT = 9002;
     private static final String FRONTEND_DIR = "frontend";
     private static String serverIP = "localhost";  // Default IP
     
