@@ -5,6 +5,8 @@ import com.sun.net.httpserver.HttpHandler;
 import com.google.gson.*;
 import java.io.*;
 import java.util.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class UserServlet implements HttpHandler {
     
@@ -124,8 +126,8 @@ public class UserServlet implements HttpHandler {
         // Read request body
         String body = readRequestBody(exchange);
         
-        System.out.println("[DEBUG] === FORGOT PASSWORD REQUEST START ===");
-        System.out.println("[DEBUG] Raw body: " + body);
+        System.out.println("[" + getTimestamp() + "] === FORGOT PASSWORD REQUEST START ===");
+        System.out.println("[" + getTimestamp() + "] Raw body: " + body);
         
         try {
             // Check if body is empty
@@ -139,14 +141,14 @@ public class UserServlet implements HttpHandler {
             }
             
             JsonObject requestJson = JsonParser.parseString(body).getAsJsonObject();
-            System.out.println("[DEBUG] Parsed JSON success");
-            System.out.println("[DEBUG] JSON keys: " + requestJson.keySet().toString());
+            System.out.println("[" + getTimestamp() + "] Parsed JSON success");
+            System.out.println("[" + getTimestamp() + "] JSON keys: " + requestJson.keySet().toString());
             
             // Get userType with safe null check
             String userType = null;
             if (requestJson.has("userType") && !requestJson.get("userType").isJsonNull()) {
                 userType = requestJson.get("userType").getAsString();
-                System.out.println("[DEBUG] userType: " + userType);
+                System.out.println("[" + getTimestamp() + "] userType: " + userType);
             } else {
                 System.out.println("[ERROR] userType is missing or null");
                 JsonObject response = new JsonObject();
@@ -157,7 +159,7 @@ public class UserServlet implements HttpHandler {
             }
             
             if ("admin".equals(userType)) {
-                System.out.println("[DEBUG] Processing ADMIN recovery");
+                System.out.println("[" + getTimestamp() + "] Processing ADMIN recovery");
                 
                 // Check fields
                 if (!requestJson.has("username") || requestJson.get("username").isJsonNull()) {
@@ -181,12 +183,12 @@ public class UserServlet implements HttpHandler {
                 String username = requestJson.get("username").getAsString();
                 String email = requestJson.get("email").getAsString();
                 
-                System.out.println("[DEBUG] Admin - username: " + username + ", email: " + email);
+                System.out.println("[" + getTimestamp() + "] Admin - username: " + username + ", email: " + email);
                 
                 Map<String, String> result = UserManager.recoverAdminPassword(username, email);
                 
                 if (result != null) {
-                    System.out.println("[DEBUG] Admin password found!");
+                    System.out.println("[" + getTimestamp() + "] Admin password found!");
                     JsonObject response = new JsonObject();
                     response.addProperty("success", true);
                     response.addProperty("message", "Password retrieved successfully");
@@ -195,14 +197,14 @@ public class UserServlet implements HttpHandler {
                     response.addProperty("email", result.get("email"));
                     sendResponse(exchange, 200, response.toString());
                 } else {
-                    System.out.println("[DEBUG] Admin password not found!");
+                    System.out.println("[" + getTimestamp() + "] Admin password not found!");
                     JsonObject response = new JsonObject();
                     response.addProperty("success", false);
                     response.addProperty("message", "Invalid username or email");
                     sendResponse(exchange, 401, response.toString());
                 }
             } else if ("faculty".equals(userType)) {
-                System.out.println("[DEBUG] Processing FACULTY recovery");
+                System.out.println("[" + getTimestamp() + "] Processing FACULTY recovery");
                 
                 // Check fields
                 if (!requestJson.has("faculty_id") || requestJson.get("faculty_id").isJsonNull()) {
@@ -226,12 +228,12 @@ public class UserServlet implements HttpHandler {
                 String facultyId = requestJson.get("faculty_id").getAsString();
                 String email = requestJson.get("email").getAsString();
                 
-                System.out.println("[DEBUG] Faculty - facultyId: " + facultyId + ", email: " + email);
+                System.out.println("[" + getTimestamp() + "] Faculty - facultyId: " + facultyId + ", email: " + email);
                 
                 Map<String, String> result = UserManager.recoverPassword(facultyId, email);
                 
                 if (result != null) {
-                    System.out.println("[DEBUG] Faculty password found!");
+                    System.out.println("[" + getTimestamp() + "] Faculty password found!");
                     JsonObject response = new JsonObject();
                     response.addProperty("success", true);
                     response.addProperty("message", "Password retrieved successfully");
@@ -242,7 +244,7 @@ public class UserServlet implements HttpHandler {
                     response.addProperty("email", result.get("email"));
                     sendResponse(exchange, 200, response.toString());
                 } else {
-                    System.out.println("[DEBUG] Faculty password not found!");
+                    System.out.println("[" + getTimestamp() + "] Faculty password not found!");
                     JsonObject response = new JsonObject();
                     response.addProperty("success", false);
                     response.addProperty("message", "Invalid Faculty ID or email");
@@ -269,7 +271,7 @@ public class UserServlet implements HttpHandler {
                 System.err.println("[ERROR] Failed to send error response: " + ex.getMessage());
             }
         }
-        System.out.println("[DEBUG] === FORGOT PASSWORD REQUEST END ===");
+        System.out.println("[" + getTimestamp() + "] === FORGOT PASSWORD REQUEST END ===");
     }
     
     private String readRequestBody(HttpExchange exchange) throws IOException {
@@ -297,5 +299,10 @@ public class UserServlet implements HttpHandler {
         error.addProperty("success", false);
         error.addProperty("message", message);
         sendResponse(exchange, statusCode, error.toString());
+    }
+
+    private String getTimestamp() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
+        return sdf.format(new Date());
     }
 }
