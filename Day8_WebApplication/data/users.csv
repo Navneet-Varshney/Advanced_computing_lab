@@ -1,7 +1,7 @@
 username,password,role,faculty_id,name,email
 admin,admin123,admin,,Administrator,admin@zhcet.ac.in
 fasal_baig,fasal@123,faculty,101,Faisal Mirza Sayeed Baig,drmfbaig@yahoo.co.uk
-muzammil,muzammil@123,faculty,102,Mohammad Muzammil,m.muzammil.me@amu.ac.in
+muzammil_prof,muzammil@123,faculty,102,Mohammad Muzammil,m.muzammil.me@amu.ac.in
 ansari_rai,ansari@123,faculty,103,Raisuddin Ansari,raisansari@zhcet.ac.in
 ahmad_khan,ahmad@123,faculty,104,Ahmad Ali Khan,khanaali@rediffmail.com
 mohd_ali_m,mohd@123,faculty,105,Mohammed Ali,mohd.ali.me@amu.ac.in
