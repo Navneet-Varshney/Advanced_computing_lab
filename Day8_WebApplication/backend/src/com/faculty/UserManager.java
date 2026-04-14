@@ -2,6 +2,8 @@ package com.faculty;
 
 import com.google.gson.Gson;
 import java.util.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class UserManager {
     private static final String USERS_CSV = "data/users.csv";
@@ -74,7 +76,7 @@ public class UserManager {
             Map<String, String> user = reader.findRow("username", username);
             
             if (user == null) {
-                System.out.println("[DEBUG] Admin user not found: " + username);
+                System.out.println("[" + getTimestamp() + "] Admin user not found: " + username);
                 return null;
             }
             
@@ -83,14 +85,14 @@ public class UserManager {
             String providedEmail = email.toLowerCase().trim();
             
             if (!storedEmail.equals(providedEmail)) {
-                System.out.println("[DEBUG] Email mismatch for admin. Expected: " + storedEmail + ", Got: " + providedEmail);
+                System.out.println("[" + getTimestamp() + "] Email mismatch for admin. Expected: " + storedEmail + ", Got: " + providedEmail);
                 return null;
             }
             
             // Verify it's admin role
             String role = user.getOrDefault("role", "");
             if (!role.equals("admin")) {
-                System.out.println("[DEBUG] User is not admin: " + username);
+                System.out.println("[" + getTimestamp() + "] User is not admin: " + username);
                 return null;
             }
             
@@ -128,14 +130,14 @@ public class UserManager {
             }
             
             if (user == null) {
-                System.out.println("[DEBUG] Faculty not found with ID: " + facultyId + " and email: " + email);
+                System.out.println("[" + getTimestamp() + "] Faculty not found with ID: " + facultyId + " and email: " + email);
                 return null;
             }
             
             // Verify it's a faculty user
             String role = user.getOrDefault("role", "");
             if (!role.equals("faculty")) {
-                System.out.println("[DEBUG] User is not faculty: " + user.get("username"));
+                System.out.println("[" + getTimestamp() + "] User is not faculty: " + user.get("username"));
                 return null;
             }
             
@@ -250,5 +252,10 @@ public class UserManager {
         }
         
         return null; // Authentication failed
+    }
+
+    private static String getTimestamp() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
+        return sdf.format(new Date());
     }
 }
