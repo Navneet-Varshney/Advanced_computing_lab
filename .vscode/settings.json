@@ -1,0 +1,31 @@
+{
+  "editor.errorSquiggles": "disabled",
+  
+  "java.import.gradle.enabled": false,
+  "java.import.maven.enabled": false,
+  "java.import.ant.enabled": false,
+  "java.configuration.updateBuildConfiguration": "disabled",
+  "java.project.importOnFirstTimeStartup": "disabled",
+  "java.validate.enable": false,
+  "java.compile.nullAnalysis.mode": "disabled",
+  "java.errors.incompleteClasspath.severity": "ignore",
+  "java.compile.errorReporting": "disabled",
+  
+  "html.validate.styles": false,
+  "html.validate.scripts": false,
+  "html.validate.html": false,
+  "css.validate": false,
+  
+  "js/ts.validate.enabled": false,
+  "[html]": {},
+  "[css]": {},
+  "[javascript]": {},
+  
+  "problems.decorations.enabled": false,
+  "problems.showCurrentInStatus": false,
+  "problemsPanel.autoReveal": false,
+  
+  "extensions.ignoreRecommendations": true,
+  "html.linters": [],
+  "css.lint": {}
+}
