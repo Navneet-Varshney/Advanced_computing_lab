@@ -1,6 +1,6 @@
 
 
-const API_BASE = 'http://localhost:9001';
+const API_BASE = `http://${window.location.hostname}:9002`;
 
 async function loginUser(username, password) {
     try {
