@@ -173,7 +173,20 @@ export default function App() {
       return "";
     }
   };
-
+  const TOKENS = [
+    "asin(",
+    "acos(",
+    "atan(",
+    "sin(",
+    "cos(",
+    "tan(",
+    "log(",
+    "ln(",
+    "exp(",
+    "pow10(",
+    "cbrt(",
+    "√(",
+  ];
   const handlePress = (val: string) => {
     const ops = ["+", "−", "×", "÷", "^"];
     const lastChar = expression.slice(-1);
@@ -237,6 +250,25 @@ export default function App() {
     } else if (val === "⌫") {
       if (cursorPos <= 0) return;
 
+      const leftPart = expression.slice(0, cursorPos);
+
+      // 🔥 check token delete
+      for (let token of TOKENS) {
+        if (leftPart.endsWith(token)) {
+          const newExpr =
+            expression.slice(0, cursorPos - token.length) +
+            expression.slice(cursorPos);
+
+          setExpression(newExpr);
+          setCursorPos(cursorPos - token.length);
+
+          const live = calculate(newExpr, isDeg);
+          setLiveResult(live);
+          return;
+        }
+      }
+
+      // normal delete
       const newCursor = cursorPos - 1;
       const newExpr =
         expression.slice(0, newCursor) + expression.slice(cursorPos);
@@ -338,16 +370,41 @@ export default function App() {
               {/* LEFT CONTROL BLOCK */}
               <View style={styles.cursorGroup}>
                 <TouchableOpacity
-                  onPress={() => setCursorPos((p) => Math.max(0, p - 1))}
+                  onPress={() => {
+                    if (cursorPos === 0) return;
+
+                    const leftPart = expression.slice(0, cursorPos);
+
+                    // check if cursor token ke baad hai
+                    for (let token of TOKENS) {
+                      if (leftPart.endsWith(token)) {
+                        setCursorPos(cursorPos - token.length);
+                        return;
+                      }
+                    }
+
+                    setCursorPos(cursorPos - 1);
+                  }}
                   style={styles.cursorBtn}
                 >
                   <Text style={styles.cursorText}>◀</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                  onPress={() =>
-                    setCursorPos((p) => Math.min(expression.length, p + 1))
-                  }
+                  onPress={() => {
+                    if (cursorPos >= expression.length) return;
+
+                    const rightPart = expression.slice(cursorPos);
+
+                    for (let token of TOKENS) {
+                      if (rightPart.startsWith(token)) {
+                        setCursorPos(cursorPos + token.length);
+                        return;
+                      }
+                    }
+
+                    setCursorPos(cursorPos + 1);
+                  }}
                   style={styles.cursorBtn}
                 >
                   <Text style={styles.cursorText}>▶</Text>
