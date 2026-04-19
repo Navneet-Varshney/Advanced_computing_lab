@@ -75,7 +75,7 @@ export default function App() {
     if (r > n || n < 0 || r < 0) return NaN;
     return factorial(n) / factorial(n - r);
   };
-  const calculate = (expr: string) => {
+  const calculate = (expr: string, degMode: boolean) => {
     try {
       if (!expr) return "";
       let cleanExpr = expr
@@ -112,7 +112,7 @@ export default function App() {
       // ---------- TRIG FUNCTIONS FIX ----------
       // ---------- TRIG FUNCTIONS FIX ----------
       // ---------- TRIG FUNCTIONS FIX (FINAL) ----------
-      if (isDeg) {
+      if (degMode) {
         // inverse FIRST (safe)
         cleanExpr = cleanExpr.replace(/asin\(/g, "(180/Math.PI)*Math.asin(");
         cleanExpr = cleanExpr.replace(/acos\(/g, "(180/Math.PI)*Math.acos(");
@@ -196,10 +196,10 @@ export default function App() {
       setExpression(newExpr);
       setCursorPos(newCursor);
 
-      const live = calculate(newExpr);
+      const live = calculate(newExpr,isDeg);
       setLiveResult(live);
     } else if (val === "=") {
-      const final = calculate(expression);
+      const final = calculate(expression,isDeg);
 
       if (final && final !== "Error") {
         // ⭐ HISTORY FIX (latest first)
@@ -235,7 +235,7 @@ export default function App() {
       setExpression(updated);
       setCursorPos(left.length + 1);
 
-      const live = calculate(updated);
+      const live = calculate(updated, isDeg);
       if (live) setLiveResult(live);
     } else if (val === "⌫") {
       if (cursorPos <= 0) return;
@@ -247,7 +247,25 @@ export default function App() {
       setExpression(newExpr);
       setCursorPos(newCursor);
 
-      const live = calculate(newExpr);
+      const live = calculate(newExpr, isDeg);
+      setLiveResult(live);
+    } else if (val === ".") {
+      let left = expression.slice(0, cursorPos);
+      let right = expression.slice(cursorPos);
+
+      // last number extract karo
+      let match = left.match(/(\d+\.?\d*)$/);
+      let lastNumber = match ? match[0] : "";
+
+      // agar already dot hai to allow mat karo
+      if (lastNumber.includes(".")) return;
+
+      const newExpr = left + "." + right;
+
+      setExpression(newExpr);
+      setCursorPos(cursorPos + 1);
+
+      const live = calculate(newExpr, isDeg);
       setLiveResult(live);
     } else {
       const newExpr =
@@ -255,7 +273,7 @@ export default function App() {
 
       setExpression(newExpr);
       setCursorPos(cursorPos + val.length);
-      const live = calculate(newExpr);
+      const live = calculate(newExpr, isDeg);
       if (live) setLiveResult(live);
     }
   };
@@ -302,13 +320,19 @@ export default function App() {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => setIsDeg(!isDeg)}
+            onPress={() => {
+              const newMode = !isDeg;
+              setIsDeg(newMode);
+
+              const live = calculate(expression,newMode);
+              setLiveResult(live);
+            }}
             style={{ position: "absolute", right: 20, top: 10 }}
           >
             <Text
               style={{ color: COLORS.accent, fontSize: 18, fontWeight: "600" }}
             >
-              {isDeg ? "DEG" : "RAD"}
+              {isDeg ? "RAD" : "DEG"}
             </Text>
           </TouchableOpacity>
           <View style={styles.displayArea}>
@@ -586,7 +610,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
   },
   inputText: {
-    fontSize: 50,
+    fontSize: 40,
     color: "#fff",
     fontWeight: "300",
     textAlign: "right",
