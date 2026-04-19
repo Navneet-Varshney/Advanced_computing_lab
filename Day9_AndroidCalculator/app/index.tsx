@@ -78,6 +78,9 @@ export default function App() {
   const calculate = (expr: string, degMode: boolean) => {
     try {
       if (!expr) return "";
+      if (/^\d+$/.test(expr) && expr.length > 15) {
+        return BigInt(expr).toString();
+      }
       let cleanExpr = expr
         .replace(/×/g, "*")
         .replace(/÷/g, "/")
@@ -393,15 +396,18 @@ export default function App() {
             <Text
               style={[
                 styles.resultText,
-                { fontSize: Math.max(
-                          18,
-                          liveResult.length > 19
-                            ? 24
-                            : liveResult.length > 15
-                              ? 26
-                              : liveResult.length > 12
-                                ? 32
-                                : 40) },
+                {
+                  fontSize: Math.max(
+                    18,
+                    liveResult.length > 19
+                      ? 24
+                      : liveResult.length > 15
+                        ? 26
+                        : liveResult.length > 12
+                          ? 32
+                          : 40,
+                  ),
+                },
               ]}
             >
               {liveResult}
