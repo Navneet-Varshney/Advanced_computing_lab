@@ -196,10 +196,10 @@ export default function App() {
       setExpression(newExpr);
       setCursorPos(newCursor);
 
-      const live = calculate(newExpr,isDeg);
+      const live = calculate(newExpr, isDeg);
       setLiveResult(live);
     } else if (val === "=") {
-      const final = calculate(expression,isDeg);
+      const final = calculate(expression, isDeg);
 
       if (final && final !== "Error") {
         // ⭐ HISTORY FIX (latest first)
@@ -324,7 +324,7 @@ export default function App() {
               const newMode = !isDeg;
               setIsDeg(newMode);
 
-              const live = calculate(expression,newMode);
+              const live = calculate(expression, newMode);
               setLiveResult(live);
             }}
             style={{ position: "absolute", right: 20, top: 10 }}
@@ -362,9 +362,25 @@ export default function App() {
               {/* EXPRESSION AREA के अंदर */}
               <View style={styles.expressionBox}>
                 {expression.length === 0 ? (
-                  <Text style={styles.inputText}>0</Text>
+                  <Text style={[styles.inputText, { fontSize: 40 }]}>0</Text>
                 ) : (
-                  <Text style={styles.inputText}>
+                  <Text
+                    style={[
+                      styles.inputText,
+                      {
+                        fontSize: Math.max(
+                          18,
+                          expression.length > 19
+                            ? 24
+                            : expression.length > 15
+                              ? 26
+                              : expression.length > 12
+                                ? 32
+                                : 40,
+                        ),
+                      },
+                    ]}
+                  >
                     {expression.slice(0, cursorPos)}
                     {showCursor ? "|" : " "}
                     {expression.slice(cursorPos)}
@@ -374,7 +390,22 @@ export default function App() {
             </View>
 
             {/* RESULT */}
-            <Text style={styles.resultText}>{liveResult}</Text>
+            <Text
+              style={[
+                styles.resultText,
+                { fontSize: Math.max(
+                          18,
+                          liveResult.length > 19
+                            ? 24
+                            : liveResult.length > 15
+                              ? 26
+                              : liveResult.length > 12
+                                ? 32
+                                : 40) },
+              ]}
+            >
+              {liveResult}
+            </Text>
           </View>
           {/* SCIENTIFIC SECTION */}
           <View style={styles.sciSection}>
@@ -610,7 +641,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
   },
   inputText: {
-    fontSize: 40,
     color: "#fff",
     fontWeight: "300",
     textAlign: "right",
