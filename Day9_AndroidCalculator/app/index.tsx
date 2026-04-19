@@ -373,9 +373,9 @@ export default function App() {
                       {
                         fontSize: Math.max(
                           18,
-                          expression.length > 20
+                          expression.length > 18
                             ? 20
-                            : expression.length > 15
+                            : expression.length > 14
                               ? 24.5
                               : expression.length > 10
                                 ? 32
@@ -399,9 +399,9 @@ export default function App() {
                 {
                   fontSize: Math.max(
                     18,
-                    liveResult.length > 20
+                    liveResult.length > 18
                       ? 20
-                      : liveResult.length > 15
+                      : liveResult.length > 14
                         ? 24.5
                         : liveResult.length > 10
                           ? 32
