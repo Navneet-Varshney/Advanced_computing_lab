@@ -32,15 +32,22 @@ export default function App() {
   const [history, setHistory] = useState<
     { exp: string; ans: string; time: Date }[]
   >([]);
-  const [showHistory, setShowHistory] = useState(false);
   const [expression, setExpression] = useState("");
   const [liveResult, setLiveResult] = useState("");
   const [isExpanded, setIsExpanded] = useState(false);
   const [isDeg, setIsDeg] = useState(true);
   const [isInverse, setIsInverse] = useState(false);
+  const [cursorPos, setCursorPos] = useState(0);
+  const [showCursor, setShowCursor] = useState(true);
 
   const slideAnim = useRef(new Animated.Value(0)).current;
-
+  // blinking cursor effect
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setShowCursor((prev) => !prev);
+    }, 500);
+    return () => clearInterval(interval);
+  }, []);
   const toggleScientific = () => {
     Animated.timing(slideAnim, {
       toValue: isExpanded ? 0 : 100, // Drawer height for sin/cos row and ln/e row
@@ -80,6 +87,11 @@ export default function App() {
         .replace(/\^/g, "**")
         .replace(/√\(/g, "Math.sqrt(");
       // PERCENTAGE SUPPORT
+      // ===============================
+      // nCr / nPr PARSER (5C2 → nCr(5,2))
+      // ===============================
+      cleanExpr = cleanExpr.replace(/(\d+)\s*C\s*(\d+)/gi, "nCr($1,$2)");
+      cleanExpr = cleanExpr.replace(/(\d+)\s*P\s*(\d+)/gi, "nPr($1,$2)");
       cleanExpr = cleanExpr.replace(/\(([^()]+)\)%/g, "(($1)/100)");
 
       // number% → (number/100)
@@ -137,8 +149,16 @@ export default function App() {
       cleanExpr = cleanExpr.replace(/exp\(/g, "Math.exp(");
       cleanExpr = cleanExpr.replace(/pow10\(/g, "Math.pow(10,");
       cleanExpr = cleanExpr.replace(/cbrt\(/g, "Math.cbrt(");
-      const evalResult = eval(cleanExpr);
+      const evalResult = Function(
+        "factorial",
+        "nCr",
+        "nPr",
+        "return " + cleanExpr,
+      )(factorial, nCr, nPr);
       // COMPLEX RESULT HANDLING
+      if (!isFinite(evalResult)) {
+        return "Math Error";
+      }
       if (typeof evalResult === "number" && !isNaN(evalResult)) {
         return parseFloat(evalResult.toFixed(8)).toString();
       }
@@ -147,7 +167,12 @@ export default function App() {
         return "Complex Result";
       }
 
-      return "Error";
+      if (!cleanExpr || cleanExpr.trim() === "") return "";
+
+      
+      if (typeof evalResult !== "number" || isNaN(evalResult)) {
+        return "Syntax Error";
+      }
     } catch (e) {
       return "";
     }
@@ -160,6 +185,20 @@ export default function App() {
     if (val === "AC") {
       setExpression("");
       setLiveResult("");
+      setCursorPos(0);
+    } else if (val === "inv") {
+      if (!expression) return;
+
+      const newExpr =
+        expression.slice(0, cursorPos) + "^-1" + expression.slice(cursorPos);
+
+      const newCursor = cursorPos + 3; // "^" "-" "1" = 3 chars
+
+      setExpression(newExpr);
+      setCursorPos(newCursor);
+
+      const live = calculate(newExpr);
+      setLiveResult(live);
     } else if (val === "=") {
       const final = calculate(expression);
 
@@ -172,21 +211,37 @@ export default function App() {
 
         setExpression(final);
         setLiveResult("");
+        setCursorPos(final.length);
       }
     } else if (ops.includes(val)) {
       if (expression === "" && val !== "−") return;
-      if (ops.includes(lastChar)) {
-        setExpression(expression.slice(0, -1) + val);
-      } else {
-        setExpression(expression + val);
-      }
+
+      const newExpr =
+        expression.slice(0, cursorPos) + val + expression.slice(cursorPos);
+
+      setExpression(newExpr);
+      setCursorPos(cursorPos + val.length);
+
+      const live = calculate(newExpr);
+      if (live) setLiveResult(live);
     } else if (val === "⌫") {
-      const newExpr = expression.slice(0, -1);
+      if (cursorPos <= 0) return;
+
+      const newCursor = cursorPos - 1;
+      const newExpr =
+        expression.slice(0, newCursor) + expression.slice(cursorPos);
+
       setExpression(newExpr);
-      setLiveResult(calculate(newExpr));
+      setCursorPos(newCursor);
+
+      const live = calculate(newExpr);
+      setLiveResult(live);
     } else {
-      const newExpr = expression + val;
+      const newExpr =
+        expression.slice(0, cursorPos) + val + expression.slice(cursorPos);
+
       setExpression(newExpr);
+      setCursorPos(cursorPos + val.length);
       const live = calculate(newExpr);
       if (live) setLiveResult(live);
     }
@@ -226,41 +281,71 @@ export default function App() {
             onPress={() => setShowHistoryScreen(true)}
             style={{ position: "absolute", left: 20, top: 10 }}
           >
-            <Text style={{ color: COLORS.accent }}>History</Text>
+            <Text
+              style={{ color: COLORS.accent, fontSize: 18, fontWeight: "600" }}
+            >
+              History
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => setIsDeg(!isDeg)}
             style={{ position: "absolute", right: 20, top: 10 }}
           >
-            <Text style={{ color: COLORS.accent }}>
+            <Text
+              style={{ color: COLORS.accent, fontSize: 18, fontWeight: "600" }}
+            >
               {isDeg ? "DEG" : "RAD"}
             </Text>
           </TouchableOpacity>
           <View style={styles.displayArea}>
-            <Text
-              style={styles.inputText}
-              numberOfLines={2}
-              adjustsFontSizeToFit
-            >
-              {expression || "0"}
-            </Text>
+            {/* TOP ROW: ARROWS + TEXT */}
+            <View style={styles.displayRow}>
+              {/* LEFT CONTROL BLOCK */}
+              <View style={styles.cursorGroup}>
+                <TouchableOpacity
+                  onPress={() => setCursorPos((p) => Math.max(0, p - 1))}
+                  style={styles.cursorBtn}
+                >
+                  <Text style={styles.cursorText}>◀</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={() =>
+                    setCursorPos((p) => Math.min(expression.length, p + 1))
+                  }
+                  style={styles.cursorBtn}
+                >
+                  <Text style={styles.cursorText}>▶</Text>
+                </TouchableOpacity>
+              </View>
+
+              {/* EXPRESSION AREA */}
+              {/* EXPRESSION AREA */}
+              <View style={styles.expressionBox}>
+                {expression.length === 0 ? (
+                  <Text style={styles.inputText}>0</Text>
+                ) : (
+                  <Text style={styles.inputText}>
+                    {expression.slice(0, cursorPos)}
+                    {/* पाइप (|) हमेशा रहेगा, बस opacity कम-ज़्यादा होगी */}
+                    <Text
+                      style={{
+                        opacity: showCursor ? 1 : 0,
+                        color: "fff",
+                      }}
+                    >
+                      |
+                    </Text>
+                    {expression.slice(cursorPos)}
+                  </Text>
+                )}
+              </View>
+            </View>
+
+            {/* RESULT */}
             <Text style={styles.resultText}>{liveResult}</Text>
           </View>
-          {showHistory && (
-            <View style={styles.historyPanel}>
-              {history.length === 0 ? (
-                <Text style={styles.noHistory}>No History Yet</Text>
-              ) : (
-                history.map((item, i) => (
-                  <View key={i} style={styles.historyCard}>
-                    <Text style={styles.historyExp}>{item.exp}</Text>
-                    <Text style={styles.historyAns}>{item.ans}</Text>
-                  </View>
-                ))
-              )}
-            </View>
-          )}
           {/* SCIENTIFIC SECTION */}
           <View style={styles.sciSection}>
             <Animated.View style={{ height: slideAnim, overflow: "hidden" }}>
@@ -301,7 +386,19 @@ export default function App() {
                   onPress={() => handlePress(isInverse ? "P" : "C")}
                 />
                 <SciBtn label="%" onPress={() => handlePress("%")} />
-                <View style={styles.sideControl} />
+                <View style={styles.sideControl}>
+                  <TouchableOpacity onPress={() => handlePress("inv")}>
+                    <Text
+                      style={{
+                        color: "#ffffff",
+                        fontSize: 18,
+                        fontWeight: "700",
+                      }}
+                    >
+                      x⁻¹
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </Animated.View>
 
@@ -434,7 +531,12 @@ function SciBtn({ label, onPress }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#000", alignItems: "center" },
+  container: {
+    flex: 1,
+    backgroundColor: "#000",
+    alignItems: "center",
+    paddingTop: Platform.OS === "android" ? 35 : 10,
+  },
   calcWrapper: {
     width: SCREEN_WIDTH,
     flex: 1,
@@ -451,6 +553,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "300",
     textAlign: "right",
+    lineHeight: 60,
   },
   resultText: { fontSize: 32, color: COLORS.textResult, marginTop: 10 },
 
@@ -459,7 +562,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    paddingVertical: 16,
+    paddingVertical: 12,
     paddingHorizontal: 10,
   },
   sciBtn: { width: (SCREEN_WIDTH - 80) / 5, alignItems: "center" },
@@ -515,13 +618,6 @@ const styles = StyleSheet.create({
   },
 
   fullHistoryScreen: {
-    flex: 1,
-    backgroundColor: "#121317",
-    paddingTop: 10,
-    paddingHorizontal: 16,
-  },
-
-  fullHistoryScreen: {
     width: SCREEN_WIDTH,
     flex: 1,
     backgroundColor: COLORS.bg,
@@ -545,5 +641,29 @@ const styles = StyleSheet.create({
   backBtn: {
     color: COLORS.accent,
     fontSize: 26,
+  },
+  displayRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+  },
+
+  cursorGroup: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  cursorBtn: {
+    paddingHorizontal: 8,
+  },
+
+  cursorText: {
+    color: COLORS.accent,
+    fontSize: 22,
+  },
+
+  expressionBox: {
+    flex: 1,
+    alignItems: "flex-end",
   },
 });
