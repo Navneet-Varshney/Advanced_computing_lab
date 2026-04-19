@@ -215,13 +215,27 @@ export default function App() {
     } else if (ops.includes(val)) {
       if (expression === "" && val !== "−") return;
 
-      const newExpr =
-        expression.slice(0, cursorPos) + val + expression.slice(cursorPos);
+      const isOperator = (ch) => ["+", "−", "×", "÷", "^"].includes(ch);
 
-      setExpression(newExpr);
-      setCursorPos(cursorPos + val.length);
+      let left = expression.slice(0, cursorPos);
+      let right = expression.slice(cursorPos);
 
-      const live = calculate(newExpr);
+      // clean left side if last char is operator
+      if (isOperator(left.slice(-1))) {
+        left = left.slice(0, -1);
+      }
+
+      // clean right side if first char is operator (rare edge case)
+      if (isOperator(right.slice(0, 1))) {
+        right = right.slice(1);
+      }
+
+      const updated = left + val + right;
+
+      setExpression(updated);
+      setCursorPos(left.length + 1);
+
+      const live = calculate(updated);
       if (live) setLiveResult(live);
     } else if (val === "⌫") {
       if (cursorPos <= 0) return;
@@ -407,15 +421,46 @@ export default function App() {
               <View style={styles.sideControl}>
                 {!isExpanded ? (
                   <TouchableOpacity onPress={toggleScientific}>
-                    <Text style={{ color: COLORS.textResult, fontSize: 18 }}>
+                    <Text style={{ color: COLORS.textResult, fontSize: 30 }}>
                       ▾
                     </Text>
                   </TouchableOpacity>
                 ) : (
-                  <TouchableOpacity onPress={() => setIsInverse(!isInverse)}>
-                    <Text style={{ color: COLORS.accent, fontSize: 18 }}>
-                      {isInverse ? "INV ON" : "⇅"}
-                    </Text>
+                  <TouchableOpacity
+                    onPress={() => setIsInverse(!isInverse)}
+                    style={{
+                      paddingHorizontal: 10,
+                      paddingVertical: 5,
+                      borderRadius: 8,
+                    }}
+                  >
+                    {!isInverse && (
+                      <Text
+                        style={{
+                          color: COLORS.accent,
+                          fontSize: 11,
+                          textAlign: "center",
+                          marginTop: 2,
+                          fontWeight: "600",
+                        }}
+                      >
+                        INV
+                      </Text>
+                    )}
+
+                    {isInverse && (
+                      <Text
+                        style={{
+                          color: COLORS.accent,
+                          fontSize: 20,
+                          textAlign: "center",
+                          marginTop: 2,
+                          fontWeight: "600",
+                        }}
+                      >
+                        ⇅
+                      </Text>
+                    )}
                   </TouchableOpacity>
                 )}
               </View>
