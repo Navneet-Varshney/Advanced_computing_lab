@@ -169,7 +169,6 @@ export default function App() {
 
       if (!cleanExpr || cleanExpr.trim() === "") return "";
 
-      
       if (typeof evalResult !== "number" || isNaN(evalResult)) {
         return "Syntax Error";
       }
@@ -322,21 +321,14 @@ export default function App() {
 
               {/* EXPRESSION AREA */}
               {/* EXPRESSION AREA */}
+              {/* EXPRESSION AREA के अंदर */}
               <View style={styles.expressionBox}>
                 {expression.length === 0 ? (
                   <Text style={styles.inputText}>0</Text>
                 ) : (
                   <Text style={styles.inputText}>
                     {expression.slice(0, cursorPos)}
-                    {/* पाइप (|) हमेशा रहेगा, बस opacity कम-ज़्यादा होगी */}
-                    <Text
-                      style={{
-                        opacity: showCursor ? 1 : 0,
-                        color: "fff",
-                      }}
-                    >
-                      |
-                    </Text>
+                    {showCursor ? "|" : " "}
                     {expression.slice(cursorPos)}
                   </Text>
                 )}
@@ -554,6 +546,7 @@ const styles = StyleSheet.create({
     fontWeight: "300",
     textAlign: "right",
     lineHeight: 60,
+    fontFamily: "monospace",
   },
   resultText: { fontSize: 32, color: COLORS.textResult, marginTop: 10 },
 
