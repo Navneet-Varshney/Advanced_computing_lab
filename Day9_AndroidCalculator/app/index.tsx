@@ -158,7 +158,7 @@ export default function App() {
         "nPr",
         "return " + cleanExpr,
       )(factorial, nCr, nPr);
-      if (Math.abs(evalResult) > 1e12) {
+      if (Math.abs(evalResult) > 1e16) {
         return "Math Error";
       }
       if (isNaN(evalResult)) {
