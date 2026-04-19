@@ -162,7 +162,7 @@ export default function App() {
         return "Math Error";
       }
       if (isNaN(evalResult)) {
-        return "Complex Result";
+        return "Not Defined";
       }
       if (typeof evalResult === "number") {
         return parseFloat(evalResult.toFixed(15)).toString();
@@ -188,7 +188,7 @@ export default function App() {
       const newExpr =
         expression.slice(0, cursorPos) + "^-1" + expression.slice(cursorPos);
 
-      const newCursor = cursorPos + 3; // "^-1" = 3 chars
+      const newCursor = cursorPos + 3; // "^" "-" "1" = 3 chars
 
       setExpression(newExpr);
       setCursorPos(newCursor);
