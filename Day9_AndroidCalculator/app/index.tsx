@@ -186,9 +186,9 @@ export default function App() {
       if (!expression) return;
 
       const newExpr =
-        expression.slice(0, cursorPos) + "(^-1)" + expression.slice(cursorPos);
+        expression.slice(0, cursorPos) + "^-1" + expression.slice(cursorPos);
 
-      const newCursor = cursorPos + 5; // "(^-1)" = 5 chars
+      const newCursor = cursorPos + 3; // "^-1" = 3 chars
 
       setExpression(newExpr);
       setCursorPos(newCursor);
