@@ -158,23 +158,17 @@ export default function App() {
         "nPr",
         "return " + cleanExpr,
       )(factorial, nCr, nPr);
-      // COMPLEX RESULT HANDLING
-      if (!isFinite(evalResult)) {
+      if (Math.abs(evalResult) > 1e12) {
         return "Math Error";
       }
-      if (typeof evalResult === "number" && !isNaN(evalResult)) {
-        return parseFloat(evalResult.toFixed(8)).toString();
-      }
-
-      if (cleanExpr.includes("Math.sqrt(-1)")) {
+      if (isNaN(evalResult)) {
         return "Complex Result";
+      }
+      if (typeof evalResult === "number") {
+        return parseFloat(evalResult.toFixed(15)).toString();
       }
 
       if (!cleanExpr || cleanExpr.trim() === "") return "";
-
-      if (typeof evalResult !== "number" || isNaN(evalResult)) {
-        return "Syntax Error";
-      }
     } catch (e) {
       return "";
     }
