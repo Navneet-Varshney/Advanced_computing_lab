@@ -11,10 +11,10 @@ import {
 } from "react-native";
 
 const { width } = Dimensions.get("window");
-const SCREEN_WIDTH = Platform.OS === "web" ? Math.min(width, 420) : width;
+const SCREEN_WIDTH = Platform.OS === "web" ? Math.min(width, 500) : width;
 const PAD = 20;
 const GAP = 10;
-const BTN_SIZE = (SCREEN_WIDTH - PAD * 2 - GAP * 3) / 4;
+const BTN_SIZE = (SCREEN_WIDTH - PAD * 2 - GAP * 3) / 4.7;
 
 const COLORS = {
   bg: "#121317",
@@ -41,7 +41,6 @@ export default function App() {
   const [showCursor, setShowCursor] = useState(true);
 
   const slideAnim = useRef(new Animated.Value(0)).current;
-  // blinking cursor effect
   React.useEffect(() => {
     const interval = setInterval(() => {
       setShowCursor((prev) => !prev);
@@ -50,13 +49,12 @@ export default function App() {
   }, []);
   const toggleScientific = () => {
     Animated.timing(slideAnim, {
-      toValue: isExpanded ? 0 : 100, // Drawer height for sin/cos row and ln/e row
+      toValue: isExpanded ? 0 : 100,
       duration: 300,
       useNativeDriver: false,
     }).start();
     setIsExpanded(!isExpanded);
   };
-  // ADD THIS ABOVE calculate()
   const factorial = (n: number) => {
     if (n < 0 || !Number.isInteger(n)) return NaN;
     if (n === 0 || n === 1) return 1;
@@ -64,13 +62,10 @@ export default function App() {
     for (let i = 2; i <= n; i++) res *= i;
     return res;
   };
-  // nCr
   const nCr = (n: number, r: number) => {
     if (r > n || n < 0 || r < 0) return NaN;
     return factorial(n) / (factorial(r) * factorial(n - r));
   };
-
-  // nPr
   const nPr = (n: number, r: number) => {
     if (r > n || n < 0 || r < 0) return NaN;
     return factorial(n) / factorial(n - r);
@@ -89,39 +84,21 @@ export default function App() {
         .replace(/\be\b/g, Math.E.toString())
         .replace(/\^/g, "**")
         .replace(/√\(/g, "Math.sqrt(");
-      // PERCENTAGE SUPPORT
-      // ===============================
-      // nCr / nPr PARSER (5C2 → nCr(5,2))
-      // ===============================
       cleanExpr = cleanExpr.replace(/(\d+)\s*C\s*(\d+)/gi, "nCr($1,$2)");
       cleanExpr = cleanExpr.replace(/(\d+)\s*P\s*(\d+)/gi, "nPr($1,$2)");
       cleanExpr = cleanExpr.replace(/\(([^()]+)\)%/g, "(($1)/100)");
-
-      // number% → (number/100)
       cleanExpr = cleanExpr.replace(/(\d+(\.\d+)?)%/g, "($1/100)");
-      // nCr nPr parsing (5C2, 5P2)
       cleanExpr = cleanExpr.replace(/(\d+)C(\d+)/g, "nCr($1,$2)");
       cleanExpr = cleanExpr.replace(/(\d+)P(\d+)/g, "nPr($1,$2)");
-      // FACTORIAL SUPPORT (5! → factorial(5))
-      // (expression)!  support  ->  factorial(expression)
-      // (expression)!  -> factorial(expression)
       cleanExpr = cleanExpr.replace(/\(([^()]+)\)!/g, "factorial(($1))");
-
-      // number!  -> factorial(number)
       cleanExpr = cleanExpr.replace(/(\d+(\.\d+)?)!/g, "factorial($1)");
-
-      // safety: double factorial prevention (!!)
       cleanExpr = cleanExpr.replace(/factorial\((.*?)\)!/g, "factorial($1)");
-      // ---------- TRIG FUNCTIONS FIX ----------
-      // ---------- TRIG FUNCTIONS FIX ----------
-      // ---------- TRIG FUNCTIONS FIX (FINAL) ----------
+
       if (degMode) {
-        // inverse FIRST (safe)
         cleanExpr = cleanExpr.replace(/asin\(/g, "(180/Math.PI)*Math.asin(");
         cleanExpr = cleanExpr.replace(/acos\(/g, "(180/Math.PI)*Math.acos(");
         cleanExpr = cleanExpr.replace(/atan\(/g, "(180/Math.PI)*Math.atan(");
 
-        // normal trig (IMPORTANT: (?<!a) lagaya hai)
         cleanExpr = cleanExpr.replace(
           /(?<!a)sin\(/g,
           "Math.sin((Math.PI/180)*",
@@ -135,18 +112,14 @@ export default function App() {
           "Math.tan((Math.PI/180)*",
         );
       } else {
-        // inverse FIRST
         cleanExpr = cleanExpr.replace(/asin\(/g, "Math.asin(");
         cleanExpr = cleanExpr.replace(/acos\(/g, "Math.acos(");
         cleanExpr = cleanExpr.replace(/atan\(/g, "Math.atan(");
 
-        // normal trig safe
         cleanExpr = cleanExpr.replace(/(?<!a)sin\(/g, "Math.sin(");
         cleanExpr = cleanExpr.replace(/(?<!a)cos\(/g, "Math.cos(");
         cleanExpr = cleanExpr.replace(/(?<!a)tan\(/g, "Math.tan(");
       }
-
-      // logs + exponent
       cleanExpr = cleanExpr.replace(/log\(/g, "Math.log10(");
       cleanExpr = cleanExpr.replace(/ln\(/g, "Math.log(");
       cleanExpr = cleanExpr.replace(/exp\(/g, "Math.exp(");
@@ -201,7 +174,7 @@ export default function App() {
       const newExpr =
         expression.slice(0, cursorPos) + "^-1" + expression.slice(cursorPos);
 
-      const newCursor = cursorPos + 3; // "^" "-" "1" = 3 chars
+      const newCursor = cursorPos + 3; 
 
       setExpression(newExpr);
       setCursorPos(newCursor);
@@ -212,10 +185,9 @@ export default function App() {
       const final = calculate(expression, isDeg);
 
       if (final && final !== "Error") {
-        // ⭐ HISTORY FIX (latest first)
         setHistory((prev) => [
           { exp: expression, ans: final, time: new Date() },
-          ...prev.slice(0, 19), // max 20 history
+          ...prev.slice(0, 19),
         ]);
 
         setExpression(final);
@@ -229,13 +201,9 @@ export default function App() {
 
       let left = expression.slice(0, cursorPos);
       let right = expression.slice(cursorPos);
-
-      // clean left side if last char is operator
       if (isOperator(left.slice(-1))) {
         left = left.slice(0, -1);
       }
-
-      // clean right side if first char is operator (rare edge case)
       if (isOperator(right.slice(0, 1))) {
         right = right.slice(1);
       }
@@ -252,7 +220,6 @@ export default function App() {
 
       const leftPart = expression.slice(0, cursorPos);
 
-      // 🔥 check token delete
       for (let token of TOKENS) {
         if (leftPart.endsWith(token)) {
           const newExpr =
@@ -267,8 +234,6 @@ export default function App() {
           return;
         }
       }
-
-      // normal delete
       const newCursor = cursorPos - 1;
       const newExpr =
         expression.slice(0, newCursor) + expression.slice(cursorPos);
@@ -281,12 +246,9 @@ export default function App() {
     } else if (val === ".") {
       let left = expression.slice(0, cursorPos);
       let right = expression.slice(cursorPos);
-
-      // last number extract karo
       let match = left.match(/(\d+\.?\d*)$/);
       let lastNumber = match ? match[0] : "";
 
-      // agar already dot hai to allow mat karo
       if (lastNumber.includes(".")) return;
 
       const newExpr = left + "." + right;
@@ -375,7 +337,6 @@ export default function App() {
 
                     const leftPart = expression.slice(0, cursorPos);
 
-                    // check if cursor token ke baad hai
                     for (let token of TOKENS) {
                       if (leftPart.endsWith(token)) {
                         setCursorPos(cursorPos - token.length);
@@ -669,7 +630,7 @@ function RoundBtn({ label, bg = COLORS.btnNum, color = "#fff", onPress }) {
   );
 }
 
-const Btn = RoundBtn; // Alias
+const Btn = RoundBtn;
 
 function SciBtn({ label, onPress }) {
   return (
