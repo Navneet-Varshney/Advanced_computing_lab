@@ -8,6 +8,7 @@ import {
   Text,
   Animated,
   Platform,
+  ScrollView,
 } from "react-native";
 
 const { width } = Dimensions.get("window");
